@@ -1,0 +1,1 @@
+自定义一个继承SeekBar的类，在onTouchEvent中返回false即可

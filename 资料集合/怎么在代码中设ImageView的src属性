@@ -1,0 +1,3 @@
+setImageDrawable(drawable);
+setImageBitmap(bm);
+setImageResource(resId);

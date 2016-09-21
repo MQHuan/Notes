@@ -1,0 +1,33 @@
+ 字符串资源的定义
+
+文件路径：res/values/strings.xml
+
+字符串资源定义示例：
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello!</string>
+</resources>
+
+ 
+
+字符串资源的调用
+
+在 Layout XML 调用字符串资源：
+<TextView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/hello" />
+
+ 
+
+在 Activity 获取字符串资源：
+this.getString(R.string.hello)
+
+ 
+
+从 Context 获取字符串资源：
+context.getString(R.string.hello)
+
+
+从 Application 获取字符串资源:
+application.getString(R.string.hello)

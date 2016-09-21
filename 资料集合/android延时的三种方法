@@ -1,0 +1,35 @@
+ android中延迟执行某个任务
+
+下面是三种方法：
+
+一、线程
+[html] view plaincopy
+
+    1. new Thread(new Runnable(){    
+    2.     public void run(){    
+    3.         Thread.sleep(XXXX);    
+    4.         handler.sendMessage();----告诉主线程执行任务    
+    5.     }    
+    6. }).start    
+
+二、延时器
+[html] view plaincopy
+
+    1. TimerTask task = new TimerTask(){    
+    2.     public void run(){    
+    3.     //execute the task     
+    4.     }    
+    5. };    
+    6. Timer timer = new Timer();  
+       timer.schedule(task, delay);  
+
+三、android消息处理
+[html] view plaincopy
+
+    new Handler().postDelayed(new Runnable(){    
+        public void run() {    
+        //execute the task    
+        }    
+     }, delay);   
+
+

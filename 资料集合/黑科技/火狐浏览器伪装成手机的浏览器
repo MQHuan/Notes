@@ -1,0 +1,33 @@
+原贴地址：http://bbs.csdn.net/topics/390897480
+
+以我们就想到用firefox修改UserAgent，用来伪装为其他手机浏览器，比如chrome、Opera Mobile等。
+
+下面就是具体的方法：
+
+1、在浏览器地址栏输入“about:config”
+
+2、新建字符串“general.useragent.override”
+
+3、输入伪装的UserAgent值
+
+伪装成Opera Mobile输入：
+
+Opera/12.02 (Android 4.1; Linux; Opera Mobi/ADR-1111101157; U; en-US) Presto/2.9.201 Version/12.02
+
+伪装成iPhone的Safari浏览器输入：
+
+Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543 Safari/419.3
+
+伪装成iPhone下的Chrome浏览器输入：
+
+Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3
+
+伪装成Chrome手机端输入：
+
+Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile
+Safari/535.19
+
+我们还可以参考Chrome for Android的User-Agent参考官方的：
+
+地址是 https://developers.google.com/chrome/mobile/docs/user-agent

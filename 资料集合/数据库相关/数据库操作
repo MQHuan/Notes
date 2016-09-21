@@ -1,0 +1,130 @@
+一、在操作数据库之前，必须先链接到数据库上(A)	mysql -u root -p
+
+二、数据库的CRUD
+1.创建数据库(B)			    create database 数据库名称 [character set 编码表名] ;
+2.删除数据库 			    drop database 数据库名；
+3.切换数据库(C)	  		    use 数据库名;
+4.查询当前正在使用的数据库          select database();
+5.查看所有的数据库		    show databases;
+6.为数据库设置字符集		    alter database 数据库名 character set 字符集(gbk,utf8);
+7.查看数据库的创建语句以及编码集    show create database 数据库名;
+
+三、数据表的CRUD
+1.数据表的创建(D)		create table 表名(
+					列名 列的类型 [列的约束],
+					列名 列的类型,
+					......
+				);
+约束：	主键约束 	primary key 唯一不能为空 	auto_increment设置自动增长
+	唯一约束 	unique   唯一
+	非空约束 	not null 不能为空。
+类型： 	char  varchar(长度可变) 字符类型要指定的长度。
+	int  float  double  date
+举例： create table employee1(
+		id int primary key auto_increment,
+		name varchar(20) unique not null,
+		grender varchar(10),
+		birthday date,
+		entry_date date not null,
+		job varchar(30),
+		salary double not null
+	);
+2.数据表删除		drop table 表名;
+3.数据表的操作
+  (1)修改表名 			rename table 旧表名 to 新表名; 
+  (2)修改表的字符集		alter table 表名 character set utf8;
+4.查看数据表结构
+  (1)查看某个库下的所有数据表		show tables;
+  查看某个数据表的定义格式(编码表)	show create table 表名
+  (2)查看数据表的结构			desc  表名;
+5.修改数据表结构（增删改）
+  (1)增加列 			alter table 表名 add 列名 类型(长度) 约束; 
+  (2)修改现有列类型、长度和约束 alter table 表名 modify 列名 类型(长度) 约束;
+  (3)修改现有列名称		alter table 表名 change 旧列名 新列名 类型(长度) 约束;
+  (4)删除现有列 		alter table 表名 drop 列名 ;
+
+四、表数据的CRUD
+1.插入数据表数据
+	方式（1）像每一列中去插入数据
+		insert into 表名(列明，列明，列明。。。。。。) values（值，值，值，值）；
+		注意：	a、列明和值要一一对应。
+			b、值和列的类型想匹配。
+			c、值得长度不能够超过定义的列长度
+			d、使用单引号表示字符类型的数据。
+			e、日期类型的数据可以使用’yyyyMMdd’‘yyyy-MM-dd’
+			‘yyyy/MM/dd’,数据库会自己识别
+			f、如果一列可以为空，可以直接插入null表示空。
+			g、如果主键是自动增长的，可以插入null，
+			数据库会自己去增长数据，插入主键这一列。
+
+	方式（2）可以省略部分列明
+		Insert into 表名(列明，列明，) values（值，值，值）
+		注意：a、有默认值，或者该列允许为空，才可以省略。
+			（省略之后如果该列有默认值，该列的值是默认值
+			 如果没有默认值，该列的值是null）
+		   
+	方式（3）省略所有列明
+		Insert into 表名 values(值，值，值。。。。);
+		注意：a、值得对应关系，与表中列的顺序相一致。
+	  	      b、值一个不能少，表里面有几列就插入几个值。但是值可以为null。
+	例子：	insert into orders(id,product,price) values(1,'电视',900);
+		insert into orders(id,product,price) values(2,'洗衣机',100);
+	//若不能输中文，则改sql根目录下的my文件57行的utf8改为gbk
+2.修改数据表数据
+		update 表名 set 列名=值，列名=值。。。 [where  条件];
+		//where 过滤条件---分组之前的过滤条件（不能有聚集函数)//
+3.删除数据表数据
+		（1）delete from 表名 [where  条件];
+		（2）truncate table 表名
+	区别：	delete是从表中一行一行删除。数据数据库定义语言DDL
+		truncate是先把表删除掉，再重新创建一个新表。 数据库操作语言DML
+4.查询数据表数据
+  语法(1) select 列名,列名...列明（或者*）from  表名 [where 条件];
+  语法(2) select 列名,列名...列明（或者*）from  表名 [where 条件] order by 列名 asc/desc;
+	//asc（升序，默认）| desc（降序）,order by 在having后面//
+5.集聚函数
+	//sum函数会排除掉null不进行计算,null 在进行运算的时候 其结果还是null//
+（1）count函数(求数量)
+	语法：select count(*)|count(列名) from 表名
+（2）sum函数（求和）
+	语法：select sum(列名) from 表名; 	
+（3）avg函数（求平均）
+	语法： select avg(列名) from 表名;
+	//ifnull(列名,值)... 	判断这个列是不是空，如果是空，返回给定的值（0）//
+（4）max，min函数（求最大最小值）
+	语法：select max/min(列名) from 表名; 
+（5）group by（分组）
+	语法(3) select 列名,列名...列明（或者*）from  表名  group by 列名  having 条件;
+6.条件运算符
+ (1) 相等=        不等 <> 
+（2) between 小数 and 大数 在两者之间取值 
+（3) in(值,值,值) 在指定值中任取一个 in(70,80,90) 
+	where 列名 in (值1，值2，值3.......);
+	where 列名=值1 or 列名=值2 or 列名=值3 .......
+ (4) like '模糊查询pattern' 进行模糊查询  
+	例如：	//name like '刘_' 姓刘两个字；//
+		// name like '刘%'所有姓刘的// 
+ (5) is null 判断该列值为空(不能写 = null,不是null: is not null)
+ (6) and 逻辑与 or 逻辑或 not 逻辑非 
+7.别名
+	as  别名,as 也可以省略。//select a+b+c as sum from exam;//
+
+select … from 表名 where 条件 group by 列名，列名 having 分组之后的条件 order by 列名。
+
+select 后可以有的内容。 * 列名 聚集函数
+from –表名
+where  过滤条件---分组之前的过滤条件（不能有聚集函数）
+group by 列名 ，按照某列进行分组
+
+having 过滤条件，分组之后进行过滤 ，可以有聚集函数（）；
+
+五、MySQL 数据库的备份和恢复（扩展）
+（1）备份命令
+	语法：mysqldump -u 用户名 -p  数据库名  >  磁盘sql文件路径 (例：c:\abc.sql)
+ (2)恢复命令
+	语法：mysql –u root –p  数据库名  <  sql文件路径
+
+六、Limit的用法
+ limit m,n表示从第m条记录开始，往后取n条记录（第一条记录是从0开始的，，第2条记录是从1开始的，一次类推）。所以从第三条记录开始取，那么m=2；如从第6条记录开始取数据，取10条，SQL语句如下：select * from mytable limit 5,10;
+
+

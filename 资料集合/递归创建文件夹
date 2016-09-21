@@ -1,0 +1,6 @@
+    public static boolean mkdir(File file) {
+        while (!file.getParentFile().exists()) {
+            mkdir(file.getParentFile());
+        }
+        return file.mkdir();
+    }

@@ -1,0 +1,24 @@
+今天看了一个google的demo，发现部分资源字符串在/res/values/string.xml中包含有类似xliff的节点，刚才查了一下，Xliff是XML Localization Interchange File Format 的缩写，中文名为XML本地化数据交换格式。
+对于在Android的资源字符串中，可能会有类似下面的 <xliff:g id="FILE_NAME">%1$s</xliff:g> 写法，这里，id我们可以随便定义，后面的%1$s的1%表示这是第一个可替换量，s表示字符串
+详细的介绍如下：
+属性id可以随便命名 
+属性example表示举例说明，可以省略 
+%n$ms：代表输出的是字符串，n代表是第几个参数，设置m的值可以在输出之前放置空格 
+%n$md：代表输出的是整数，n代表是第几个参数，设置m的值可以在输出之前放置空格，也可以设为0m,在输出之前放置m个0 
+%n$mf：代表输出的是浮点数，n代表是第几个参数，设置m的值可以控制小数位数，如m=2.2时，输出格式为00.00
+例如一个String中有多个需要替换的变量，可以在xml中定义如下变量： 
+   <string name="info">
+your name is <xliff:g id="NAME">%1$s</xliff:g>, and your age is
+<xliff:g id="AGE">%2$s</xliff:g>
+   </string>
+
+程序中动态加载：
+TextView tv = (TextView) findViewById(R.id.textView);
+        String info = getResources().getString(R.string.info,"jnhoodlum","22");
+        tv.setText(info);
+ 
+最后要注意一点：在String里要增加XLIFF的 xmlns：
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+博文原地址：http://blog.csdn.net/xipiaoyouzi/article/details/7891153

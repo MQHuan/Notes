@@ -1,0 +1,9 @@
+            String weekMonthDay = WEEK_MONTH_DAY.format(date);
+            for (int i = 0; i < weekMonthDay.length(); i++) {
+                canvas.save(Canvas.MATRIX_SAVE_FLAG);
+                canvas.rotate(135+i*4, centerX, centerY);
+                canvas.drawText(String.valueOf(weekMonthDay.toUpperCase().charAt(i)),
+                        centerX ,
+                        centerY- centerY*4/5, mWeekMonDayPaint);
+                canvas.restore();
+            }

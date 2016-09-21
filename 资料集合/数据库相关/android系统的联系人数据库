@@ -1,0 +1,55 @@
+博客原地址：http://blog.csdn.net/wwj_748/article/details/19628755
+
+此路径下可以找到：/data/data/com.android.providers.contacts/databases/contact2.db
+
+比较重要的几个表：
+1、contacts表
+
+         该表保存了所有的手机测联系人，每个联系人占一行，该表保存了联系人的ContactID、联系次数、最后一次联系的时间、是否含有号码、是否被添加到收藏夹等信息。
+
+2、raw_contacts表
+
+         该表保存了所有创建过的手机测联系人，每个联系人占一行，表里有一列标识该联系人是否被删除，该表保存了两个ID： RawContactID和ContactID,从而将contacts表和raw_contacts表联系起来。该表保存了联系人的RawContactID、ContactID、联系次数、最后一次联系的时间、是否被添加到收藏夹、显示的名字、用于排序的汉语拼音等信息。
+
+3、 mimetypes 表
+
+该表定义了所有的MimeTypeID，即联系人的各个字段的唯一标志。
+
+4、data表
+
+Ø  该表保存了所有创建过的手机测联系人的所有信息，每个字段占一行   ，该表保存了两个ID： MimeTypeID和RawContactID,从而将data表和raw_contacts表联系起来。
+
+Ø  联系人的所有信息保存在列data1至data15中，各列中保存的内容根据MimeTypeID的不同而不同。如保存号码(MimeTypeID=5)的那行数据中，data1列保存号码，data2列保存号码类型(手机号码/家庭号码/工作号码等)。
+
+对联系人的基本操作（增删改查）
+
+* 权限设置
+
+ <!-- 读联系人权限 -->
+
+ <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+ <!-- 写联系人权限 -->
+
+ <uses-permissionandroid:name="android.permission.WRITE_CONTACTS" />
+
+
+* 例子：根据电话号码获取用户联系人的名字
+//把整个电话本都遍历了，把从数据库拿出来的号码进行去除"-"," "操作，再和来电号码进行匹配
+public String getContactNameFromPhoneBook(Context context, String phoneNum) {
+        String contactName = "";
+        ContentResolver cr = context.getContentResolver();
+        Cursor cursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        while(cursor.moveToNext()) {
+            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            number = number.replace("-", "").replace(" ", "");
+
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            if (number.equals(phoneNum)) {
+                contactName = name;
+            }
+
+        }
+
+        return contactName;
+    }

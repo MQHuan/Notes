@@ -1,0 +1,16 @@
+   //缩放处理
+		Options opts = new Options();
+		opts.inSampleSize = 2;
+		Bitmap icon = BitmapFactory.decodeResource(getResources(), WeatherUtils.findImage(info.weatherCode), opts);
+
+public class WeatherUtils {
+
+    /**
+     * 通过天气代码找到对应的天气图标
+     * @param code
+     * @return
+     */
+    public static int findImage(String code) {
+        return R.drawable.yahoo00 + Integer.valueOf(code);
+    }
+}

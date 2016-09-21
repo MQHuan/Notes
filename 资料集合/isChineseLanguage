@@ -1,0 +1,9 @@
+    private boolean isChineseLanguage() {
+        Locale l = Locale.getDefault();
+        String language = l.getLanguage();
+        if (language != null
+                && language.trim().equals("zh"))
+            return true;
+        else
+            return false;
+    }

@@ -1,0 +1,143 @@
+时间戳转化
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+String date = sdf.format(new Date(时间戳));//时间戳为毫秒数
+
+日期转毫秒
+String str = "201104141302";
+SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
+
+long millionSeconds = sdf.parse(str).getTime();//毫秒
+
+数字格式化　博客地址：http://www.cnblogs.com/zhxiaomiao/archive/2009/09/01/1558125.html
+在实际工作中，常常需要设定数字的输出格式，如以百分比的形式输出，或者设定小数位数等，现稍微总结如下。
+主要使用的类：java.text.DecimalFormat
+1。实例化对象，可以用如下两种方法：
+      DecimalFormat df=(DecimalFormat)NumberFormat.getInstance();
+      DecimalFormat df1=(DecimalFormat) DecimalFormat.getInstance();
+     因为DecimalFormat继承自NumberFormat。
+2。设定小数位数
+系统默认小数位数为3，如：
+    DecimalFormat df=(DecimalFormat)NumberFormat.getInstance();
+    System.out.println(df.format(12.3456789));
+输出：12.346
+现在可以通过如下方法把小数为设为两位：
+  df.setMaximumFractionDigits(2);
+    System.out.println(df.format(12.3456789));
+则输出为：12.35
+3。将数字转化为百分比输出，有如下两种方法：
+(1)
+  df.applyPattern("##.##%");
+    System.out.println(df.format(12.3456789));
+    System.out.println(df.format(1));
+    System.out.println(df.format(0.015));
+输出分别为：1234.57%    100%      1.5%
+(2)
+    df.setMaximumFractionDigits(2);
+    System.out.println(df.format(12.3456789*100)+"%");
+    System.out.println(df.format(1*100)+"%");
+    System.out.println(df.format(0.015*100)+"%");
+输出分别为：
+1,234.57%     100%     1.5%
+4。设置分组大小
+     DecimalFormat df1=(DecimalFormat) DecimalFormat.getInstance();
+df1.setGroupingSize(2);
+    System.out.println(df1.format(123456789));
+输出：1,23,45,67,89
+还可以通过df1.setGroupingUsed(false);来禁用分组设置，如：
+     DecimalFormat df1=(DecimalFormat) DecimalFormat.getInstance();
+    df1.setGroupingSize(2);
+df1.setGroupingUsed(false);
+    System.out.println(df1.format(123456789));
+输出：123456789
+5。设置小数为必须为2位
+    DecimalFormat df2=(DecimalFormat) DecimalFormat.getInstance();
+  df2.applyPattern("0.00");
+    System.out.println(df2.format(1.2));
+输出：1.20
+
+java.text.DecimalFormat学习笔记
+
+
+例子：
+import java.text.*;
+
+public class Untitled1    {
+   public static void main(String[] args) {
+
+     //---------------------------------------------
+     //定义一个数字格式化对象，格式化模板为".##"，即保留2位小数.
+     DecimalFormat a = new DecimalFormat(".##");
+     String s= a.format(333.335);
+     System.err.println(s);
+     //说明：如果小数点后面不够2位小数，不会补零.参见Rounding小节
+     //---------------------------------------------
+
+     //-----------------------------------------------
+     //可以在运行时刻用函数applyPattern(String)修改格式模板
+     //保留2位小数，如果小数点后面不够2位小数会补零
+     a.applyPattern(".00");
+     s = a.format(333.3);
+     System.err.println(s);
+     //------------------------------------------------
+
+     //------------------------------------------------
+     //添加千分号
+     a.applyPattern(".##\u2030");
+     s = a.format(0.78934);
+     System.err.println(s);//添加千位符后,小数会进三位并加上千位符
+     //------------------------------------------------
+
+     //------------------------------------------------
+     //添加百分号
+     a.applyPattern("#.##%");
+     s = a.format(0.78645);
+     System.err.println(s);
+     //------------------------------------------------
+
+    //------------------------------------------------
+     //添加前、后修饰字符串，记得要用单引号括起来
+     a.applyPattern("'这是我的钱$',###.###'美圆'");
+     s = a.format(33333443.3333);
+     System.err.println(s);
+     //------------------------------------------------
+
+      //------------------------------------------------
+     //添加货币表示符号(不同的国家，添加的符号不一样
+     a.applyPattern("\u00A4");
+     s = a.format(34);
+     System.err.println(s);
+     //------------------------------------------------
+
+     //-----------------------------------------------
+     //定义正负数模板,记得要用分号隔开
+      a.applyPattern("0.0;'@'-#.0");
+      s = a.format(33);
+      System.err.println(s);
+      s = a.format(-33);
+      System.err.println(s);
+      //-----------------------------------------------
+   
+     //综合运用，正负数的不同前后缀
+     String pattern="'my moneny'###,###.##'RMB';'ur money'###,###.##'US'";
+     a.applyPattern(pattern);
+     System.out.println(a.format(1223233.456));
+   }
+}
+
+总结：
+要生成一个DecimalFormat对象，一般只要通过NumberFormat类工厂的getInstance()来取得一个 NumberFormat对象再将其转换成DecimalFormat对象，然后通过DecimalForat对象的applyPattern()来动态 改变数据的现示格式模板，通过format()方法取得格式化后的数字。同时,DecimalFormat提供了许多的方法来返回格式化后的数字的某一部 份，这些方法如：getNegativeSuffix()。这个类的难点主要是在模板的书写及理解上。其实主要的就是针对一个数字的正负形式来设定不同的 格式显示。这里要特别注意的是使用在模板上的特殊字符代表有特殊的意义，如下表所示：
+Symbol    Description
+0    a digit
+#    a digit, zero shows as absent
+.    placeholder for decimal separator
+,    placeholder for grouping separator
+E   separates mantissa and exponent for exponential formats
+;    separates formats
+-    default negative prefix
+%    multiply by 100 and show as percentage
+?    multiply by 1000 and show as per mille
+¤    currency sign; replaced by currency symbol; if doubled, replaced by international currency symbol; if present in a pattern, the monetary decimal separator is used instead of the decimal separator 
+X    any other characters can be used in the prefix or suffix
+'    used to quote special characters in a prefix or suffix
+
+例如：如果模板中含有#，意思是指这个#号可代表一个或多个数字如果该位的数字是零的话则省略该位。另：注意“#,##0.0#;(#)”这个模板的意思是指数字的负数形式跟正数的一样。 

@@ -1,0 +1,19 @@
+
+//判断程序是否获取了通知权限
+private boolean isEnabled() {
+        String pkgName = ImcoApplication.getInstance().getPackageName();
+        final String flat = Settings.Secure.getString(ImcoApplication.getInstance().getContentResolver(),
+                ENABLED_NOTIFICATION_LISTENERS);
+        if (!TextUtils.isEmpty(flat)) {
+            final String[] names = flat.split(":");
+            for (int i = 0; i < names.length; i++) {
+                final ComponentName cn = ComponentName.unflattenFromString(names[i]);
+                if (cn != null) {
+                    if (TextUtils.equals(pkgName, cn.getPackageName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }

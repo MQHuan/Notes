@@ -1,0 +1,58 @@
+﻿
+自从Google在2013年发布了Android Studio后，Android Studio凭借着自己良好的内存优化，酷炫的UI主题，强大的自动补全提示以及Gradle的编译支持正逐步取代Eclipse，成为主流的Android开发IDE。Android Studio在为我们提供了良好的编码体验的同时，也提供了许多对App性能分析的工具，让开发者可以更方便分析App性能。Google在IO大会上一直告诫开发者不要无节制的使用手机内存，要注意一些不良的开发习惯会导致App的内存泄漏。虽然如今网上检测App内存泄漏的文章汗牛充栋，但是要使用DDMS和MAT，不仅使用步骤复杂繁琐，而且要手动排查内存泄漏的位置，操作起来多有不便。其实Android Studio已经开始支持自动进行内存泄漏检查了，本文就带着大家一探其中的奥妙吧。
+
+什么是内存泄漏
+
+Android虚拟机的垃圾回收采用的是根搜索算法。GC会从根节点（GC Roots）开始对heap进行遍历。到最后，部分没有直接或者间接引用到GC Roots的就是需要回收的垃圾，会被GC回收掉。而内存泄漏出现的原因就是存在了无效的引用，导致本来需要被GC的对象没有被回收掉。
+
+举个栗子
+
+
+
+mLeak是存储在静态区的静态变量，而Leak是内部类，其持有外部类Activity的引用。这样就导致Activity需要被销毁时，由于被mLeak所持有，所以系统不会对其进行GC，这样就造成了内存泄漏。
+
+再举一个最常犯的栗子
+
+
+
+如果我们在在调用Singleton的getInstance()方法时传入了Activity。那么当instance没有释放时，这个Activity会一直存在。因此造成内存泄露。
+
+解决方法可以将new Singleton(context)改为new Singleton(context.getApplicationContext())即可，这样便和传入的Activity没关系了。
+
+内存泄漏的检测
+
+打开Android Studio，编译代码，在模拟器或者真机上运行App，然后点击[Anroid monitor]，在Android Monitor下点击Monitor对应的Tab，进入如下界面
+
+
+
+在Memory一栏中，可以观察不同时间App内存的动态使用情况，点击可以手动触发GC，点击可以进入HPROF Viewer界面，查看Java的Heap，如下图
+
+
+
+Reference Tree代表指向该实例的引用，可以从这里面查看内存泄漏的原因，Shallow Size指的是该对象本身占用内存的大小，Retained Size代表该对象被释放后，垃圾回收器能回收的内存总和。
+
+下面我们以掌上道聚城客户端为例，来一探内存泄漏检测的方法。
+
+打开Android Studio，编译代码，运行掌上道聚城，然后开始尽情的耍我们的App啦，然后就从Memory Monitor里面观察App的内存使用曲线，突然发现，纳尼！！！怎么内存使用越来越大了，这就很有可能是发生内存泄漏了，然后点击手动进行GC，再点击观看JavaHeap，点击Analyzer Task，Android Monitor就可以为我们自动分析泄漏的Activity啦，分析出来如下图所示
+
+
+
+在Reference Tree里面，我们直接就可以看到持有该Activity的单例对象，直接定位到该单例中的代码，发现代码中出现了
+
+
+
+和刚刚举得栗子里出现的错误一模一样啊，这段代码是谁写的，拖出去······
+
+我们修复了检查出的内存泄漏的问题，并将修复前和修复后的代码在相同的模拟器上运行并进行相同的操作，查看他们使用内存的情况，如下图所示
+
+
+
+有内存泄漏的情况，占用内存约为43M
+
+文章的地址：http://mp.weixin.qq.com/s?__biz=MzAxMzYyNDkyNA==&mid=2651332083&idx=1&sn=d5a1b24736d6f14ff24dfecf15e397a9&scene=2&srcid=0531cU2NCjcKGvz9JmadDCXx&from=timeline&isappinstalled=0#wechat_redirect
+
+
+修复了内存泄漏问题，占用内存为36M。
+
+在修复了内存泄漏问题后，内存使用下降了16.3%！！！
+

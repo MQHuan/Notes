@@ -1,0 +1,47 @@
+问题：
+Error:Unexpected lock protocol found in lock file. Expected 3, found 0.
+解决：
+Go into your local file project and search for the ".gradle" folder
+Erase it and restart your IDE.(删除as自动生成的．gradle文件夹)
+
+／＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+问题：
+Error:Jack is required to support java 8 language features [duplicate]
+解决：
+The error say that you have to enable Jack.
+
+To enable support for Java 8 in your Android project, you need to configure your build.gradle file like that
+
+android {
+  ...
+
+
+  compileSdkVersion 23
+  buildToolsVersion "24rc2"
+  defaultConfig {
+  ...
+    jackOptions {
+      enabled true
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+} 
+
+/*********************************
+Question :  
+Error:Could not find property ‘options’ on task ‘:app:compileDebugJavaWithJack’.
+解决：
+原因：使用Jack时不能同时使用APT，暂时不兼容。包括butterknife，Dagger等使用了APT的注解框架。希望Google可以尽早解决。
+博客：http://blog.csdn.net/yuhanghate/article/details/51544201
+
+/********************************
+Question:
+INSTALL_FAILED_NO_MATCHING_ABIS
+Answer:
+INSTALL_FAILED_NO_MATCHING_ABIS is when you are trying to install an app that has native libraries and it doesn't have a native library for your cpu architecture. For example if you compiled an app for armv7 and are trying to install it on an emulator that uses the Intel architecture instead it will not work.
+StackOverflow address: http://stackoverflow.com/questions/24572052/install-failed-no-matching-abis-when-install-apk
+

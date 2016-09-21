@@ -1,0 +1,6 @@
+http://blog.csdn.net/jm_beizi/article/details/44410103
+
+自定义相机拍照时，系统自带的gallery的不会自动更新，需要发一天广播通知系统gallery更新，如下
+ sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCIM/Camera/"+filename)));
+注意Uri一定要指向某个存在的文件，不能只指向目录
+

@@ -1,0 +1,17 @@
+https://www.aswifter.com/2015/11/12/mastering-coordinator/
+
+注意点：
+１：
+  <android.support.design.widget.CollapsingToolbarLayout
+         ．．．
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+snap添加有弹性效果的头
+
+
+２：
+
+    <android.support.v4.widget.NestedScrollView
+        app:behavior_overlapTop="100dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+app:behavior_overlapTop　可以设置距离顶部的距离而不影响拉动时的效果

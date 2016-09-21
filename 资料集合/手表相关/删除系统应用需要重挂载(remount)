@@ -1,0 +1,3 @@
+1 mount 查看需要重挂载的目录
+
+２　mount -o remount,rw /dev/block/platform/jzmmc_v1.2.0/by-name/system system

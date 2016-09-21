@@ -1,0 +1,76 @@
+public class PhoneStatuReceiver extends BroadcastReceiver{
+
+    private static final String TAG = "PhoneStatuReceiver";
+    private static boolean incomingFlag = false;
+    private static String incoming_number = null;
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        //拨打电话监听
+        if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)){
+            incomingFlag = false;
+            String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+            Log.d(TAG, "call OUT : "+phoneNumber);
+        }else{
+            //来电监听
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+
+            switch (tm.getCallState()){
+                case TelephonyManager.CALL_STATE_RINGING:
+                    incomingFlag = true;
+                    incoming_number = intent.getStringExtra("incoming_number");
+                    String incoming_name = getContactNameFromPhoneBook(context, incoming_number);
+
+                    Log.i(TAG, "RINGING :"+incoming_number+"INCOMING_NAME :"+incoming_name);
+                    Toast.makeText(context, "RINGING :"+incoming_number+"INCOMING_NAME :"+incoming_name, Toast.LENGTH_SHORT).show();
+                    break;
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                    if (incomingFlag){
+                        Log.i(TAG, "incoming ACCEPT:"+ incoming_number);
+                    }
+                    break;
+                case TelephonyManager.CALL_STATE_IDLE:
+                    if (incomingFlag){
+                        Log.i(TAG, "incoming IDLE");
+                    }
+                    break;
+            }
+        }
+    }
+
+//把整个电话本都遍历了，把从数据库拿出来的号码进行去除"-"," "操作，再和来电号码进行匹配
+public String getContactNameFromPhoneBook(Context context, String phoneNum) {
+        String contactName = "";
+        ContentResolver cr = context.getContentResolver();
+        Cursor cursor = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        while(cursor.moveToNext()) {
+            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            number = number.replace("-", "").replace(" ", "");
+
+            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            if (number.equals(phoneNum)) {
+                contactName = name;
+            }
+
+        }
+
+        return contactName;
+    }
+
+//根据电话号码，获取联系人姓名  这个不行，号码没经过处理，不能匹配数据库里面的格式
+    public String getContactNameFromPhoneBook(Context context, String phoneNum) {
+        String contactName = "";
+        ContentResolver cr = context.getContentResolver();
+        Cursor pCur = cr.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                ContactsContract.CommonDataKinds.Phone.NUMBER + " = ?",
+                new String[] { phoneNum }, null);
+        if (pCur.moveToFirst()) {
+            contactName = pCur
+                    .getString(pCur
+                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+
+            pCur.close();
+        }
+        return contactName;
+    }
+}

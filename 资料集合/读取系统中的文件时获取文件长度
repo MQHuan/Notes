@@ -1,0 +1,22 @@
+ private String getInternalVersionNum() {
+        	String temp = "";
+			File file = new File("/system/CoWatchOS_Version");
+			if (file.isFile()) {
+				try {
+					FileInputStream fileInputStream = new FileInputStream(file);
+					int available = fileInputStream.available();
+					byte[] buffer = new byte[available];
+					fileInputStream.read(buffer);
+					
+					temp = EncodingUtils.getString(buffer, "UTF-8");
+					
+				} catch (Exception e) {
+					
+					return "CoWatchOS_Version read failed";
+				}		
+				return temp;
+				
+			}else{
+				return "CoWatchOS_Version not exist";
+			}
+		}

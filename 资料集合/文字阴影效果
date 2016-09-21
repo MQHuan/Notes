@@ -1,0 +1,37 @@
+TextView控件有一个方法是控制阴影的加入的：
+
+mTextView.setShadowLayer(10F, 11F,5F, Color.YELLOW); 第一个参数为模糊半径，越大越模糊。 第二个参数是阴影离开文字的x横向距离。 第三个参数是阴影离开文字的Y横向距离。 第四个参数是阴影颜色。
+
+ 
+
+第二种方式是将TextView控件的style单独写成一个.xml文件进行添加。
+
+res/values/styles.xml
+[html] view plain copy
+
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <resources>  
+        <style name="AudioFileInfoOverlayText">  
+            <item name="android:paddingLeft">4px</item>  
+            <item name="android:paddingBottom">4px</item>  
+            <item name="android:textColor">#f1f1f1</item>  
+            <item name="android:textSize">60sp</item>  
+            <item name="android:shadowColor">#4d4d4d</item>  
+            <item name="android:shadowDx">0</item>  
+            <item name="android:shadowDy">-3</item>  
+            <item name="android:shadowRadius">3</item>  
+        </style>  
+    </resources>  
+
+
+res/layout/main.xml
+[html] view plain copy
+
+    <TextView  
+           android:id="@+id/tvTest"  
+           style="@style/AudioFileInfoOverlayText"  
+           android:layout_width="wrap_content"  
+           android:layout_height="wrap_content" />  
+
+
+以上两方式都可以实现。

@@ -1,0 +1,7 @@
+//    将给定的正则表达式编译并赋予给Pattern类 ,flag参数的指定，可选的flag参数包括：CASE INSENSITIVE,MULTILINE,DOTALL,UNICODE CASE， CANON EQ
+        Pattern pattern = Pattern.compile(patternString, Pattern.DOTALL);
+//    编译给定的正则表达式并且对输入的字串以该正则表达式为模开展匹配,
+        Matcher matcher = pattern.matcher(code);//适合于该正则表达式只会使用一次的情况，也就是只进行一次匹配工作，因为这种情况下并不需要生成一个Matcher实例。
+
+这里文件的编码方式最好是UTF-8，否则可能报错
+在android studio中查看编码方式的方法Settings->Editor->File Encodings

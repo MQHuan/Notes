@@ -1,0 +1,4 @@
+clone()后的对象与原对象的关系：
+x.clone() != x
+x.clone().getClass() == x.getClass()
+x.clone().equals(x)

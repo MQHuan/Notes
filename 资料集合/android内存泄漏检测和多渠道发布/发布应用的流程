@@ -1,0 +1,12 @@
+1 先修改应用的版本号：
+　　到app目录下的build.gradle修改：
+        versionCode 22
+        versionName "3.1.4"
+２　写ReleaseNotes
+
+3 commit和push 修改的代码
+4 打tag
+	git tag 版本号
+	git push --tag
+
+5　用android studio 的工具栏下的build->generates signed apk

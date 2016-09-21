@@ -1,0 +1,65 @@
+ @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int action = event.getAction();
+        switch (action) {
+        case MotionEvent.ACTION_DOWN:
+            x = (int) event.getX();
+            y = (int) event.getY();
+            break;
+        case MotionEvent.ACTION_UP:
+            distanceX = (int) event.getX() - x;
+            distanceY = (int) event.getY() - y;
+
+            if (Math.abs(distanceY) < mTouchSlop
+                    && Math.abs(distanceX) < mTouchSlop) { // 点击
+                if (mSettingLayout != null
+                        && mSettingLayout.getVisibility() == View.VISIBLE) {
+                    // 隐藏设置界面
+                    setSettingLayoutAnim(false);
+                } else if (isPlay) {
+                    // 暂停播放
+                    mTitle.setEllipsize(TruncateAt.END);
+                    mNextTitle.setEllipsize(TruncateAt.END);
+                    mPlayBtn.setImageResource(R.drawable.pause_to_play_anim_list);
+                    ((AnimationDrawable) mPlayBtn.getDrawable()).start();
+                    preferences.edit().putBoolean("auto_player_enable", false).commit();
+                    pause();
+                } else {
+                    // 继续播放
+                    mTitle.setEllipsize(TruncateAt.MARQUEE);
+                    mNextTitle.setEllipsize(TruncateAt.MARQUEE);
+                    mPlayBtn.setImageResource(R.drawable.play_to_pause_anim_list);
+                    ((AnimationDrawable) mPlayBtn.getDrawable()).start();
+                    continuePlay();
+                    preferences.edit().putBoolean("auto_player_enable", true).commit();
+                }
+            } else if (Math.abs(distanceY) > Math.abs(distanceX)
+                    && Math.abs(distanceY) > mTouchSlop
+                    && !MediaUtil.isFastDoubleClick()) { // Y方向滑动
+                if (distanceY > 0) {
+                    // 播放上一首
+                    previous();
+                } else {
+                    // 播放下一首
+                    next();
+                }
+                mPlayBtn.setImageResource(R.drawable.play_to_pause_anim_list);
+                ((AnimationDrawable) mPlayBtn.getDrawable()).start();
+            } else if (Math.abs(distanceX) > Math.abs(distanceY)
+                    && Math.abs(distanceX) > mTouchSlop
+                    && !MediaUtil.isFastDoubleClick()) { // X方向滑动
+                if (distanceX < 0) { // 呼出设置界面
+//                    if (mSettingLayout != null
+//                            && mSettingLayout.getVisibility() == View.GONE) {
+//                        setSettingLayoutAnim(true);
+//                    }
+                } else { // 退出播放界面
+//                    onBackPressed();
+                }
+            }
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
+

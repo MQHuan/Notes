@@ -1,0 +1,4 @@
+Android 5.0程序运行报Service Intent must be explicit错误，原因是5.0的service必须显式调用
+
+改成 Intent intent = new Intent(mContext, IService.class);
+或者 Intent intent = new Intent("com.xx.xx.Service").setPackage("xx.xx.xx");

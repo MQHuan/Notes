@@ -1,0 +1,5 @@
+ TextView自动换行
+
+1.Use android:maxEms to specify a maximum amount of characters
+
+2.set android:singleLine="false"

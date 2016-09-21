@@ -1,0 +1,35 @@
+用代码把请求头User-Agent修改成pc浏览器的User-Agent就可以欺骗现在大部分后台服务器
+
+实例：
+在glide(类picasso)中
+
+public class ImageUtil {
+
+    public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0";
+    public static final String APP_AGENT = "XYZ";
+
+    /**
+     * 更改User-Agent, 欺骗服务器，让它以为是pc端访问
+     * @param url
+     * @return
+     */
+    public static GlideUrl getUrl(String url) {
+        if (TextUtils.isEmpty(url)) {
+            return null;
+        }
+        else return new GlideUrl(url, new LazyHeaders.Builder()
+                .setHeader("User-Agent", USER_AGENT)
+                .addHeader("App-agent", APP_AGENT)
+                .build());
+    }
+
+    public static void loadImg(ImageView v, String url) {
+
+        LogUtil.d("TESTAPI", url);
+        Glide.with(v.getContext())
+                .load(getUrl(url))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(v);
+    }
+｝

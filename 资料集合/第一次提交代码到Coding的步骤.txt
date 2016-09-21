@@ -1,0 +1,11 @@
+在Linux命令行下
+１进入项目的根目录：cd 项目目录路径
+２初始化git仓库：git init
+３添加README文档: 
+	echo "#init object" >> README.md
+	git add .
+４本地提交：git commit -m "commit log"
+５关联远程仓库：git remote add origin (远程仓库的HTTPS(无密钥)或SSH(有密钥))	
+６提交代码到主分支:git push -u origin master
+
+注意事项：远程仓库项目的名字必须和本地项目的名字一致

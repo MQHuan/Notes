@@ -1,0 +1,9 @@
+在style.xml中添加
+ <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+         ...
+    <item name="actionMenuTextColor">@color/text_color</item>
+         ...
+ </style>
+
+在对应的toolbar下面添加
+android:theme="@style/AppTheme.ActionBar"

@@ -41,9 +41,11 @@ people from all over the world was using
 the app we said okay let's do it in as
 这个APP,我们说好吧，让我们做它兼容
 many languages as we can， we are aiming
-多语言尽我们可能，
+多语言尽我们可能，我们正在瞄准
 for here in Argentina is creating the 
-initial part of the project but we knew
+这里 在阿根廷正在创造的 
+initial part of the project ,but we knew
+项目的初始部分, 不过我们知道
 from the beginning that we had to be 
 laughs very big and strong team we
 started to hire people from all over

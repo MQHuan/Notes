@@ -1,0 +1,16 @@
+作者：校军
+链接：http://www.zhihu.com/question/24008766/answer/58836643
+来源：知乎
+著作权归作者所有，转载请联系作者获得授权。
+
+最近比较火的开源库由Bilibili贡献
+GitHub - Bilibili/ijkplayer: Android/iOS video player based on FFmpeg n3.1, with MediaCodec, VideoToolbox support.
+遵循Apache License 2.0，稳定性还不错，开发难度低有比较详细的例子，完全免费。
+
+-------------------------------------------
+工作原因试用过几个播放器SDK，简单说一下
+Vitamio 支持格式较多，稳定性高，性能较高，功能强大，开发难度低。个人使用免费，商业使用收费。
+Baidu 云媒体 支持格式多，稳定性一般，性能一般，功能稍微少，开发难度低。个人使用免费，商业使用免费。
+VLC 支持格式较多，稳定性高，性能不错，功能较为强大，开发难度较高。开源免费
+FFMpeg 市面上所有的播放器几乎都是基于此开源项目修改，由于开源，会有不少bug，如需商业使用需有精通FFMpge开发者进行二次开发。
+建议：如果有技术的可以直接使用FFMpeg进行二次开发，如果没有相关开发者可以使用Vitamio或者VLC，Baidu云媒体不推荐。

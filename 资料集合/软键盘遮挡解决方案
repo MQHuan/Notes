@@ -1,0 +1,13 @@
+方案一
+  new KeyboardVisibilityEvent().setEventListener(mActivity, new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                if (isOpen) {
+                    mRangeBarSleep.setVisibility(View.GONE);
+                    mRangeBarStep.setVisibility(View.GONE);
+                } else {
+                    mRangeBarSleep.setVisibility(View.VISIBLE);
+                    mRangeBarStep.setVisibility(View.VISIBLE);
+                }
+            }
+        });

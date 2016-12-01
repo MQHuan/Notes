@@ -45,3 +45,38 @@ Answer:
 INSTALL_FAILED_NO_MATCHING_ABIS is when you are trying to install an app that has native libraries and it doesn't have a native library for your cpu architecture. For example if you compiled an app for armv7 and are trying to install it on an emulator that uses the Intel architecture instead it will not work.
 StackOverflow address: http://stackoverflow.com/questions/24572052/install-failed-no-matching-abis-when-install-apk
 
+
+/*********************************
+Question:
+No service of type Factory available in ProjectScopeServices
+
+Answer:
+Change maven gradle plugin version to 1.4.1 in project build.gradle file
+
+dependencies {
+    classpath 'com.android.tools.build:gradle:2.2.2'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,6 +16,13 @@ git branch -m old_name new_name
 *查看远程分支
 git branch -a 或者 git branch --all
 
+*推送新分支到远程
+git push --set-upstream origin branch_name
 
+*不commit的情况下切换分支
+// 把提交暂存起来
+$ git statsh
+// 重新获取刚才的提交
+$ git statsh apply
 
 #参考资料： http://zengrong.net/post/1746.htm

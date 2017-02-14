@@ -1,0 +1,13 @@
+1.在XML中使用
+
+android:drawableLeft="@drawable/icon"
+
+
+
+2.代码中动态变化
+
+Drawable drawable= getResources().getDrawable(R.drawable.drawable);
+/// 这一步必须要做,否则不会显示.
+drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+myTextview.setCompoundDrawables(drawable,null,null,null);
+

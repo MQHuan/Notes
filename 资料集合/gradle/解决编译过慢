@@ -1,0 +1,5 @@
+方法一：
+Setting --> Build,Execution,Deployment --> Build Tools --> Gradle -->把右边的Offline work 钩上
+
+更多方法：http://mdsa.51cto.com/art/201503/469038.htm
+http://blog.csdn.net/zero_and_one/article/details/42009487

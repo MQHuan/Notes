@@ -1,0 +1,21 @@
+该分割线是系统默认的，你可以在theme.xml中找到该属性的使用情况。那么，使用系统的listDivider有什么好处呢？就是方便我们去随意的改变，该属性我们可以直接声明在：
+
+ <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+      <item name="android:listDivider">@drawable/divider_bg</item>  
+    </style>
+
+然后自己写个drawable即可，下面我们换一种分隔符：
+
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <gradient
+        android:centerColor="#ff00ff00"
+        android:endColor="#ff0000ff"
+        android:startColor="#ffff0000"
+        android:type="linear" />
+    <size android:height="4dp"/>
+
+</shape>

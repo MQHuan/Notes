@@ -1,0 +1,12 @@
+----.xml
+       <TextView
+          ....
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:text="asdfasdfasdfasdfasdfs  dfsdfasadfasdf"
+        ..../>
+
+----.java
+...
+         data.setSelected(true);
+...

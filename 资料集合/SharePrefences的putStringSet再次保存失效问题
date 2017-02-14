@@ -1,0 +1,151 @@
+问题背景
+
+从API 11开始，Android提供了保存和获取String Set的方法:
+
+Editor putStringSet(String key, @Nullable Set<String> values);
+Set<String> getStringSet(String key, @Nullable Set<String> defValues);
+
+
+可以很方便地保存数组。
+
+问题
+
+问题代码
+
+private Set<String> mBusCardIdSet;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    mBusCardIdSet = 
+        mSharedPreferences.getStringSet(SPConstants.SP_BUS_CARD_ID, new HashSet<String>());
+}
+public void onClickAddCard(View view) {
+    String newBusCardId = mEditTextCardId.getText().toString();
+    mBusCardIdSet.add(newBusCardId);
+    mSharedPreferences.edit().putStringSet(SPConstants.SP_BUS_CARD_ID, mBusCardIdSet).apply();
+}
+
+
+这段代码很简单，创建时，从SharedPreferences中读取一个字符集合，点击添加时，更新集合并保存到SharedPreferences中。
+
+问题描述
+
+首次启动，一切功能正常。结束进程后，再次启动，无法保存数据。
+
+问题解决
+
+百思不得其解之后，运用最快解决办法，百度之，发现答案：
+
+百度贴吧快照：PS可能失效 
+Editor editor = customApplition_preferences.edit().clear(); 
+editor.putStringSet(“customApplition”, deleteCustomApplitionSet).;就OK了 个人原来没有研究过这个editor，清除一次就可以了。
+在editor之后调用一次clear再重新添加数据，发现确实可以保存了，OK，问题得到解决。
+
+背后的原因
+
+问题是解决了，但是心里有疑问并没有散去，背后是有什么黑幕呢？找到源码分析
+
+//以下代码已删除部分无关内容
+public final class EditorImpl implements Editor {
+    private final Map<String, Object> mModified = Maps.newHashMap();
+    private boolean mClear = false;
+    public Editor clear() {
+352            synchronized (this) {
+353                mClear = true;
+354                return this;
+355            }
+356        }
+    public Editor putStringSet(String key, Set<String> values) {
+        synchronized (this) {
+            //这里创建了一个新的HashSet
+            mModified.put(key,
+                (values == null) ? null : new HashSet<String>(values));
+                    return this;
+        }
+    }
+    private MemoryCommitResult commitToMemory() {
+389            MemoryCommitResult mcr = new MemoryCommitResult();
+390            synchronized (SharedPreferencesImpl.this) {
+401                mcr.mapToWriteToDisk = mMap;
+411                synchronized (this) {
+412                    if (mClear) {
+                            //如果调用了clear(),那么这里就会执行
+413                        if (!mMap.isEmpty()) {
+414                            mcr.changesMade = true; //只有这个标志被设置之后，内容才会被保存到文件中
+415                            mMap.clear();
+416                        }
+417                        mClear = false;
+418                    }
+419
+420                    for (Map.Entry<String, Object> e : mModified.entrySet()) {
+421                        String k = e.getKey();
+422                        Object v = e.getValue();
+426                        if (v == this || v == null) {
+427                            if (!mMap.containsKey(k)) {
+428                                continue;
+429                            }
+430                            mMap.remove(k);
+431                        } else {
+432                            if (mMap.containsKey(k)) {
+433                                Object existingValue = mMap.get(k);
+                                    //跟据问题可以判断是这里判断条件为真
+434                                if (existingValue != null && existingValue.equals(v)) {
+435                                    continue;
+436                                }
+437                            }
+438                            mMap.put(k, v);
+439                        }
+440
+441                        mcr.changesMade = true;
+442                        if (hasListeners) {
+443                            mcr.keysModified.add(k);
+444                        }
+445                    }
+446
+447                    mModified.clear();
+448                }
+449            }
+450            return mcr;
+451        }
+}
+
+//existingValue.equals(v) 是两个HashSet的比较，从代码来看，putStringSet中新建了一个对像，那么两者是不一样的对像，为什么还会equals呢，看一下代码：
+public class HashSet<E> extends AbstractSet<E>;
+public abstract class AbstractSet<E> extends AbstractCollection<E> implements
+        Set<E> {
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object instanceof Set) {
+            Set<?> s = (Set<?>) object;
+
+            try {
+                return size() == s.size() && containsAll(s); //注意这里，内容相等那么会返回true
+            } catch (NullPointerException ignored) {
+                return false;
+            } catch (ClassCastException ignored) {
+                return false;
+            }
+        }
+        return false;
+    }        
+}
+
+分析到这里真相已经大白了。回顾一下：
+
+mBusCardIdSet = 
+        mSharedPreferences.getStringSet(SPConstants.SP_BUS_CARD_ID, new HashSet<String>());
+
+第一次启动: 
+– mBusCardIdSet指向了new HashSet() 
+– 在添加数据后，mBusCardIdSet中的内容和mSharedPreferences.mMap.get(SPConstants.SP_BUS_CARD_ID)不一样，那么判断条件为假，从而会执行保存数据代码。
+第二次启动: 
+– mBusCardIdSet指向了mSharedPreferences.mMap.get(SPConstants.SP_BUS_CARD_ID) 
+– 在添加数据后，mSharedPreferences.mMap.get(SPConstants.SP_BUS_CARD_ID)中的内容同样会被修改，在putStringSet之后比较new HashSet(mBusCardIdSet)和mSharedPreferences.mMap.get(SPConstants.SP_BUS_CARD_ID),因为HashSet内容相同时也会返回true，所以在这里两者的内容相同，导致没有执行保存数据代码。
+总结
+
+总的来说，这是一个隐藏的小bug，解决办法有两个： 
+1.在editor之后调用一次clear，强制重新保存数据
+
+博客地址：http://blog.csdn.net/crazyman2010/article/details/51187817

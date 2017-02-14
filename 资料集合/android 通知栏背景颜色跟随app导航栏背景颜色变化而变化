@@ -1,0 +1,15 @@
+通知栏（notification）背景颜色跟随app导航栏（top title）背景颜色变化而变化。
+
+这也叫沉浸式状态栏，这是Google在android 4.4以上的系统提出的。
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {  
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);  
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);  
+    }  
+
+XML布局中加入
+    android:clipToPadding="false"  
+    android:fitsSystemWindows="true"  
+
+github项目地址
+https://github.com/jgilfelt/SystemBarTint

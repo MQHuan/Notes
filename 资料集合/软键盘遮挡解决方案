@@ -1,0 +1,44 @@
+方案一
+  new KeyboardVisibilityEvent().setEventListener(mActivity, new KeyboardVisibilityEventListener() {
+            @Override
+            public void onVisibilityChanged(boolean isOpen) {
+                if (isOpen) {
+                    mRangeBarSleep.setVisibility(View.GONE);
+                    mRangeBarStep.setVisibility(View.GONE);
+                } else {
+                    mRangeBarSleep.setVisibility(View.VISIBLE);
+                    mRangeBarStep.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+方案 二： 
+项目中适配了Android最新的MaterialDesign，theme中声明
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+....
+以及使用了NoActionBar这样的style
+或者使用了沉浸式topbar全屏时想实现键盘弹出时候把这个菜单栏顶上来，正常来说，我们只需要在 AndroidManifest相应的Activity下面声明：
+            android:windowSoftInputMode="adjustResize" 
+就可以搞定。
+但是这是这时候发现失效了。
+
+解决办法：
+简单的解决办法说是这样的，加一个属性
+android:fitsSystemWindows="true"
+
+虽然可以生效，但是。。toolbar向下平移了statusbar的高度，也就是说statusbar是全白的。。
+看来这个不行了，继续google。。
+
+找到了这个
+http://stackoverflow.com/questions/7417123/android-how-to-adjust-layout-in-full-screen-mode-when-softkeyboard-is-visible
+分数最高的那个解决方案
+
+在三星上可以完美解决，但是在5.0系统和魅族手机上 底部菜单栏和键盘有大约50px的高度，不能完美适配。。。尼玛
+
+继续google
+找到了这个http://stackoverflow.com/questions/21092888/windowsoftinputmode-adjustresize-not-working-with-translucent-action-navbar
+自定义了一个layout继承你的根layout。
+重写fitSystemWindows方法，并且在根layout中声明 fitSystemWindows="true"
+
+虽然麻烦点，可以完美适配。
+

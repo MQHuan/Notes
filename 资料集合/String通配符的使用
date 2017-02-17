@@ -1,0 +1,10 @@
+<string name="welcome_messages">Hello, %1$s! You have %2$d new messages.</string>
+在这个例子中，这个格式化的字符串有2个参数
+属性值举例说明
+%n$ms：代表输出的是字符串，n代表是第几个参数，设置m的值可以在输出之前放置空格 
+%n$md：代表输出的是整数，n代表是第几个参数，设置m的值可以在输出之前放置空格，也可以设为0m,在输出之前放置m个0 
+%n$mf：代表输出的是浮点数，n代表是第几个参数，设置m的值可以控制小数位数，如m=2.2时，输出格式为00.00
+ 
+在程序中按照下面的方法来根据参数来格式化字符串：
+Resources res = getResources();
+String text = String.format(res.getString(R.string.welcome_messages), username, mailCount);

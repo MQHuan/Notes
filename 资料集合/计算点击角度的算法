@@ -1,0 +1,36 @@
+ @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //获取图片的半径
+        mRealPointerRadius = mImagePointer.getWidth() / 2f / 2;
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            int width = getWidth();
+            int height = getHeight();
+
+            float x = event.getX();
+            float y = event.getY();
+            // 计算用户点击的半径
+            double d = Math.sqrt(Math.pow((x - width / 2f), 2) + Math.pow((y - height / 2), 2));
+
+            // 如果用户点击的半径大于图片半径
+            if (d > mRealPointerRadius) {
+                // 得出用户点击点相对于中心点的角度(atan2 得出弧度值，toDegrees转化出角度值)
+                double angle = Math.toDegrees(Math.atan2(width / 2f - x, height / 2 - y));
+                //根据角度，设置对已的颜色
+                if (angle > 0 && angle < 72) {
+                    setTheme(RED);
+                } else if (angle > 72 && angle < 144) {
+                    setTheme(BLACK);
+                } else if (angle > 144) {
+                    setTheme(BLUE);
+                } else if (angle < 0 && angle > -72) {
+                    setTheme(ORANGE);
+                } else if (angle < -72 && angle > -144) {
+                    setTheme(YELLOW);
+                } else if (angle < -144) {
+                    setTheme(BLUE);
+                }
+            }
+        }
+
+        return true;
+    }

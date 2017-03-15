@@ -67,7 +67,24 @@ Answer:
 解决的方案就是安装几个32位的兼容库，如下：
 $ sudo apt-get install -y libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1  
 
+/******************************************
+Question:
+Getting Exception java.lang.NoClassDefFoundError: com.google.firebase.FirebaseOptions after updating to the new firebase
 
+Answer:
+http://stackoverflow.com/questions/37360126/getting-exception-java-lang-noclassdeffounderror-com-google-firebase-firebaseop
+
+/*********************************************
+Question:
+有些so库在android7.0会报 dlopen failed: "xxx.so" .dynamic section header was not found
+
+Answer:
+把报错的so库去掉，或者更新
+Android7.0开始Hook方式将会直接导致App崩溃
+Starting in Android 7.0, the systemprevents apps from dynamically linking against non-NDK
+libraries, which may cause your app to crash
+
+参考 ：https://developer.android.com/about/versions/nougat/android-7.0-changes.html#ndk
 
 
 

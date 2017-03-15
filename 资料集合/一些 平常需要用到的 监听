@@ -1,0 +1,57 @@
+/** 权限 
+         *  <receiver android:name="com.example.app_install_unstall.MyBroadcastReceiver" >   
+                <intent-filter>   
+                    <action android:name="android.intent.action.PACKAGE_ADDED" />   
+                    <action android:name="android.intent.action.PACKAGE_REMOVED" />   
+       
+                     <data android:scheme="package" />   
+                     
+                     <action android:name="android.intent.action.TIME_SET" />   
+                     <action android:name="android.intent.action.DATE_CHANGED" />   
+                </intent-filter>   
+        </receiver>  
+     
+         */  
+          
+          
+         /**监听应用程序的安装*/  
+         if(intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {     // install    
+            String packageName = intent.getDataString();    
+    
+            System.out.println("安装了 :" + packageName);  
+            
+         }    
+    
+         /**监听应用程序的卸载*/  
+         if(intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {   //uninstall    
+            String packageName = intent.getDataString();    
+            System.out.println("卸载了 :" + packageName);  
+          }    
+      
+           
+           
+         //时间的监听 必须使用动态广播  
+           
+         /**系统的时间变化   每分钟都会发送*/  
+         //ACTION_TIME_TICK = "android.intent.action.TIME_TICK";  
+         if(intent.getAction().equals(Intent.ACTION_TIME_TICK)) {    
+             String packageName = intent.getDataString();  
+               System.out.println("Intent.ACTION_TIME_TICK :" + packageName);  
+              
+         }    
+           
+         
+         //ACTION_DATE_CHANGED = "android.intent.action.DATE_CHANGED";  
+         if(intent.getAction().equals(Intent.ACTION_DATE_CHANGED)) {    
+             String packageName = intent.getDataString();    
+             System.out.println("Intent.ACTION_DATE_CHANGED :" + packageName);  
+            
+         }    
+           
+         /**  time changeed    更改时间  和  24小时制 或12小时制  */  
+        //ACTION_TIME_CHANGED = "android.intent.action.TIME_SET";  
+         if(intent.getAction().equals(Intent.ACTION_TIME_CHANGED)) {    
+             String packageName = intent.getDataString();  
+             System.out.println("Intent.ACTION_TIME_CHANGED  :" + packageName);  
+                
+         }  

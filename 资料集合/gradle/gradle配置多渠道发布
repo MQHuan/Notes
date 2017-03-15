@@ -1,0 +1,25 @@
+主要用到： productFlavors
+例子：
+   productFlavors {
+
+        xiaomi {
+            manifestPlaceholders = [CHANNEL_VALUE: "xiaomi"]
+            buildConfigField "String", "CHANNEL", "\"xiaomi\""
+            ndk {
+                abiFilters "armeabi-v7a", "armeabi"
+            }
+        }
+
+        qihoo {
+            manifestPlaceholders = [CHANNEL_VALUE: "qihoo"]
+            buildConfigField "String", "CHANNEL", "\"qihoo\""
+            ndk {
+                abiFilters "armeabi-v7a", "armeabi"
+            }
+        }
+   }
+
+Android Studio左下角有个 Build Variants按钮，可以看到当前moudle的Build Variant, 在指定moudle的Bulid Variant下的下拉列表中选择对应的条目可以编译指定的内容
+参考资料：
+DeveloperAndroid:https://developer.android.com/studio/build/build-variants.html
+

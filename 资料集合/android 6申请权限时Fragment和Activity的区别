@@ -1,0 +1,9 @@
+在Fragment中申请运行时权限的时候是使用Fragment本身来进行申请
+
+在Activity中使用的时候我们的代码如下：
+ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+        1);
+我们在Fragment中申请时不是使用AcyivityCompat而是使用Fragment本身，代码如下：
+HomeFragment.this.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+        1);
+

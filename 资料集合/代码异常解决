@@ -1,0 +1,17 @@
+
+/**********************************************
+Qustion:
+
+Java.lang.IllegalStateException: Fragment ***Fragment{41e49e28} not attached to Activity
+
+Answer:
+出现该异常，是因为Fragment的还没有Attach到Activity时，调用了如getResource()等，需要上下文Content的函数。解决方法，就是等将调用的代码写在OnStart（）中。主要是在调用
+
+/*************************************************
+Qustion:
+
+Can't create handler inside thread that has not called Looper.prepare()
+
+Answer:
+new Handle(Loop.getMainLooper);
+

@@ -4,7 +4,7 @@
 
         xiaomi {
             manifestPlaceholders = [CHANNEL_VALUE: "xiaomi"]
-            buildConfigField "String", "CHANNEL", "\"xiaomi\""
+            buildConfigField "String", "CHANNEL", "\"xiaomi\""//自动生成的BuildConfig类中添加一个常量 public static final String CHANNEL = "xiaomi";
             ndk {
                 abiFilters "armeabi-v7a", "armeabi"
             }

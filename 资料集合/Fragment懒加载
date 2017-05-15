@@ -1,0 +1,4 @@
+ViewPager嵌套Fragment时候，用Fragment的getUserVisibleHint()和@Override setUserVisibleHint(boolean isVisibleToUser){}判读Fragment是否正展示在用户面前从而实现Fragment的懒加载。
+
+http://blog.csdn.net/tellh/article/details/50705178
+http://www.jianshu.com/p/e7449278e33d

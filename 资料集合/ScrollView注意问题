@@ -1,0 +1,16 @@
+Scrollview 一定要填满屏幕才会滚动
+可以用
+   <Space
+            android:layout_below="@+id/weight_unit"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+填满屏幕
+
+
+//问题一：
+ScrollView match_parent不起作用
+/** 
+  * When set to true, the scroll view measure its child to make it fill the currently
+  * visible area. */
+@ViewDebug.ExportedProperty(category = "layout")
+private boolean mFillViewport;

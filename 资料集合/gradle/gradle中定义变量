@@ -1,2 +1,8 @@
 1.在project下的gradle.properties添加变量例如：SUPPORT_VERSION=25.0.1
 2.在.gradle文件中用${变量名}引用，注意引用变量时字符串的符号必须是双引号""，其余用法和java类似
+
+好像还可以这么用：
+compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_SDK_VERSION)
+buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+FROM：http://blog.csdn.net/fuchaosz/article/details/51151957

@@ -1,9 +1,0 @@
-配置获取焦点时下划线和光标的颜色：
-在style.xml中添加
-    <style name="theme_band_green">
-        <item name="colorAccent">@color/weight_green</item>
-    </style>
-在EditText的属性中中添加
-     android:theme="@style/theme_band_green"
-
-貌似很多改不了颜色的属性都可以通过设置style来改

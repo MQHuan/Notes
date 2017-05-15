@@ -1,0 +1,82 @@
+XXX_layout.xml 
+
+      <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/acs_seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="10.5dp"
+            android:indeterminateOnly="false"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:progressDrawable="@drawable/seek_bar_bg"
+            android:minHeight="10.5dp"
+            android:thumb="@drawable/seek_bar_thumb"
+            android:thumbOffset="12.0dp"
+            />
+
+/***************************************************/
+seek_bar_bg.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:drawable="@drawable/bar_up" />
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <corners android:radius="2.0dip" />
+                <gradient android:startColor="#80ffd300" android:endColor="#a0ffcb00" android:angle="270.0" android:centerY="0.75" android:centerColor="#80ffb600" />
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip android:drawable="@drawable/bar_dn" />
+    </item>
+</layer-list>
+
+
+/***************************************************/
+seek_bar_thumb.xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按下状态 -->
+    <item  android:state_pressed="true">
+        <!--<shape android:shape="oval">-->
+        <!--<size-->
+        <!--android:width="60dp"-->
+        <!--android:height="60dp" />-->
+        <!--<solid android:color="@color/white" />-->
+        <!--</shape>-->
+        <shape android:shape="oval">
+            <size android:width="30dp" android:height="30dp" />
+            <solid android:color="@color/white" />
+            <stroke android:width="1dp" android:color="@color/color_e0e0e0" />
+
+        </shape>
+    </item>
+
+    <!-- 焦点状态 -->
+    <item  android:state_focused="true">
+        <!--<shape android:shape="oval">-->
+        <!--<size-->
+        <!--android:width="60dp"-->
+        <!--android:height="60dp" />-->
+        <!--<solid android:color="@color/white" />-->
+        <!--</shape>-->
+        <shape android:shape="oval">
+            <size android:width="30dp" android:height="30dp" />
+            <solid android:color="@color/white" />
+            <stroke android:width="1dp" android:color="@color/color_e0e0e0" />
+
+        </shape>
+    </item>
+
+    <!-- 默认状态 -->
+    <item>
+        <shape android:shape="oval" android:innerRadius="100dp">
+            <size android:width="30dp" android:height="30dp" />
+            <solid android:color="@color/white" />
+            <stroke android:width="1dp" android:color="@color/color_e0e0e0">
+            </stroke>
+
+        </shape>
+    </item>
+</selector>

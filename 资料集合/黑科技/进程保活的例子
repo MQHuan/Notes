@@ -1,0 +1,129 @@
+package com.imco.cocoband.services;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
+
+import com.imco.App;
+import com.imco.common.utils.C;
+import com.imco.common.utils.Logger;
+import com.imco.common.utils.DateUtils;
+import com.imco.common.utils.UTESPUtil;
+import com.imco.watchassistant.Card;
+import com.imco.watchassistant.R;
+import com.yc.peddemo.sdk.UTESQLOperate;
+
+import java.util.Calendar;
+
+/**
+ * Created by imco on 5/17/16.
+ */
+public class SportCardPushService extends Service {
+    private NotificationCompat.Builder mNotification;
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Logger.d(this, "onCreate");
+
+        mNotification = new NotificationCompat.Builder(this);
+        mNotification.setPriority(Notification.PRIORITY_MIN);
+
+        startForeground(9998, mNotification.build());
+
+        registeTimeChangedBroadcast();
+
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (mNotification != null) {
+            notificationManager.cancelAll();
+        }
+
+        return super.onStartCommand(intent, flags, startId);
+
+    }
+
+    private void registeTimeChangedBroadcast() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_TIME_TICK);
+        registerReceiver(timeChangedReceiver, filter);
+    }
+
+    private BroadcastReceiver timeChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTimeInMillis(System.currentTimeMillis());
+            int hour = mCalendar.get(Calendar.HOUR_OF_DAY);
+            int minute = mCalendar.get(Calendar.MINUTE);
+            if (hour == 22 && minute == 30) {
+                UTESQLOperate utesqlOperate = new UTESQLOperate(App.getContext());
+                int goalStep = (int) UTESPUtil.get(C.STEPS_TARGET, 10000);
+                int todayStep = utesqlOperate.queryStepDate(DateUtils.getDateByMilliseconds("yyyyMMdd", DateUtils.getToday()));
+
+                if (todayStep > goalStep) {
+                    Card card = new Card();
+                    card.setTime(System.currentTimeMillis());
+                    card.setCompletedStep(todayStep);
+                    if (goalStep >= 20000) {
+                        card.setType(C.TYPE_SPORT_COMPLETED_GOAL_20000);
+                    } else if (goalStep >= 16000) {
+                        card.setType(C.TYPE_SPORT_COMPLETED_GOAL_16000);
+                        card.setMessage(context.getString(R.string.card_goal_16000));
+                    } else if (goalStep >= 8000) {
+                        card.setType(C.TYPE_SPORT_COMPLETED_GOAL_8000);
+                        card.setMessage(context.getString(R.string.card_goal_8000));
+                    } else if (goalStep >= 4000) {
+                        card.setType(C.TYPE_SPORT_COMPLETED_GOAL_4000);
+                        card.setMessage(context.getString(R.string.card_goal_4000));
+                    } else if (goalStep >= 2000) {
+                        card.setType(C.TYPE_SPORT_COMPLETED_GOAL_2000);
+                        card.setMessage(context.getString(R.string.card_goal_2000));
+                    }
+                    App.getDaoSession().getCardDao().insert(card);
+                } else {
+//                    Card completionCard = new Card();
+//                    completionCard.setTime(System.currentTimeMillis());
+//                    completionCard.setType(C.TYPE_SPORT_COMPLETION);
+//                    int completion = (int) (todayStep / (float) goalStep * 100);
+//                    completionCard.setStepCompletion(completion);
+//                    App.getDaoSession().getCardDao().insert(completionCard);
+
+                    Card uncompleteStepCard = new Card();
+                    uncompleteStepCard.setTime(System.currentTimeMillis());
+                    uncompleteStepCard.setUncompleteStep(goalStep - todayStep);
+                    uncompleteStepCard.setType(C.TYPE_SPORT_UNCOMPLETE_STEP);
+                    App.getDaoSession().getCardDao().insert(uncompleteStepCard);
+
+
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Logger.d(this, "on Destroy");
+        unregisterReceiver(timeChangedReceiver);
+        stopForeground(true);
+    }
+}
+

@@ -1,0 +1,40 @@
+/***Component :Component它是一个桥梁，一端是目标类，另一端是目标类所依赖类的实例，它也是注入器（Injector）负责把目标类所依赖类的实例注入到目标类中，同时它也管理Module。*******/
+
+@Component
+public abstract class AppComponent {
+    private static AppComponent mComponent;
+
+    public static AppComponent getInstance() {
+        if (mComponent == null) {
+            mComponent = DaggerAppComponent.builder().build();
+        }
+
+        return mComponent;
+    }
+
+    public abstract void inject(BandActivity activity);
+}
+
+/***Module***/
+@Module
+public class MainPresenter extends BasePresenter {
+    private MainView mView;
+
+    @Inject
+    public MainPresenter() {
+        AppComponent.getInstance().inject(this);
+   
+    }
+}
+
+/***使用***/
+public class BandActivity extends BaseActivity implements MainView {
+
+    @Inject
+    MainPresenter mMainPresenter;
+
+    @Override
+    protected void init() {
+        AppComponent.getInstance().inject(this);
+    }
+}

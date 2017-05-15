@@ -1,0 +1,4 @@
+命令解析器：
+ shell -- unix 操作系统
+ bash -- Linux操作系统
+

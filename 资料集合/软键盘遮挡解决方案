@@ -1,3 +1,43 @@
+
+  /**
+   * 弹出键盘
+   *
+   * @param context
+   * @param view
+   */
+  public static void showSoftInput(Context context, View view) {
+    if (view != null) {
+      InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.showSoftInput(view, 0);
+    }
+  }
+
+  /**
+   * 隐藏键盘
+   *
+   * @param context
+   * @param view
+   */
+  public static void hideSoftInput(Context context, View view) {
+    if (view != null) {
+      InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+  }
+
+
+把要随软键盘弹出的空间作为View参数输入即可
+记得在这个View的布局里面加上android:fitsSystemWindows="true"
+>>>>>>>注意不是在根View,而是在这个View本身
+
+
+
+
+
+
+
+
+/**********网上的方法，仅供参考****************/
 方案一
   new KeyboardVisibilityEvent().setEventListener(mActivity, new KeyboardVisibilityEventListener() {
             @Override

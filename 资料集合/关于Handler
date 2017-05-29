@@ -1,0 +1,43 @@
+/**********************************
+Qusition : 
+removeCallbacks not stopping runnable
+
+Answer :
+匿名内部类会默认持有外部类的隐式引用
+It appears to me that removeCallbacks(..) only stops pending messages (Runnables). If your runnable has already started, then there's no stopping it (at least not this way).
+Alternatively, you can extend the Runnable class and give it some kind of kill switch like this:
+
+public class MyRunnable implements Runnable
+{
+   private boolean killMe = false;
+
+   private void run()
+   {
+      if(killMe)
+         return;
+
+      /* do your work */
+   }
+
+   private void killRunnable()
+   {
+      killMe = true;
+   }
+}
+This will only prevent it from starting, but you could occasionally check killMe and bail out. If you are looping the runnable (like some kind of background thread) you can say:
+
+while(!killMe) {
+   /* do work */
+}
+
+/**************************************
+Qusition :
+How to remove all callback from a Handler?
+
+Answer:
+In my experience calling this worked great!
+
+handler.removeCallbacksAndMessages(null);
+In the docs for removeCallbacksAndMessages it says...
+
+Remove any pending posts of callbacks and sent messages whose obj is token. If token is null, all callbacks and messages will be removed.

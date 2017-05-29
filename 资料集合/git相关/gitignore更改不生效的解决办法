@@ -1,5 +1,17 @@
 修改.gitignore发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
 
+
+
+第一步，为避免冲突需要先同步下远程仓库
+git pull
+
+第二步，在本地项目目录下删除缓存
 git rm -r --cached .
+
+第三步，再次add所有文件
+输入以下命令，再次将项目中所有文件添加到本地仓库缓存中
 git add .
-git commit -m 'update .gitignore'
+
+第四步，添加commit，提交到远程库
+git commit -m "filter new files"
+git push

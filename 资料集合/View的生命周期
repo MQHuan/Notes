@@ -1,0 +1,5 @@
+
+View 的生命周期为
+ [改变可见性] --> 构造View --> onFinishInflate --> onAttachedToWindow --> onMeasure -->  onSizeChanged --> onLayout --> onDraw -->
+ onDetackedFromWindow
+参考：http://blog.csdn.net/lue2009/article/details/45692009

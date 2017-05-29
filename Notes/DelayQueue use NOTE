@@ -1,0 +1,88 @@
+五个队列所提供的各有不同：
+* ArrayBlockingQueue ：一个由数组支持的有界队列。
+* LinkedBlockingQueue ：一个由链接节点支持的可选有界队列。
+* PriorityBlockingQueue ：一个由优先级堆支持的无界优先级队列。
+* DelayQueue ：一个由优先级堆支持的、基于时间的调度队列。
+* SynchronousQueue ：一个利用 BlockingQueue 接口的简单聚集（rendezvous）机制。
+
+
+* DelayQueue 队列的例子：
+
+public class DelayedElement implements Delayed {
+
+    private long duration = 0;
+    private RunTask mRunTask;
+    public DelayedElement(long duration, RunTask runTask) {
+        this.duration = System.currentTimeMillis() + duration;
+        this.mRunTask = runTask;
+    }
+
+    @Override
+    public int compareTo(Delayed o) {
+        return (int) (this.duration - ((DelayedElement) o).getDuration());
+    }
+
+    public void run() {
+        mRunTask.run();
+    }
+    @Override
+    /*
+     * Expiration occurs when an element's getDelay(TimeUnit unit) method
+     * returns a value less than or equal to zero.
+     */
+    public long getDelay(TimeUnit unit) {
+        long diff = duration - System.currentTimeMillis();
+        return unit.convert(diff, TimeUnit.MILLISECONDS);
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public interface RunTask {
+        void run();
+    }
+}
+
+
+public class BackGroundThread implements Runnable {
+    private static DelayQueue<DelayedElement> mDelayQueue;
+    private static BackGroundThread mBackGroundThread;
+
+    private BackGroundThread() {
+        mDelayQueue = new DelayQueue<>();
+    }
+
+    public static BackGroundThread getInstance() {
+        if (mBackGroundThread == null) {
+            mBackGroundThread = new BackGroundThread();
+        }
+        return mBackGroundThread;
+    }
+    public int getQueueSize() {
+        return mDelayQueue.size();
+    }
+    public void putTaskInQueue(DelayedElement delayedElement) {
+        if (mDelayQueue != null) {
+            mDelayQueue.put(delayedElement);
+        }
+    }
+
+    @Override
+    public void run() {
+        while (!Thread.interrupted()) {
+            try {
+                Thread.sleep(100);
+                if (!mDelayQueue.isEmpty()) {
+                    mDelayQueue.take().run();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}

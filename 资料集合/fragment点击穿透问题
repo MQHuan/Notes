@@ -1,0 +1,2 @@
+
+叠在一起的fragment上层会响应下层的按钮点击事件，而且还会响应activity中的点击事件。在每个fragment布局的根节点加一条android:clickable="true"可破

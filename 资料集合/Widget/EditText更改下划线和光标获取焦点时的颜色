@@ -7,3 +7,17 @@
      android:theme="@style/theme_band_green"
 
 貌似很多改不了颜色的属性都可以通过设置style来改
+
+
+EditText有一个属性：android:textCursorDrawable，这个属性是用来控制光标颜色的
+
+android:textCursorDrawable="@null"，"@null"作用是让光标颜色和textcolor一样
+
+
+
+PS：
+
+textcursordrawable 在framework 的textview 中有这个 它代表的就是光标，是一张点9图片 ，只要去换这张图片可以了 
+
+这张图片在framework/core/res/res/values/themes.xml 中去更换。
+在应用层也可以再editText中设置android:textCursorDrawable="@drawable/ic_png"也可以更换光标

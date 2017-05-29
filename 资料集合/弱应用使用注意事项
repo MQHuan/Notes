@@ -1,0 +1,2 @@
+BaseActivity mActivity = new WeakReference<>((BaseActivity)) getActivity()).get();
+上面一句把弱引用转化为强应用了，导致弱引用无效化。

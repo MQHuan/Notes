@@ -86,6 +86,22 @@ libraries, which may cause your app to crash
 
 参考 ：https://developer.android.com/about/versions/nougat/android-7.0-changes.html#ndk
 
+/*******************************************
+Question:
+“Expected resource of type string” when use Butterknife
+
+Answer:
+Answer to this is: disable lint rule in your build.gradle
+
+android {
+  lintOptions {
+    disable "ResourceType"
+  }
+}
+Edit: This may happen particularly when migrating from Eclipse to Android Studio.
+
+http://stackoverflow.com/questions/35009832/androidstudio-disable-expected-resource-of-type-string
+
 
 
 

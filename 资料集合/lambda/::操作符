@@ -1,0 +1,14 @@
+这个::是java 8里引入lambda后的一种用法，表示引用
+
+例子1： 
+for (Object n : list) { System.out.println(n); }
+
+list.forEach(n -> System.out.println(n));
+
+list.forEach(System.out::println);
+
+例子2:
+Math::max等效于(a, b)->Math.max(a, b)
+String::startWith等效于(s1, s2)->s1.startWith(s2)
+s::isEmpty等效于()->s.isEmpty()
+

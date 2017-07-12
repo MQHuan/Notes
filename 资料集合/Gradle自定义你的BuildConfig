@@ -1,0 +1,14 @@
+在gradle android 标签下面的子标签添加下面的代码就可以了
+        buildConfigField "boolean", "TINKER_ENABLE", "${tinkerpatchSupport.tinkerEnable}"
+
+
+例如： 
+android {
+    defaultConfig {
+        buildConfigField "boolean", "TINKER_ENABLE", "${tinkerpatchSupport.tinkerEnable}"
+    }
+}
+or
+        buildConfigField("String", "SOURCE", "\"AsafaActive\"")
+or
+http://blog.csdn.net/buaaroid/article/details/49496779

@@ -1,3 +1,7 @@
-基本流程是： 鼠标移动至 Analyze （中文释义:分析） 再点选 Run Inspection by Name … （中文释义:根据名称扫描检查）在输入框输入 unused
+Lint审查工具, 
 
-http://blog.csdn.net/qq_19986309/article/details/50266899
+流程 ： 项目名 --> Analyze -- > Inspect Code...
+
+
+分析完成后多余资源目录：  Android > Lint > Performance > Unused resources 
+参考http://www.cnblogs.com/cheerego/p/5175764.html

@@ -1,0 +1,43 @@
+注意事项
+
+以上写法在android 5以上是没有任何问题的，但是放到之前版本上就会出现问题
+原本是彩色的，在这里变成黑色的了。。。怎么办？
+
+1 在build.gradle里面进行配置
+
+android {
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+|
+2 只能用于AppCompatImageView或者AppCompatImageButton或其子类，而且必须在app:srcCompat标签中使用。
+
+这样是肯定没有问题的，但是问题在于，我不可能把代码里面所有View都改成这2种。。。
+
+3 SVG图像需要依附于StateListDrawable,InsetDrawable,LayerDrawable,LevelListDrawable,RotateDrawable，这样就可以在低版本中显示了。StateListDrawable最简单，就是直接写一个selector即可
+
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_a"></item>
+</selector>
+别忘记还有一个标志位要开启，在activity的最上方
+
+static {
+    AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+}
+这样就没问题了
+
+4 换色
+如果你想手动更换图片的背景色，那么只要这样就可以了
+
+VectorDrawableCompat a=VectorDrawableCompat.create(getResources(), R.drawable.ic_a, getTheme());
+a.setTint(Color.RED);
+ImageView imageview= (ImageView) findViewById(R.id.imageview);
+imageview.setImageDrawable(a);
+
+Paste_Image.png
+如何手动更换某一部分Path的色值，
+暂时还不知道，
+
+
+source: http://www.jianshu.com/p/709994b08683 

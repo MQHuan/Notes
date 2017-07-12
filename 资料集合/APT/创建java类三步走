@@ -1,0 +1,19 @@
+Step 1: 
+类构建 ：
+        String CLASS_NAME = "TRouter";
+        TypeSpec.Builder tb = classBuilder(CLASS_NAME).addModifiers(PUBLIC, FINAL).addJavadoc("@ 全局路由器 此类由apt自动生成");
+
+
+Step 2:
+方法构建：
+            tb.addMethod(MethodSpec.methodBuilder("go")
+                    .addJavadoc("@此方法由apt自动生成")
+                    .addModifiers(PUBLIC, STATIC)
+                    .addParameter(String.class, "name")
+                    .addParameter(HashMap.class, "extra")
+                    .addCode("go(name,extra,null);\n").build());
+
+Step 3:
+文件创建：
+            JavaFile javaFile = JavaFile.builder(Utils.PackageName, tb.build()).build();// 生成源代码
+            javaFile.writeTo(mAbstractProcessor.mFiler);// 在 app module/build/generated/source/apt 生成一份源代码

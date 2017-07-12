@@ -1,0 +1,6 @@
+SSL是Secure Sockets Layer（安全套接层协议）的缩写，可以在Internet上提供秘密性传输。Netscape公司在推出第一个Web浏览器的同时，提出了SSL协议标准。其目标是保证两个应用间通信的保密性和可靠性,可在服务器端和用户端同时实现支持。已经成为Internet上保密通讯的工业标准。
+SSL能使用户/服务器应用之间的通信不被攻击者窃听，并且始终对服务器进行认证，还可选择对用户进行认证。SSL协议要求建立在可靠的传输层协议(TCP)之上。SSL协议的优势在于它是与应用层协议独立无关的，高层的应用层协议(例如：HTTP，FTP，TELNET等)能透明地建立于SSL协议之上。SSL协议在应用层协议通信之前就已经完成加密算法、通信密钥的协商及服务器认证工作。在此之后应用层协议所传送的数据都会被加密，从而保证通信的私密性。
+
+SSL is the sorth-writer Secure Sockets Layer (safe socket protocal) . We can secretlt pass the data in internet by it. Netscape company work out the SSL protocal. It' aim is to keep the secret and the safety between two applications, it' supported by server as well as client.it becomes the industry standard of safe communications.
+
+SSL can avoid the communications between client and server being attacked. it keep verify the server. and it can also verify the user. SSL protocal shold extablish on the layer of TCP. The advantage of the SSL is that is seperated from the apply layer. the high layer apply protocal(such as HTTP,FTP,TELNET etc.）can set up on the SSL protocal perspectively. SSL comple the secret math, comute key of the talk and server verify job before the apply layer. 

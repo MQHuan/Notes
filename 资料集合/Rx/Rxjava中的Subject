@@ -1,0 +1,6 @@
+RxJava中常见的Subject有4种，分别是 AsyncSubject、 BehaviorSubject、 PublishSubject、 ReplaySubject。
+
+简介：
+Subject在ReactiveX是作为observer和observerable的一个bridge或者proxy。因为它是一个观察者，所以它可以订阅一个或多个可观察对象，同时因为他是一个可观测对象，所以它可以传递和释放它观测到的数据对象，并且能释放新的对象。
+
+用法参考： http://www.jianshu.com/p/1257c8ba7c0c

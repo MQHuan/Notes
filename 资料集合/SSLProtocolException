@@ -1,0 +1,35 @@
+异常解决
+
+问题描述
+
+在4.x系统上通过HTTPS进行访问产生如下异常：
+
+javax.net.ssl.SSLProtocolException: SSL handshake aborted: ssl=0x65bc0ad8: Failure in SSL library, usually a protocol error 
+error:1407743E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert inappropriate fallback (external/openssl/ssl/s23_clnt.c:744 0x5cf4ed74:0x00000000)
+原因
+
+Android4.x系统对TLS的支持存在版本差异，具体细节请看以下分析
+
+分析
+
+首先我们查看一下Google关于SSLEngine的官方文档说明
+
+这里截取不同Android版本针对于TLS协议的默认配置图如下：
+
+这里写图片描述
+
+从上图可以得出如下结论：
+
+TLSv1.0从API 1+就被默认打开
+TLSv1.1和TLSv1.2只有在API 20+ 才会被默认打开
+也就是说低于API 20+的版本是默认关闭对TLSv1.1和TLSv1.2的支持，若要支持则必须自己打开
+有了以上关于android SSLEngine相关知识的铺垫，让我们来测试一下这次目标案例的域名 fort.sports.baofeng.com
+
+我们可以在QUALYS SSL LABS测试它对ssl支持的版本 
+这里截取SSL报告中对我们有用的一部分，如下图
+
+
+解决方案：
+http://blog.csdn.net/s003603u/article/details/53907910#comments
+
+http://blog.csdn.net/guozhaohui628/article/details/54571176

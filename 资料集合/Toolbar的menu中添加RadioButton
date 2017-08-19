@@ -1,0 +1,18 @@
+添加 ：  android:checkableBehavior="single"
+eg:
+
+ <group android:id="@+id/rssi"
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/rssi_30"
+                android:orderInCategory="1"
+                android:title="30" />
+            <item
+                android:id="@+id/rssi_40"
+                android:orderInCategory="1"
+                android:title="40" />
+            <item
+                android:id="@+id/rssi_50"
+                android:orderInCategory="1"
+                android:title="50" />
+ </group>

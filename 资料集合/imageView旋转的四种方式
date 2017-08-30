@@ -1,0 +1,32 @@
+我整理了一下，大概有四种，亲测成功三种。
+
+第一种是最愚蠢的，不过看许多博客都使用这种方法，即旋转bitmap：
+
+Bitmap bitmap = ((BitmapDrawable)getResources().getDrawable(R.drawable.ic_launcher)).getBitmap();
+Matrix matrix  = new Matrix();
+matrix.setRotate(90);
+Bitmap new = Bitmap.create(bitmap,0,bitmap.getWidth(),0,bitmap.getHeight(),matrix);
+image.setBitmapResource(bitmap);
+bitmap在不断旋转，又不回收内存，浪费大大哒，不推荐使用。
+
+第二种，使用imageview自带的旋转方法
+
+image.setPivotX(image.getWidth()/2);
+image.setPivotY(image.getHeight()/2);//支点在图片中心
+image.setRotation(90);
+第三种，使用旋转动画
+
+复制代码
+                Animation rotateAnimation  = new RotateAnimation(lastAngle, progress, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
+                rotateAnimation.setFillAfter(true);
+                rotateAnimation.setDuration(50);
+                rotateAnimation.setRepeatCount(0);
+                rotateAnimation.setInterpolator(new LinearInterpolator());
+                rotateImage.startAnimation(rotateAnimation);
+复制代码
+第四种，其他博客看到的，亲测不能实现，顺便贴出来吧，看客哪个试出来了，请指导一下小弟！
+
+Matrix matrix=new Matrix();
+                rotateImage.setScaleType(ScaleType.MATRIX);   //required
+                matrix.postRotate((float) progress, pivotX, pivotY);
+                rotateImage.setImageMatrix(matrix);

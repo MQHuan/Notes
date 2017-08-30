@@ -1,0 +1,7 @@
+sudo apt-get install -f
+
+sudo dpkg -i 文件名.deb
+
+如果还不行再运行：
+sudo apt-get -f install
+

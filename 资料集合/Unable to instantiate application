@@ -1,0 +1,1 @@
+这里是Android的安装时热替换导致的问题，第一次安装应用时把install run 关闭，在 Setting -> Instant Run -> 把右边的 Enable Instant Run to hot swap code/resource changes on deploy(default enabled)的勾勾去掉

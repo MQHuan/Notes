@@ -1,0 +1,7 @@
+
+// 改到底部
+gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+
+
+//改到左边
+gsettings set com.canonical.Unity.Launcher launcher-position Left

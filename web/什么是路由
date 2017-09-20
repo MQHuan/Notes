@@ -1,0 +1,6 @@
+路由说白啦就是根据用户的请求找到需要执行的函数或者controller
+
+GET      /v1/shop/nike  ShopController Get
+DELETE   /v1/shop/nike  ShopController Delete
+
+GET      /v1/notallowed notallowed function

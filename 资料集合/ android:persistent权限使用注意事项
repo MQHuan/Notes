@@ -1,0 +1,8 @@
+在做桌面产品的时候，发现一些机型存在将桌面默认后重启手机出现卡死的情况，通过查看log，出现错误信息在手机系统启动加载完androidmanifest.xml，开始进行contentproveder的加载注册处理时发生。查看相关部分的功能处理代码无果后，将关注点放在了androidmanifest.xml中的权限声明中。
+
+application的属性 android:persistent，如果将android:persistent=“true"，其目的是为了希望程序常驻内存，但前提是程序必须为系统程序，即其安装目录为/system/apk/目录下才会有效。这样的程序需要重启手机后才会起效。正常的程序安装后路径为 /data/apk/目录下，因此即使设置了该属性也不会有效果。
+
+一些手机，特别实三星的部分手机会根据这个权限的设置去做检查，使得contentprovider在加载与关联时，认为其不具备系统级的权限使得contentprovider不断的重复循环执行，因此导致程序运行失败。
+
+使用android:persistent时慎重使用。如不是系统级别的应用，不推荐使用。
+

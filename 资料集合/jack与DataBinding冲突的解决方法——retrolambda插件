@@ -5,3 +5,11 @@ http://blog.csdn.net/codezjx/article/details/51327164
 
 可以参考T-MVP的配置，上面的配置不太正确
 
+
+如果想用java8 又不想配置jack = true ,在项目根目录的build.gradle　加上
+        classpath 'me.tatarka:gradle-retrolambda:3.2.0'
+在module里面的build.gradle加上
+apply plugin: 'me.tatarka.retrolambda'
+
+
+

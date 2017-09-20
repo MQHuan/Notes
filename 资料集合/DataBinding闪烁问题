@@ -1,0 +1,3 @@
+DataBinding和RecyclerView一起用的时候会出现闪烁问题，解决方法是使用executePendingBindings()，使用方法如下：
+     mViewBinding.setItem(bleDevicesBean);
+        mViewBinding.executePendingBindings();

@@ -1,0 +1,4 @@
+file:// 是root 目录
+jackOptions { enabled true }　有配置这个的话会报错，一定要用java8的话请用　retrolambda
+
+javadoc 不规范也会报错

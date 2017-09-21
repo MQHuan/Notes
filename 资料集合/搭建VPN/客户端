@@ -1,0 +1,3 @@
+因为用了gcm 加密需要用支持这个加密的客户端：
+https://github.com/shadowsocks/shadowsocks
+把分支切换为master就好

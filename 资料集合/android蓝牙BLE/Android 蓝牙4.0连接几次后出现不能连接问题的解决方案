@@ -1,0 +1,20 @@
+最近做手机蓝牙与BLE设备的智能项目。遇到一个问题，记录下来。方便以后。
+出现的情况是：手机蓝牙与蓝牙设备连接几次，交互信息后，无法再次连接与搜索到服务，需重启手机蓝牙或者关闭APP后，再次启动APP，才能再次连接设备。
+上网查找了不少资料。才找资料。非常感谢此博文提供的参考解决方案http://bbs.eeworld.com.cn/thread-438571-1-1.html
+
+/*多次创建gatt连接对象的直接结果是创建过6个以上gatt后就会再也连接不上任何设备，原因应该是Android中对BLE限制了同时连接的数量为6个
+                         * 解决办法是在每一次重新连接时都执行一次gatt.close();关闭上一个连接。
+                         * 有人说为什么不在gatt.disconnect();后加一条gatt.close();呢，原因是如果立即执行gatt.close();会导致gattCallback无法收到STATE_DISCONNECTED的状态。
+                         * 当然，最好的办法是在gattCallback收到STATE_DISCONNECTED后再执行gatt.close();，这样逻辑上会更清析一些。
+                         */
+
+比如我的项目：
+
+
+if (mBluetoothGatt != null) {
+   mBluetoothGatt.close();
+   //LogUtil.info("-------------关闭mBluetoothGatt");
+}
+//连接前先关闭之前 的
+
+ mBluetoothGatt = device.connectGatt(context, false, mGattCallback);

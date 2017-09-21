@@ -10,8 +10,8 @@
 
 
 ##characteristic (特征值)
-由UUID作为唯一标示符
-BLE主机从机通信均是通过characteristic进行，可以将其理解为一个标签，通过该标签可以读取或写入相关信息。一个Characteristic包含一个Value,一个Properties和多个Descriptor
+由UUID作为唯一标示符，
+BLE主机从机通信均是通过characteristic进行，可以将其理解为一个标签，通过该标签可以读取或写入相关信息。一个Characteristic包含一个Value(用于存储uuid),一个Properties和多个Descriptor
 
 ###property
 特征值的属性,常用的:read, write, notify

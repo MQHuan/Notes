@@ -14,7 +14,7 @@
 BLE主机从机通信均是通过characteristic进行，可以将其理解为一个标签，通过该标签可以读取或写入相关信息。一个Characteristic包含一个Value(用于存储uuid),一个Properties和多个Descriptor
 
 ###property
-特征值的属性,常用的:read, write, notify
+特征值的属性,常用的:read, write, notify,Indicating
 具体有：read, read_encrypted, read_encrypted_mitm, write, 
 write_encrypted, write_encrypted_mitm, write_signed, write_signed_MITM,
 broadcast, extended_props, indicate, notify, read , signed_write, write,write_no_response

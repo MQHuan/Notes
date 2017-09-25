@@ -95,3 +95,8 @@ quickstart
 2017/09/21 14:12:06 [I] [asm_amd64.s:2337] http server Running on http://:8080
 
 ```
+我本地的命令
+```
+docker run -it --rm --name test -p 8080:8080 -v ~/Go/gocode/src/quickstart:/go/src/quickstart -w /go/src/quickstart test
+
+```

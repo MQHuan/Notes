@@ -1,0 +1,11 @@
+~$ sudo apt-get install nginx
+
+查看 Nginx 进程是否已经启动
+
+~$ ps aux|grep nginx
+
+查看 ip 地址 ，访问一下 Nginx
+
+~$ ifconfig
+
+在浏览器查看localhost

@@ -1,0 +1,5 @@
+用命令：
+ps -ef 
+查看pid(进程ID)
+
+根据pid杀死进程 kill -9 pid

@@ -1,0 +1,18 @@
+java里面final可以进行留白，并且在构造方法里面赋值。
+
+public class Test {
+   private final int testNum;
+   public Test(int test) {
+      this.testNum = testNum;
+   }
+}
+或者
+
+public class Test {
+   private final int testNum;
+   public Test() {
+      testNum = 10;
+   }
+}
+都是可以的。
+不可以在非构造方法的其他方法里面赋值。

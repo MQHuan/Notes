@@ -1,0 +1,1 @@
+在.gradle文件下建立task方法，在右边的Gradle　projects目录下点击对于的task，就可以在Gradle Console查看输出，如图

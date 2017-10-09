@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://www.cnblogs.com/liuhaorain/p/3747470.html#title_3 -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/bundle-CodingLife.css">
+<link type="text/css" rel="stylesheet" href="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/79470.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/bundle-CodingLife-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/liuhaorain/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/liuhaorain/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/liuhaorain/wlwmanifest.xml">
+<script src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'liuhaorain', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+<div id="page_begin_html"><!--打赏 Start-->
+ 
+
+ 
+</div><script>load_page_begin_html();</script>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/liuhaorain/"><img id="blogLogo" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/liuhaorain/">刘皓（.NET开发）</a></h1>
+<h2>学而时习之，不亦说乎！</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/liuhaorain/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%9C%A8%E5%B0%8F%E6%A5%A0">联系</a></li>
+<li>
+<!----></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 15&nbsp; </span>
+<span id="stats_article_count">文章 - 75&nbsp; </span>
+<span id="stats-comment_count">评论 - 516</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/liuhaorain/p/3747470.html">深入理解DIP、IoC、DI以及IoC容器</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h2>摘要</h2>
+<p>面向对象设计（OOD）有助于我们开发出高性能、易扩展以及易复用的程序。其中，OOD有一个重要的思想那就是依赖倒置原则（DIP），并由此引申出IoC、DI以及Ioc容器等概念。通过本文我们将一起学习这些概念，并理清他们之间微妙的关系。</p>
+<hr>
+<p>&nbsp;</p>
+<h2>目录</h2>
+<ul>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_1">前言</a></li>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_2">依赖倒置原则（DIP)</a></li>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_3">控制反转（IoC）</a></li>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_4">依赖注入（DI）</a></li>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_5">IoC容器</a></li>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_6">总结</a></li>
+</ul>
+<p>&nbsp;</p>
+<hr>
+<p>&nbsp;</p>
+<h2 id="title_1">前言</h2>
+<p>对于大部分小菜来说，当听到大牛们高谈DIP、IoC、DI以及IoC容器等名词时，有没有瞬间石化的感觉？其实，这些“高大上”的名词，理解起来也并不是那么的难，关键在于入门。只要我们入门了，然后循序渐进，假以时日，自然水到渠成。</p>
+<p>好吧，我们先初略了解一下这些概念。</p>
+<p><span style="color: #008000;"><strong>依赖倒置原则（DIP）：</strong></span>一种软件架构设计的原则（抽象概念）。</p>
+<p><span style="color: #008000;"><strong>控制反转（IoC）：</strong></span>一种反转流、依赖和接口的方式（DIP的具体实现方式）。</p>
+<p><span style="color: #008000;"><strong>依赖注入（DI）：</strong></span>IoC的一种实现方式，用来反转依赖（IoC的具体实现方式）。</p>
+<p><span style="color: #008000;"><strong>IoC容器：</strong></span>依赖注入的<strong>框架</strong>，用来映射依赖，管理对象创建和生存周期（DI框架）。</p>
+<p>哦！也许你正为这些陌生的概念而伤透脑筋。不过没关系，接下来我将为你一一道破这其中的玄机。</p>
+<p>&nbsp;</p>
+<h2 id="title_2">依赖倒置原则（DIP）</h2>
+<p>在讲概念之前，我们先看生活中的一个例子。</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_O_未标-1_副本.jpg" alt="" width="800" height="487"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 图1&nbsp;&nbsp; ATM与银行卡</p>
+<p>相信大部分取过钱的朋友都深有感触，只要有一张卡，随便到哪一家银行的ATM都能取钱。在这个场景中，ATM相当于高层模块，而银行卡相当于低层模块。ATM定义了一个插口（接口），供所有的银行卡插入使用。也就是说，ATM不依赖于具体的哪种银行卡。它只需定义好银行卡的规格参数（接口），所有实现了这种规格参数的银行卡都能在ATM上使用。现实生活如此，软件开发更是如此。<strong>依赖倒置原则，它转换了依赖，高层模块不依赖于低层模块的实现，而低层模块依赖于高层模块定义的接口</strong>。通俗的讲，就是高层模块定义接口，低层模块负责实现。</p>
+<blockquote>
+<p>Bob Martins对DIP的定义：</p>
+<p><em>高层模块不应依赖于低层模块，两者应该依赖于抽象。</em></p>
+<p><em>抽象不不应该依赖于实现，实现应该依赖于抽象。</em></p>
+</blockquote>
+<p>&nbsp;</p>
+<p>如果生活中的实例不足以说明依赖倒置原则的重要性，那下面我们将通过软件开发的场景来理解为什么要使用依赖倒置原则。</p>
+<p><span style="color: #0000ff;"><strong>场景一&nbsp; 依赖无倒置（低层模块定义接口，高层模块负责实现）</strong></span></p>
+<p>&nbsp;<img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_low Level.png" alt=""></p>
+<p>从上图中，我们发现高层模块的类依赖于低层模块的接口。因此，低层模块需要考虑到所有的接口。如果有新的低层模块类出现时，高层模块需要修改代码，来实现新的低层模块的接口。这样，就破坏了开放封闭原则。</p>
+<p>&nbsp;</p>
+<p><strong><span style="color: #0000ff;">场景二 依赖倒置（高层模块定义接口，低层模块负责实现）</span></strong></p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_High Level2.png" alt=""></p>
+<p>在这个图中，我们发现高层模块定义了接口，将不再直接依赖于低层模块，低层模块负责实现高层模块定义的接口。这样，当有新的低层模块实现时，不需要修改高层模块的代码。</p>
+<p>由此，我们可以总结出使用DIP的优点：</p>
+<p><strong>系统更柔韧：</strong>可以修改一部分代码而不影响其他模块。</p>
+<p><strong>系统更健壮：</strong>可以修改一部分代码而不会让系统崩溃。</p>
+<p><strong>系统更高效：</strong>组件松耦合，且可复用，提高开发效率。</p>
+<p>&nbsp;</p>
+<h2 id="title_3">控制反转（IoC）</h2>
+<p>DIP是一种 <strong><span style="color: #008000;">软件设计原则</span></strong>，它仅仅告诉你两个模块之间应该如何依赖，但是它并没有告诉如何做。IoC则是一种 <strong><span style="color: #008000;">软件设计模式</span></strong>，它告诉你应该如何做，来解除相互依赖模块的耦合。<strong>控制反转（IoC），它为相互依赖的组件提供抽象，将依赖（低层模块）对象的获得交给第三方（系统）来控制</strong>，<strong>即依赖对象不在被依赖模块的类中直接通过<span style="color: #0000ff;">new</span>来获取</strong>。在图1的例子我们可以看到，ATM它自身并没有插入具体的银行卡（工行卡、农行卡等等），而是将插卡工作交给人来控制，即我们来决定将插入什么样的银行卡来取钱。同样我们也通过软件开发过程中场景来加深理解。</p>
+<blockquote>
+<p><strong>软件设计原则：</strong>原则为我们提供指南，它告诉我们什么是对的，什么是错的。它不会告诉我们如何解决问题。它仅仅给出一些准则，以便我们可以设计好的软件，避免不良的设计。一些常见的原则，比如DRY、OCP、DIP等。</p>
+<p><strong>软件设计模式：</strong>模式是在软件开发过程中总结得出的一些可重用的解决方案，它能解决一些实际的问题。一些常见的模式，比如工厂模式、单例模式等等。</p>
+</blockquote>
+<p>做过电商网站的朋友都会面临这样一个问题：<span style="color: #ff0000;"><strong>订单入库</strong></span>。假设系统设计初期，用的是SQL Server数据库。通常我们会定义一个SqlServerDal类，用于数据库的读写。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_756934" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">SqlServerDal</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.WriteLine(</code><code class="csharp string">"在数据库中添加一条订单!"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number7 index6 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;然后我们定义一个Order类，负责订单的逻辑处理。由于订单要入库，需要依赖于数据库的操作。因此在Order类中，我们需要定义SqlServerDal类的变量并初始化。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_974849" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">Order</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">private</code> <code class="csharp keyword">readonly</code> <code class="csharp plain">SqlServerDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">SqlServerDal();</code><code class="csharp comments">//添加一个私有变量保存数据库操作的对象</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">dal.Add();</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number9 index8 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>最后，我们写一个控制台程序来检验成果。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_396349" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number7 index6 alt2"><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order();</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number18 index17 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;输出结果：</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_QQ截图20140524121920.png" alt="" width="668" height="115"></p>
+<p>&nbsp; OK，结果看起来挺不错的！正当你沾沾自喜的时候，这时BOSS过来了。“小刘啊，刚客户那边打电话过来说数据库要改成Access”，“对你来说，应当小CASE啦！”BOSS又补充道。带着自豪而又纠结的情绪，我们思考着修改代码的思路。</p>
+<p>&nbsp;由于换成了Access数据库，SqlServerDal类肯定用不了了。因此，我们需要新定义一个AccessDal类，负责Access数据库的操作。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_655241" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">AccessDal</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.WriteLine(</code><code class="csharp string">"在ACCESS数据库中添加一条记录！"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number7 index6 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;然后，再看Order类中的代码。由于，Order类中直接引用了SqlServerDal类的对象。所以还需要修改引用，换成AccessDal对象。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_213511" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">Order</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">private</code> <code class="csharp keyword">readonly</code> <code class="csharp plain">AccessDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">AccessDal();</code><code class="csharp comments">//添加一个私有变量保存数据库操作的对象</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">dal.Add();</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number9 index8 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>输出结果：</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_QQ截图20140524131836.png" alt="" width="670" height="140"></p>
+<p>费了九牛二虎之力，程序终于跑起来了！试想一下，如果下次客户要换成MySql数据库，那我们是不是还得重新修改代码？</p>
+<p>显然，这不是一个良好的设计，组件之间高度耦合，可扩展性较差，它违背了DIP原则。高层模块Order类不应该依赖于低层模块SqlServerDal，AccessDal，两者应该依赖于抽象。那么我们是否可以通过IoC来优化代码呢？答案是肯定的。IoC有2种常见的实现方式：依赖注入和服务定位。其中，依赖注入使用最为广泛。下面我们将深入理解依赖注入（DI），并学会使用。</p>
+<p>&nbsp;</p>
+<h2 id="title_4">依赖注入（DI）</h2>
+<p>控制反转（IoC）一种重要的方式，<strong>就是将依赖对象的创建和绑定转移到被依赖对象类的外部来实现</strong>。在上述的实例中，Order类所依赖的对象SqlServerDal的创建和绑定是在Order类内部进行的。事实证明，这种方法并不可取。既然，不能在Order类内部直接绑定依赖关系，那么如何将SqlServerDal对象的引用传递给Order类使用呢？</p>
+<p>&nbsp;</p>
+<p style="margin-left: 60px;">&nbsp;<img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_12.jpg" alt="" width="461" height="432"></p>
+<p>依赖注入（DI），<strong>它提供一种机制，将需要依赖（低层模块）对象的引用传递给被依赖（高层模块）对象。</strong>通过DI，我们可以在Order类的外部将SqlServerDal对象的引用传递给Order类对象。那么具体是如何实现呢？</p>
+<h3 id="title_7"><span style="background-color: #ffffff; color: #ff0000;"><strong>方法一 构造函数注入</strong></span></h3>
+<p>构造函数函数注入，毫无疑问通过构造函数传递依赖。因此，构造函数的参数必然用来接收一个依赖对象。那么参数的类型是什么呢？具体依赖对象的类型？还是一个抽象类型？根据DIP原则，我们知道高层模块不应该依赖于低层模块，两者应该依赖于抽象。那么构造函数的参数应该是一个抽象类型。我们再回到上面那个问题，<span style="color: #ff0000;"><strong>如何将SqlServerDal对象的引用传递给Order类使用呢</strong></span>？</p>
+<p>首选，我们需要定义SqlServerDal的抽象类型IDataAccess，并在IDataAccess接口中声明一个Add方法。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_487325" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">interface</code> <code class="csharp plain">IDataAccess</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">void</code> <code class="csharp plain">Add();</code></div><div class="line number4 index3 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;然后在SqlServerDal类中，实现IDataAccess接口。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_99173" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">SqlServerDal:IDataAccess</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.WriteLine(</code><code class="csharp string">"在数据库中添加一条订单！"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number7 index6 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;接下来，我们还需要修改Order类。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_156499" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp spaces">&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">Order</code></div><div class="line number2 index1 alt1"><code class="csharp spaces">&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">private</code> <code class="csharp plain">IDataAccess _ida;</code><code class="csharp comments">//定义一个私有变量保存抽象</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp comments">//构造函数注入</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp plain">Order(IDataAccess ida)</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ida = ida;</code><code class="csharp comments">//传递依赖</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ida.Add();</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number15 index14 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;OK，我们再来编写一个控制台程序。</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_420044" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number7 index6 alt2"><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">SqlServerDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">SqlServerDal();</code><code class="csharp comments">//在外部创建依赖对象</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order(dal);</code><code class="csharp comments">//通过构造函数注入依赖</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number20 index19 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;输出结果：</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_QQ截图20140524121920.png" alt="" width="668" height="115"></p>
+<p>从上面我们可以看出，我们将依赖对象SqlServerDal对象的创建和绑定转移到Order类外部来实现，这样就解除了SqlServerDal和Order类的耦合关系。当我们数据库换成Access数据库时，只需定义一个AccessDal类，然后外部重新绑定依赖，不需要修改Order类内部代码，则可实现Access数据库的操作。</p>
+<p>定义AccessDal类：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_18238" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">AccessDal:IDataAccess</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.WriteLine(</code><code class="csharp string">"在ACCESS数据库中添加一条记录！"</code><code class="csharp plain">);</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number7 index6 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>然后在控制台程序中重新绑定依赖关系：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_196096" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number7 index6 alt2"><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">AccessDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">AccessDal();</code><code class="csharp comments">//在外部创建依赖对象</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order(dal);</code><code class="csharp comments">//通过构造函数注入依赖</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number20 index19 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>输出结果：</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_QQ截图20140524131836.png" alt="" width="670" height="140"></p>
+<p>显然，我们不需要修改Order类的代码，就完成了Access数据库的移植，这无疑体现了IoC的精妙。</p>
+<h3><span style="color: #ff0000;">&nbsp;<strong>方法二 属性注入</strong></span></h3>
+<p>顾名思义，属性注入是通过属性来传递依赖。因此，我们首先需要在依赖类Order中定义一个属性：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_859334" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">Order</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">private</code> <code class="csharp plain">IDataAccess _ida;</code><code class="csharp comments">//定义一个私有变量保存抽象</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp comments">//属性，接受依赖</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp plain">IDataAccess Ida</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">set</code> <code class="csharp plain">{ _ida = value; }</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">get</code> <code class="csharp plain">{ </code><code class="csharp keyword">return</code> <code class="csharp plain">_ida; }</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ida.Add();</code></div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number16 index15 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;然后在控制台程序中，给属性赋值，从而传递依赖：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_540669" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number7 index6 alt2"><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">AccessDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">AccessDal();</code><code class="csharp comments">//在外部创建依赖对象</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order();</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Ida = dal;</code><code class="csharp comments">//给属性赋值</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number17 index16 alt2">&nbsp;</div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number20 index19 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number21 index20 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>我们可以得到上述同样的结果。</p>
+<h3><span style="color: #ff0000;">&nbsp;<strong>方法三 接口注入</strong></span></h3>
+<p><span style="color: #000000;">相比构造函数注入和属性注入，接口注入显得有些复杂，使用也不常见。具体思路是先定义一个接口，包含一个设置依赖的方法。然后依赖类，继承并实现这个接口。</span></p>
+<p><span style="color: #000000;">首先定义一个接口：</span>&nbsp;</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_277305" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">interface</code> <code class="csharp plain">IDependent</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">void</code> <code class="csharp plain">SetDependence(IDataAccess ida);</code><code class="csharp comments">//设置依赖项</code></div><div class="line number4 index3 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p><span style="color: #000000;">依赖类实现这个接口：</span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_201662" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code class="csharp keyword">class</code> <code class="csharp plain">Order : IDependent</code></div><div class="line number2 index1 alt1"><code class="csharp spaces">&nbsp;</code><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">private</code> <code class="csharp plain">IDataAccess _ida;</code><code class="csharp comments">//定义一个私有变量保存抽象</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp comments">//实现接口</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">SetDependence(IDataAccess ida)</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ida = ida;</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number10 index9 alt1">&nbsp;</div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">public</code> <code class="csharp keyword">void</code> <code class="csharp plain">Add()</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ida.Add();</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;</code><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;&nbsp;控制台程序通过SetDependence方法传递依赖：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_366182" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number7 index6 alt2"><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">AccessDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">AccessDal();</code><code class="csharp comments">//在外部创建依赖对象</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order();</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.SetDependence(dal);</code><code class="csharp comments">//传递依赖</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number20 index19 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number21 index20 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number22 index21 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p><span style="color: #000000;">我们同样能得到上述的输出结果。</span></p>
+<p>&nbsp;</p>
+<h2 id="title_5">IoC容器</h2>
+<p>前面所有的例子中，我们都是通过<strong>手动</strong>的方式来创建依赖对象，并将引用传递给被依赖模块。比如：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_267697" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp plain">SqlServerDal dal = </code><code class="csharp keyword">new</code> <code class="csharp plain">SqlServerDal();</code><code class="csharp comments">//在外部创建依赖对象 </code></div><div class="line number2 index1 alt1"><code class="csharp plain">Order order = </code><code class="csharp keyword">new</code> <code class="csharp plain">Order(dal);</code><code class="csharp comments">//通过构造函数注入依赖 </code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;对于大型项目来说，相互依赖的组件比较多。如果还用手动的方式，自己来创建和注入依赖的话，显然效率很低，而且往往还会出现不可控的场面。正因如此，IoC容器诞生了。IoC容器实际上是一个DI框架，它能简化我们的工作量。它包含以下几个功能：</p>
+<ul>
+<li>动态创建、注入依赖对象。</li>
+<li>管理对象生命周期。</li>
+<li>映射依赖关系。</li>
+</ul>
+<p>目前，比较流行的Ioc容器有以下几种：</p>
+<p><span style="color: #008000;">1.<strong> Ninject</strong></span>:&nbsp; <a href="http://www.ninject.org/">http://www.ninject.org/</a></p>
+<p><span style="color: #008000;">2. <strong>Castle Windsor</strong></span>: &nbsp;<a href="http://www.castleproject.org/container/index.html">http://www.castleproject.org/container/index.html</a></p>
+<p><span style="color: #008000;">3.<strong> Autofac</strong></span>:&nbsp; <a href="http://code.google.com/p/autofac/">http://code.google.com/p/autofac/</a></p>
+<p><span style="color: #008000;">4. <strong>StructureMap</strong><span style="color: #000000;">：</span></span> <a href="http://docs.structuremap.net/">http://docs.structuremap.net/</a></p>
+<p><span style="color: #008000;">5. <strong>Unity</strong><span style="color: #000000;">：</span></span>&nbsp; <a href="http://unity.codeplex.com/">http://unity.codeplex.com/</a></p>
+<p><span style="color: #ff0000;"><strong>注：</strong><span style="color: #000000;">根据园友 <a href="http://www.cnblogs.com/Chinese-xu/"><span style="color: #000000;">徐少侠</span></a> 的提醒，MEF不应该是IoC容器。我又查阅了一些资料，觉得MEF作为IoC容器是有点勉强，它的主要作用还是用于应用程序扩展，避免生成脆弱的硬依赖项。</span></span></p>
+<p><span style="text-decoration: line-through;"><span style="color: #008000; text-decoration: line-through;">&nbsp;6. <strong>MEF</strong></span>:&nbsp; <a href="http://msdn.microsoft.com/zh-cn/library/dd460648.aspx">http://msdn.microsoft.com/zh-cn/library/dd460648.aspx</a>&nbsp;</span></p>
+<p>另外，园友<a href="http://www.cnblogs.com/LiuJourney/"> aixuexi </a>提出Spring.NET也是比较流行的IoC容器。</p>
+<p><span style="color: #008000;">7.<strong> Spring.NET</strong><span style="color: #000000;">：</span></span> <a href="http://www.springframework.net/">http://www.springframework.net/</a></p>
+<p>园友 <em><span style="color: #0000ff;">wdwwtzy</span></em> 也推荐了一个不错的IoC容器：</p>
+<p><span style="color: #008000;">8. <strong>LightInject</strong></span>:&nbsp; <a href="http://www.lightinject.net/">http://www.lightinject.net/</a>&nbsp;（<span style="color: #ff0000;">推荐使用Chrome浏览器访问</span>）</p>
+<p>&nbsp;以Ninject为例，我们同样来实现<strong> <a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#title_7">[方法一 构造函数注入]</a></strong> 的功能。</p>
+<p>首先在项目添加Ninject程序集，同时使用using指令引入。&nbsp;</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_828263" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">Ninject;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>然后，Ioc容器注册绑定依赖：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_452945" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp plain">StandardKernel kernel = </code><code class="csharp keyword">new</code> <code class="csharp plain">StandardKernel();</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="csharp plain">kernel.Bind&lt;IDataAccess&gt;().To&lt;SqlServerDal&gt;();</code><code class="csharp comments">//注册依赖</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;接下来，我们获取需要的Order对象（注入了依赖对象）：</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_636254" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp plain">Order order = kernel.Get&lt;Order&gt;();</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;下面，我们写一个完整的控制台程序</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_133871" class="syntaxhighlighter  csharp"><div class="toolbar"><span><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System;</code></div><div class="line number2 index1 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Collections.Generic;</code></div><div class="line number3 index2 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">System.Linq;</code></div><div class="line number4 index3 alt1"><code class="csharp keyword">using</code> <code class="csharp plain">System.Text;</code></div><div class="line number5 index4 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">Ninject;</code></div><div class="line number6 index5 alt1">&nbsp;</div><div class="line number7 index6 alt2"><code class="csharp keyword">namespace</code> <code class="csharp plain">DIPTest</code></div><div class="line number8 index7 alt1"><code class="csharp plain">{</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">class</code> <code class="csharp plain">Program</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">static</code> <code class="csharp keyword">void</code> <code class="csharp plain">Main(</code><code class="csharp keyword">string</code><code class="csharp plain">[] args)</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">StandardKernel kernel = </code><code class="csharp keyword">new</code> <code class="csharp plain">StandardKernel();</code><code class="csharp comments">//创建Ioc容器</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">kernel.Bind&lt;IDataAccess&gt;().To&lt;SqlServerDal&gt;();</code><code class="csharp comments">//注册依赖</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Order order = kernel.Get&lt;Order&gt;();</code><code class="csharp comments">//获取目标对象</code></div><div class="line number17 index16 alt2">&nbsp;</div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">order.Add();</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Console.Read();</code></div><div class="line number20 index19 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number21 index20 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number22 index21 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>&nbsp;输出结果：</p>
+<p><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_QQ截图20140524121920.png" alt="" width="668" height="115"></p>
+<p>使用IoC容器，我们同样实现了该功能。</p>
+<p>&nbsp;</p>
+<h2 id="title_6">&nbsp;总结</h2>
+<p>在本文中，我试图以最通俗的方式讲解，希望能帮助大家理解这些概念。下面我们一起来总结一下：DIP是软件设计的一种思想，IoC则是基于DIP衍生出的一种软件设计模式。DI是IoC的具体实现方式之一，使用最为广泛。IoC容器是DI构造函注入的框架，它管理着依赖项的生命周期以及映射关系。</p></div><div id="MySignature" style="display: block;"><div style="display: block; border: solid 1px #169fe6; padding: 10px; background: #FFFEFE; height: 160px;" id="MySignature"><div style="float: right; padding-top: 50px;"><img style="height: 80px" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/o_579838452025252655.gif"></div><div style="padding-right: 50px"><span style="color: #169fe6; font-size: 16px;">我叫刘皓</span>，很高兴您能阅读完我的这篇文章。<br>我花了大量时间和精力来完成这篇文章，如果文章对您有帮助，请不要忘了点<span style="color: red; font-size: 16px;">推荐</span>哦！<br>如果您能点击右边的打赏按钮，<span style="color: red; font-size: 16px;">打赏</span>一杯咖啡钱，我将获得更多的动力和能量写出下一篇好文章。 <br><br>本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文链接，否则保留追究法律责任的权利。 </div><div style="clear: both"></div></div></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/liuhaorain/category/459362.html" target="_blank">设计模式</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/liuhaorain/tag/DIP/">DIP</a>, <a href="http://www.cnblogs.com/liuhaorain/tag/IoC/">IoC</a>, <a href="http://www.cnblogs.com/liuhaorain/tag/DI/">DI</a>, <a href="http://www.cnblogs.com/liuhaorain/tag/Ioc%E5%AE%B9%E5%99%A8/">Ioc容器</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3747470,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;83dd2766-36f6-df11-ac81-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/liuhaorain/" target="_blank"><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/20140509165132.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/liuhaorain/">木小楠</a><br>
+            <a href="http://home.cnblogs.com/u/liuhaorain/followees">关注 - 36</a><br>
+            <a href="http://home.cnblogs.com/u/liuhaorain/followers">粉丝 - 887</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;83dd2766-36f6-df11-ac81-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(3747470,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">309</span>
+    </div>
+    <div class="buryit" onclick="votePost(3747470,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">5</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/liuhaorain/archive/2012/03/25/2399510.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/liuhaorain/archive/2012/03/25/2399510.html" title="发布于2012-03-25 16:59">ADO.NET入门教程（八） 深入理解DataAdapter（上）</a><br><a href="http://www.cnblogs.com/liuhaorain/p/3776467.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/liuhaorain/p/3776467.html" title="发布于2014-06-09 12:59">ASP.NET Identity入门系列教程（一） 初识Identity</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2014-05-26 11:24</span> <a href="http://www.cnblogs.com/liuhaorain/">木小楠</a> 阅读(<span id="post_view_count">50949</span>) 评论(<span id="post_comment_count">188</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3747470" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" onclick="AddToWz(3747470);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=79470,cb_entryId=3747470,cb_blogApp=currentBlogApp,cb_blogUserGuid='83dd2766-36f6-df11-ac81-842b2b196315',cb_entryCreatedDate='2014/5/26 11:24:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"><div class="pager"><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(3,50);return false;">&lt; Prev</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(1,50);return false;">1</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(2,50);return false;">2</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(3,50);return false;">3</a><span class="current">4</span></div></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3257892" class="layer">#151楼</a><a name="3257892" id="comment_anchor_3257892"></a>  <span class="comment_date">2015-08-31 21:41</span> <a id="a_comment_author_3257892" href="http://www.cnblogs.com/chenhp/" target="_blank">chenhp</a> <a href="http://msg.cnblogs.com/send/chenhp" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3257892" class="blog_comment_body">不得不顶！！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3257892,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3257892,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3259482" class="layer">#152楼</a><a name="3259482" id="comment_anchor_3259482"></a>  <span class="comment_date">2015-09-03 16:26</span> <a id="a_comment_author_3259482" href="http://www.cnblogs.com/geekgao/" target="_blank">老高是我</a> <a href="http://msg.cnblogs.com/send/%E8%80%81%E9%AB%98%E6%98%AF%E6%88%91" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3259482" class="blog_comment_body">说得很好,有条有理,顶</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3259482,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3259482,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3263027" class="layer">#153楼</a><a name="3263027" id="comment_anchor_3263027"></a>  <span class="comment_date">2015-09-09 10:30</span> <a id="a_comment_author_3263027" href="http://www.cnblogs.com/WEI-CONG/" target="_blank">WEI_聪</a> <a href="http://msg.cnblogs.com/send/WEI_%E8%81%AA" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3263027" class="blog_comment_body">不得不顶！！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3263027,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3263027,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3263027_avatar" style="display:none;">http://pic.cnblogs.com/face/548183/20130715173420.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3269226" class="layer">#154楼</a><a name="3269226" id="comment_anchor_3269226"></a>  <span class="comment_date">2015-09-18 12:08</span> <a id="a_comment_author_3269226" href="http://www.cnblogs.com/dmdjacky/" target="_blank">明东</a> <a href="http://msg.cnblogs.com/send/%E6%98%8E%E4%B8%9C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3269226" class="blog_comment_body">通俗易懂 贊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3269226,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3269226,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3270927" class="layer">#155楼</a><a name="3270927" id="comment_anchor_3270927"></a>  <span class="comment_date">2015-09-21 14:02</span> <a id="a_comment_author_3270927" href="http://www.cnblogs.com/kaipengli/" target="_blank">李凯鹏</a> <a href="http://msg.cnblogs.com/send/%E6%9D%8E%E5%87%AF%E9%B9%8F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3270927" class="blog_comment_body">mark</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3270927,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3270927,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3270927_avatar" style="display:none;">http://pic.cnblogs.com/face/526013/20161118142137.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3302429" class="layer">#156楼</a><a name="3302429" id="comment_anchor_3302429"></a>  <span class="comment_date">2015-11-10 11:22</span> <a id="a_comment_author_3302429" href="http://home.cnblogs.com/u/312761/" target="_blank">木子璐</a> <a href="http://msg.cnblogs.com/send/%E6%9C%A8%E5%AD%90%E7%92%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3302429" class="blog_comment_body">通俗易懂，知道这几个名词很久了，一直想找个时间深入弄懂，每次翻几页百度就不想看了，这篇文章一下子给解决了。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3302429,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3302429,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3306079" class="layer">#157楼</a><a name="3306079" id="comment_anchor_3306079"></a>  <span class="comment_date">2015-11-13 17:31</span> <a id="a_comment_author_3306079" href="http://home.cnblogs.com/u/808110/" target="_blank">灬清风灬</a> <a href="http://msg.cnblogs.com/send/%E7%81%AC%E6%B8%85%E9%A3%8E%E7%81%AC" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3306079" class="blog_comment_body">namespace DIPTest<br>{<br>    class Program<br>    {<br>        static void Main(string[] args)<br>        {<br>           StandardKernel kernel = new StandardKernel();//创建Ioc容器<br>           kernel.Bind&lt;IDataAccess&gt;().To&lt;SqlServerDal&gt;();//注册依赖<br> IDataAccess dataAccess = = kernel.Get&lt;Order&gt;();//获取目标对象<br>             Order order = new Order(dataAccess );<br> <br>             order.Add();<br>           Console.Read();<br>        }<br>    }<br>}</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3306079,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3306079,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3310970" class="layer">#158楼</a><a name="3310970" id="comment_anchor_3310970"></a>  <span class="comment_date">2015-11-20 17:21</span> <a id="a_comment_author_3310970" href="http://www.cnblogs.com/wuMing-dj/" target="_blank">豆沙包没有肉</a> <a href="http://msg.cnblogs.com/send/%E8%B1%86%E6%B2%99%E5%8C%85%E6%B2%A1%E6%9C%89%E8%82%89" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3310970" class="blog_comment_body">好文章，难得的好。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3310970,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3310970,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3310970_avatar" style="display:none;">http://pic.cnblogs.com/face/186746/20140902091731.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3323125" class="layer">#159楼</a><a name="3323125" id="comment_anchor_3323125"></a>  <span class="comment_date">2015-12-08 19:29</span> <a id="a_comment_author_3323125" href="http://home.cnblogs.com/u/764217/" target="_blank">习惯~有你</a> <a href="http://msg.cnblogs.com/send/%E4%B9%A0%E6%83%AF~%E6%9C%89%E4%BD%A0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3323125" class="blog_comment_body">博主看了好多依赖注入的文章，还是想不明白为什么把类的关系推迟到运行时，就可以解耦了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3323125,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3323125,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3334605" class="layer">#160楼</a><a name="3334605" id="comment_anchor_3334605"></a>  <span class="comment_date">2015-12-25 15:45</span> <a id="a_comment_author_3334605" href="http://home.cnblogs.com/u/866068/" target="_blank">_允贺_Style</a> <a href="http://msg.cnblogs.com/send/_%E5%85%81%E8%B4%BA_Style" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3334605" class="blog_comment_body">好文章,要顶</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3334605,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3334605,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3341617" class="layer">#161楼</a><a name="3341617" id="comment_anchor_3341617"></a>  <span class="comment_date">2016-01-05 19:54</span> <a id="a_comment_author_3341617" href="http://www.cnblogs.com/lansehai/" target="_blank">study的猫</a> <a href="http://msg.cnblogs.com/send/study%E7%9A%84%E7%8C%AB" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3341617" class="blog_comment_body">好文!!!</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3341617,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3341617,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3365269" class="layer">#162楼</a><a name="3365269" id="comment_anchor_3365269"></a>  <span class="comment_date">2016-02-23 09:31</span> <a id="a_comment_author_3365269" href="http://www.cnblogs.com/jinlun/" target="_blank">夜幽儿</a> <a href="http://msg.cnblogs.com/send/%E5%A4%9C%E5%B9%BD%E5%84%BF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3365269" class="blog_comment_body">好文</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3365269,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3365269,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3365269_avatar" style="display:none;">http://pic.cnblogs.com/face/u115241.jpg</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3397417" class="layer">#163楼</a><a name="3397417" id="comment_anchor_3397417"></a>  <span class="comment_date">2016-03-31 22:46</span> <a id="a_comment_author_3397417" href="http://www.cnblogs.com/lvshoutao/" target="_blank">滴水冰寒</a> <a href="http://msg.cnblogs.com/send/%E6%BB%B4%E6%B0%B4%E5%86%B0%E5%AF%92" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3397417" class="blog_comment_body">好文，特意来顶</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3397417,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3397417,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3416480" class="layer">#164楼</a><a name="3416480" id="comment_anchor_3416480"></a>  <span class="comment_date">2016-04-24 23:00</span> <a id="a_comment_author_3416480" href="http://home.cnblogs.com/u/943660/" target="_blank">搬砖工的奋斗史</a> <a href="http://msg.cnblogs.com/send/%E6%90%AC%E7%A0%96%E5%B7%A5%E7%9A%84%E5%A5%8B%E6%96%97%E5%8F%B2" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3416480" class="blog_comment_body">//属性，接受依赖<br>        public IDataAccess Ida<br>       {<br>           set { _ida = value; }<br>           get { return _ida; }<br>       }<br> <br><br>这句还是看不怎么懂啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3416480,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3416480,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3417140" class="layer">#165楼</a><a name="3417140" id="comment_anchor_3417140"></a>  <span class="comment_date">2016-04-25 18:15</span> <a id="a_comment_author_3417140" href="http://www.cnblogs.com/zengzhaoyuan/" target="_blank">zhaoyuan</a> <a href="http://msg.cnblogs.com/send/zhaoyuan" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3417140" class="blog_comment_body">好文要多读几遍，并实践</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3417140,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3417140,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3417140_avatar" style="display:none;">http://pic.cnblogs.com/face/419001/20131018143035.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3419388" class="layer">#166楼</a><a name="3419388" id="comment_anchor_3419388"></a>  <span class="comment_date">2016-04-28 14:28</span> <a id="a_comment_author_3419388" href="http://www.cnblogs.com/DHclly/" target="_blank">DHclly</a> <a href="http://msg.cnblogs.com/send/DHclly" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3419388" class="blog_comment_body">楼主功底不错，写得很好</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3419388,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3419388,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3419388_avatar" style="display:none;">http://pic.cnblogs.com/face/724259/20150528205820.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3427856" class="layer">#167楼</a><a name="3427856" id="comment_anchor_3427856"></a>  <span class="comment_date">2016-05-10 17:12</span> <a id="a_comment_author_3427856" href="http://home.cnblogs.com/u/946614/" target="_blank">yykldll</a> <a href="http://msg.cnblogs.com/send/yykldll" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3427856" class="blog_comment_body">好文章！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3427856,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3427856,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3443564" class="layer">#168楼</a><a name="3443564" id="comment_anchor_3443564"></a>  <span class="comment_date">2016-06-01 14:00</span> <a id="a_comment_author_3443564" href="http://www.cnblogs.com/lori/" target="_blank">张占岭</a> <a href="http://msg.cnblogs.com/send/%E5%BC%A0%E5%8D%A0%E5%B2%AD" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3443564" class="blog_comment_body">说的真好！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3443564,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3443564,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3443564_avatar" style="display:none;">http://pic.cnblogs.com/face/118538/20160831224712.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3446781" class="layer">#169楼</a><a name="3446781" id="comment_anchor_3446781"></a>  <span class="comment_date">2016-06-05 21:11</span> <a id="a_comment_author_3446781" href="http://www.cnblogs.com/liujingnan/" target="_blank">nannan168</a> <a href="http://msg.cnblogs.com/send/nannan168" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3446781" class="blog_comment_body">说的不错！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3446781,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3446781,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3465026" class="layer">#170楼</a><a name="3465026" id="comment_anchor_3465026"></a>  <span class="comment_date">2016-07-06 17:33</span> <a id="a_comment_author_3465026" href="http://www.cnblogs.com/kewolf/" target="_blank">柯小呆。</a> <a href="http://msg.cnblogs.com/send/%E6%9F%AF%E5%B0%8F%E5%91%86%E3%80%82" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3465026" class="blog_comment_body">一直零零碎碎的看一些这方面的资料，都似懂非懂。这下全给整明白了。感谢！！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3465026,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3465026,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3465026_avatar" style="display:none;">http://pic.cnblogs.com/face/354514/20150619124915.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3487166" class="layer">#171楼</a><a name="3487166" id="comment_anchor_3487166"></a>  <span class="comment_date">2016-08-11 09:15</span> <a id="a_comment_author_3487166" href="http://www.cnblogs.com/samgk/" target="_blank">firslien</a> <a href="http://msg.cnblogs.com/send/firslien" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3487166" class="blog_comment_body">一个集成依赖注入、配置、日志功能的小核心，支持LightInject、Ninject、Autofac扩展，望大家试试<a href="https://www.gkarch.com/docs/home/" target="_blank">https://www.gkarch.com/docs/home/</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3487166,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3487166,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3487166_avatar" style="display:none;">http://pic.cnblogs.com/face/687363/20150901101945.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3489950" class="layer">#172楼</a><a name="3489950" id="comment_anchor_3489950"></a>  <span class="comment_date">2016-08-16 00:53</span> <a id="a_comment_author_3489950" href="http://www.cnblogs.com/xiaopohou/" target="_blank">monkey's</a> <a href="http://msg.cnblogs.com/send/monkey%26%2339%3Bs" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3489950" class="blog_comment_body">好文呀！如果早看这篇文章，面试就不会被刷下来了！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3489950,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3489950,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3489950_avatar" style="display:none;">http://pic.cnblogs.com/face/u305497.jpg?id=27231910</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3498707" class="layer">#173楼</a><a name="3498707" id="comment_anchor_3498707"></a>  <span class="comment_date">2016-08-29 13:42</span> <a id="a_comment_author_3498707" href="http://www.cnblogs.com/MyJie/" target="_blank">acfun</a> <a href="http://msg.cnblogs.com/send/acfun" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3498707" class="blog_comment_body">public interface IDataAccess<br>    {<br>        void Add();<br>    }<br>    public class SqlServerDal:IDataAccess<br>    {<br>        public void Add()<br>        {<br>           Console.WriteLine("在数据库中添加一条订单！");<br>        }<br>    }<br>    public class Order&lt;T&gt; where T:IDataAccess,new()<br>    {<br>        private T _ida = new T();//定义一个私有变量保存抽象<br> <br>        public void Add()<br>        {<br>            _ida.Add();<br>        }<br>    }<br>    static void Main(string[] args)<br>    {<br>        Order order = new Order&lt;SqlServerDal&gt;();<br>        order.Add();<br>        Console.Read();<br>    }<br>我用泛型类好像一样可以实现DI的优势，请问它们在应用上有什么区别吗，求告知。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3498707,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3498707,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3515009" class="layer">#174楼</a><a name="3515009" id="comment_anchor_3515009"></a>  <span class="comment_date">2016-09-20 15:35</span> <a id="a_comment_author_3515009" href="http://www.cnblogs.com/luyiwei/" target="_blank">Victor.lu</a> <a href="http://msg.cnblogs.com/send/Victor.lu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3515009" class="blog_comment_body">好文要顶，之前用过IOC的框架，但是始终不明白这其中的原理，这下明白了，感谢！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3515009,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3515009,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3525706" class="layer">#175楼</a><a name="3525706" id="comment_anchor_3525706"></a>  <span class="comment_date">2016-10-08 15:09</span> <a id="a_comment_author_3525706" href="http://www.cnblogs.com/liuyu7177/" target="_blank">六欲</a> <a href="http://msg.cnblogs.com/send/%E5%85%AD%E6%AC%B2" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3525706" class="blog_comment_body">我这样写注入失败了 order 里面拿不到IDataAccess的注入值</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3525706,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3525706,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3525712" class="layer">#176楼</a><a name="3525712" id="comment_anchor_3525712"></a>  <span class="comment_date">2016-10-08 15:14</span> <a id="a_comment_author_3525712" href="http://www.cnblogs.com/liuyu7177/" target="_blank">六欲</a> <a href="http://msg.cnblogs.com/send/%E5%85%AD%E6%AC%B2" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3525712" class="blog_comment_body">忘了加构造函数注入了，就写了属性注入。现在可以了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3525712,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3525712,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3540267" class="layer">#177楼</a><a name="3540267" id="comment_anchor_3540267"></a>  <span class="comment_date">2016-10-25 13:31</span> <a id="a_comment_author_3540267" href="http://www.cnblogs.com/xiao99/" target="_blank">xiao99</a> <a href="http://msg.cnblogs.com/send/xiao99" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3540267" class="blog_comment_body">最近一直在看IOC的文章，也在编写例子，一直想把公司的这个代码修改一下，但是一想到公司实际的代码来，感觉还是有点无从下手，不知道结合实际的工作项目怎么使用。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3540267,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3540267,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3540267_avatar" style="display:none;">http://pic.cnblogs.com/face/u243886.jpg?id=04222635</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3552191" class="layer">#178楼</a><a name="3552191" id="comment_anchor_3552191"></a>  <span class="comment_date">2016-11-09 16:55</span> <a id="a_comment_author_3552191" href="http://www.cnblogs.com/ACE8793/" target="_blank">Ace8793</a> <a href="http://msg.cnblogs.com/send/Ace8793" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3552191" class="blog_comment_body">场景一  依赖无倒置（低层模块定义接口，高层模块负责实现）<br>图中的箭头是不是画反了？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3552191,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3552191,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3552191_avatar" style="display:none;">http://pic.cnblogs.com/face/377458/20161107194642.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3554328" class="layer">#179楼</a><a name="3554328" id="comment_anchor_3554328"></a>  <span class="comment_date">2016-11-12 17:57</span> <a id="a_comment_author_3554328" href="http://home.cnblogs.com/u/672356/" target="_blank">韦驮天</a> <a href="http://msg.cnblogs.com/send/%E9%9F%A6%E9%A9%AE%E5%A4%A9" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3554328" class="blog_comment_body">讲得很好吖,膜拜大佬</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3554328,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3554328,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3565330" class="layer">#180楼</a><a name="3565330" id="comment_anchor_3565330"></a>  <span class="comment_date">2016-11-25 16:40</span> <a id="a_comment_author_3565330" href="http://www.cnblogs.com/shouwenbo/" target="_blank">依然淘气</a> <a href="http://msg.cnblogs.com/send/%E4%BE%9D%E7%84%B6%E6%B7%98%E6%B0%94" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3565330" class="blog_comment_body">kernel.Bind&lt;IDataAccess&gt;().To&lt;SqlServerDal&gt;();//注册依赖<br>Order order = kernel.Get&lt;Order&gt;();//获取目标对象<br><br>这两句话无法理解,百思不得其解<br>为什么不直接用构造函数注入?这样写的意义何在?</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3565330,&#39;Digg&#39;,this)">支持(2)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3565330,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3570312" class="layer">#181楼</a><a name="3570312" id="comment_anchor_3570312"></a>  <span class="comment_date">2016-12-01 20:13</span> <a id="a_comment_author_3570312" href="http://www.cnblogs.com/JacobHuang/" target="_blank">CodingJacob</a> <a href="http://msg.cnblogs.com/send/CodingJacob" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3570312" class="blog_comment_body">非常好的文章！感谢~</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3570312,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3570312,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3602434" class="layer">#182楼</a><a name="3602434" id="comment_anchor_3602434"></a>  <span class="comment_date">2017-01-12 16:28</span> <a id="a_comment_author_3602434" href="http://www.cnblogs.com/q101301/" target="_blank">小菜鸟飞飞</a> <a href="http://msg.cnblogs.com/send/%E5%B0%8F%E8%8F%9C%E9%B8%9F%E9%A3%9E%E9%A3%9E" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3602434" class="blog_comment_body">这个 Order order = kernel.Get&lt;Order&gt;();<br>和  Order order =New Order();  <br>区别在哪里呢？优缺点呢？<br>为了满足依赖倒置原则：依赖于抽象？<br>小弟是个新手  希望大神们 帮忙解惑</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3602434,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3602434,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3602434_avatar" style="display:none;">http://pic.cnblogs.com/face/521871/20130426150012.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3683188" class="layer">#183楼</a><a name="3683188" id="comment_anchor_3683188"></a>  <span class="comment_date">2017-05-04 11:42</span> <a id="a_comment_author_3683188" href="http://www.cnblogs.com/IFire47/" target="_blank">IFire47</a> <a href="http://msg.cnblogs.com/send/IFire47" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3683188" class="blog_comment_body">最近在学习Unity，更是在体会其中的思想，你的文章，真心牛逼。。。大些赞。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3683188,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3683188,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3683188_avatar" style="display:none;">http://pic.cnblogs.com/face/1140527/20170409014654.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3706681" class="layer">#184楼</a><a name="3706681" id="comment_anchor_3706681"></a>  <span class="comment_date">2017-06-04 14:15</span> <a id="a_comment_author_3706681" href="http://www.cnblogs.com/xiaopohou/" target="_blank">monkey's</a> <a href="http://msg.cnblogs.com/send/monkey%26%2339%3Bs" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3706681" class="blog_comment_body">你的文章，真心牛逼。。。大些赞</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3706681,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3706681,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3706681_avatar" style="display:none;">http://pic.cnblogs.com/face/u305497.jpg?id=27231910</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3716800" class="layer">#185楼</a><a name="3716800" id="comment_anchor_3716800"></a>  <span class="comment_date">2017-06-18 13:19</span> <a id="a_comment_author_3716800" href="http://www.cnblogs.com/zhan520g/" target="_blank">天空的湛蓝</a> <a href="http://msg.cnblogs.com/send/%E5%A4%A9%E7%A9%BA%E7%9A%84%E6%B9%9B%E8%93%9D" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3716800" class="blog_comment_body">楼主可以申请微软mvp去啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3716800,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3716800,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3716800_avatar" style="display:none;">http://pic.cnblogs.com/face/710776/20150105215106.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3770168" class="layer">#186楼</a><a name="3770168" id="comment_anchor_3770168"></a>  <span class="comment_date">2017-08-30 09:06</span> <a id="a_comment_author_3770168" href="http://www.cnblogs.com/sheng-jie/" target="_blank">『圣杰』</a> <a href="http://msg.cnblogs.com/send/%E3%80%8E%E5%9C%A3%E6%9D%B0%E3%80%8F" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3770168" class="blog_comment_body">也可以跟设计模式做类比。<br>软件设计原则（Solid原则）；<br>任一个设计模式是基于原则的一种实现。<br>而任一种设计模式有又有多种实现方式。<br><br>比如：对于SRP-》单例模式-》饿汉模式实现的单例模式、懒汉模式实现的单例模式。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3770168,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3770168,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3770168_avatar" style="display:none;">http://pic.cnblogs.com/face/577140/20170107145656.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3773413" class="layer">#187楼</a><a name="3773413" id="comment_anchor_3773413"></a>  <span class="comment_date">2017-09-02 11:06</span> <a id="a_comment_author_3773413" href="http://www.cnblogs.com/xuxuzhaozhao/" target="_blank">xuxuzhaozhao</a> <a href="http://msg.cnblogs.com/send/xuxuzhaozhao" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3773413" class="blog_comment_body">厉害厉害</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3773413,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3773413,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3773413_avatar" style="display:none;">http://pic.cnblogs.com/face/1047534/20161104100102.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3777781" class="layer">#188楼</a><a name="3777781" id="comment_anchor_3777781"></a><span id="comment-maxId" style="display:none;">3777781</span><span id="comment-maxDate" style="display:none;">2017/9/7 16:39:22</span>  <span class="comment_date">2017-09-07 16:39</span> <a id="a_comment_author_3777781" href="http://www.cnblogs.com/refuge/" target="_blank">热敷哥</a> <a href="http://msg.cnblogs.com/send/%E7%83%AD%E6%95%B7%E5%93%A5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3777781" class="blog_comment_body">留名啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3777781,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3777781,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"><div class="pager"><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(3,50);return false;">&lt; Prev</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(1,50);return false;">1</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(2,50);return false;">2</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#!comments" onclick="commentManager.renderComments(3,50);return false;">3</a><span class="current">4</span></div></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/solution/la?fromSource=gwzcw.436846.436846.436846" target="_blank">【推荐】搭建微信小程序 就选腾讯云</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://www.mtyun.com/promote/69f73a72-f46d-4103-88e5-94ed2f81259d/" target="_blank"><img width="300" height="250" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/24442-20170921101521025-1845913848.jpg" alt="美团云0921"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/579661/" target="_blank">iOS端Edge浏览器上手体验</a><br> ·  <a href="http://news.cnblogs.com/n/579660/" target="_blank">仅限iPhone 6s 苹果重新开放iOS 10.3.3验证通道</a><br> ·  <a href="http://news.cnblogs.com/n/579659/" target="_blank">iPhone X正式批准开售：已通过FCC认证</a><br> ·  <a href="http://news.cnblogs.com/n/579658/" target="_blank">谷歌Pixel 2/XL支持27W快充 需另外购买充电器</a><br> ·  <a href="http://news.cnblogs.com/n/579657/" target="_blank">英国作家石黑一雄获得2017年度诺贝尔文学奖</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/22446/" target="_blank"><img width="468" height="60" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/24442-20171001085719794-417760373.jpg" alt="阿里云1001"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br> ·  <a href="http://kb.cnblogs.com/page/575829/" target="_blank">做到这一点，你也可以成为优秀的程序员</a><br> ·  <a href="http://kb.cnblogs.com/page/566880/" target="_blank">写给立志做码农的大学生</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/liuhaorain/">木小楠</a><br>园龄：<a href="http://home.cnblogs.com/u/liuhaorain/" title="入园时间：2010-11-22">6年10个月</a><br>荣誉：<a href="http://www.cnblogs.com/expert/">推荐博客</a><br>粉丝：<a href="http://home.cnblogs.com/u/liuhaorain/followers/">887</a><br>关注：<a href="http://home.cnblogs.com/u/liuhaorain/followees/">36</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;83dd2766-36f6-df11-ac81-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/liuhaorain/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/liuhaorain/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/liuhaorain/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/liuhaorain/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/liuhaorain/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(15)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/liuhaorain/category/272219.html">.NET基础(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/liuhaorain/category/352388.html">ADO.NET(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/liuhaorain/category/1011641.html">ASP.NET WebAPI</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/liuhaorain/category/579614.html">ASP.NET&amp;ASP.NET MVC(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/liuhaorain/category/352386.html">C#</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/liuhaorain/category/454877.html">HTML5</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/liuhaorain/category/272222.html">JavaScript(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/liuhaorain/category/274472.html">jQuery</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/liuhaorain/category/612462.html">ORM</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/liuhaorain/category/347217.html">UI框架(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/liuhaorain/category/349171.html">地图服务(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/liuhaorain/category/962749.html">框架工具</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/liuhaorain/category/459362.html">设计模式(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="http://www.cnblogs.com/liuhaorain/category/292557.html">数据结构与算法</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="http://www.cnblogs.com/liuhaorain/category/272220.html">数据库</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="http://www.cnblogs.com/liuhaorain/category/360310.html">网络编程</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="http://www.cnblogs.com/liuhaorain/category/972191.html">原创翻译</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	76721
+	</li>
+	<li class="liRank">
+		排名 -	3911
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/liuhaorain/p/3911845.html#3796327">1. Re:C#委托使用详解（Delegates）</a></li>
+        <li class="recent_comment_body">讲解很详细</li>
+        <li class="recent_comment_author">--309</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/liuhaorain/archive/2012/02/11/2346312.html#3794283">2. Re:ADO.NET入门教程（二）了解.NET数据提供程序</a></li>
+        <li class="recent_comment_body">还行</li>
+        <li class="recent_comment_author">--小梦1</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3777781">3. Re:深入理解DIP、IoC、DI以及IoC容器</a></li>
+        <li class="recent_comment_body">留名啊</li>
+        <li class="recent_comment_author">--热敷哥</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3773413">4. Re:深入理解DIP、IoC、DI以及IoC容器</a></li>
+        <li class="recent_comment_body">厉害厉害</li>
+        <li class="recent_comment_author">--xuxuzhaozhao</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html#3770168">5. Re:深入理解DIP、IoC、DI以及IoC容器</a></li>
+        <li class="recent_comment_body">也可以跟设计模式做类比。软件设计原则（Solid原则）；任一个设计模式是基于原则的一种实现。而任一种设计模式有又有多种实现方式。比如：对于SRP-》单例模式-》饿汉模式实现的单例模式、懒汉模式实现的单......</li>
+        <li class="recent_comment_author">--『圣杰』</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/01/24/2311352.html">1. Highcharts使用指南(153948)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/p/3911845.html">2. C#委托使用详解（Delegates）(67680)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html">3. 深入理解DIP、IoC、DI以及IoC容器(50949)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/01/31/2334018.html">4. 如何通过经纬度获取地址信息？(39531)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/02/19/2353110.html">5. ADO.NET入门教程（五） 细说数据库连接池(37772)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html">1. 深入理解DIP、IoC、DI以及IoC容器(188)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/02/19/2353110.html">2. ADO.NET入门教程（五） 细说数据库连接池(92)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/p/3776467.html">3. ASP.NET Identity入门系列教程（一） 初识Identity(53)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/03/25/2399510.html">4. ADO.NET入门教程（八） 深入理解DataAdapter（上）(40)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/01/24/2311352.html">5. Highcharts使用指南(29)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/liuhaorain/p/3747470.html">1. 深入理解DIP、IoC、DI以及IoC容器(309)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/02/19/2353110.html">2. ADO.NET入门教程（五） 细说数据库连接池(106)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/p/3776467.html">3. ASP.NET Identity入门系列教程（一） 初识Identity(72)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/archive/2012/03/25/2399510.html">4. ADO.NET入门教程（八） 深入理解DataAdapter（上）(57)</a></li><li><a href="http://www.cnblogs.com/liuhaorain/p/3911845.html">5. C#委托使用详解（Delegates）(52)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 木小楠
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<div align="center"><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fcdbc1d39ea6bfe9ec8c60a2e47e11754' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/h.js" type="text/javascript"></script><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="HolmesIcon1507275029" width="67" height="18"><param name="movie" value="http://eiv.baidu.com/hmt/icon/31.swf"><param name="flashvars" value="s=http://tongji.baidu.com/hm-web/welcome/ico?s=cdbc1d39ea6bfe9ec8c60a2e47e11754"><param name="allowscriptaccess" value="always"><embed type="application/x-shockwave-flash" name="HolmesIcon1507275029" width="67" height="18" src="http://eiv.baidu.com/hmt/icon/31.swf" flashvars="s=http://tongji.baidu.com/hm-web/welcome/ico?s=cdbc1d39ea6bfe9ec8c60a2e47e11754" allowscriptaccess="always"></object></div>
+<!--PageEndHtml Block End-->
+
+
+<link type="text/css" rel="stylesheet" href="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/myRewards.css"><div id="myRewards" class="myRewards" style="width: 0px;"><a class="btn-myRewards" href="javascript:;"><img class="png" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/tab_5.png"></a><div class="myRewards-main"><h1 class="myR-h">喜欢请打赏</h1><div class="myRewardsbox"><div class="myRewards-list"><ul class="not-full"><li class="myR-on"><a href="javascript:;">支付宝<img class="png" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/alipay.png" alt="支付宝"></a></li><li class=""><a href="javascript:;">微信<img class="png" src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/weixin.png" alt="微信"></a></li></ul></div><div class="myRewards-detail"><div class="myRewards-ubox"><p class="myRewards-code-tit">扫描二维码打赏</p><div class="myRewards-code"><img src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/t_alipay.bmp"></div><p class="myRewards-account">支付宝打赏</p></div></div></div><p class="myR-bot"><a href="https://github.com/greedying/tctip" target="_blank">了解更多</a></p></div></div><script src="./深入理解DIP、IoC、DI以及IoC容器 - 木小楠 - 博客园_files/index"></script></body></html>

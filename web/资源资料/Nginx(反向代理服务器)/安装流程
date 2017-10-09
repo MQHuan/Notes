@@ -1,0 +1,23 @@
+首先要安装 PCRE
+PCRE 作用是让 Nginx 支持 Rewrite 功能。
+去官网下载安装包
+解压安装包
+进入安装包目录
+[root@bogon src]# cd pcre-8.35
+编译安装 
+[root@bogon pcre-8.35]# ./configure
+[root@bogon pcre-8.35]# make && make install
+查看pcre版本
+[root@bogon pcre-8.35]# pcre-config --version
+
+安装Nginx
+去官网下载安装包
+解压安装包
+进入安装包目录
+[root@bogon src]# cd nginx-1.6.2
+1、编译安装
+[root@bogon nginx-1.6.2]# ./configure --prefix=/usr/local/webserver/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre=/usr/local/src/pcre-8.35
+[root@bogon nginx-1.6.2]# make
+[root@bogon nginx-1.6.2]# make install
+2、查看nginx版本
+[root@bogon nginx-1.6.2]# /usr/local/webserver/nginx/sbin/nginx -v

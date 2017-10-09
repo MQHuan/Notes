@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.cnblogs.com/vinphy/p/4674247.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/bundle-En_summerGarden.css">
+<link type="text/css" rel="stylesheet" href="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/233419.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/bundle-En_summerGarden-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/vinphy/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/vinphy/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/vinphy/wlwmanifest.xml">
+<script type="text/javascript" src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/encoder.js"></script><script src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'vinphy', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/vinphy/"><img id="blogLogo" src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/logo.gif" alt="Return Home"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/vinphy/">文依悠然</a></h1>
+<h2>人生就是一步一步的走，一点一点的扔，这样，路才会越走越远，心才会越走越静</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<!--done-->
+			<ul id="navList">
+				<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">CnBlogs</a></li>
+				<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/vinphy/">Home</a></li>
+				<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">New Post</a></li>
+				<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%96%87%E4%BE%9D%E6%82%A0%E7%84%B6">Contact</a></li>
+				<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">Admin</a></li>
+				<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/vinphy/rss">Rss</a>
+				<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/vinphy/rss"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/xml.gif" alt="Rss"></a></li>
+			</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+Posts - 5&nbsp;
+Articles - 0&nbsp;
+Comments - 2&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/vinphy/p/4674247.html">thymeleaf 学习笔记-基础篇(中文教程)</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><div>
+<p><span style="font-family: 宋体; font-size: 16px;">&nbsp; （一）Thymeleaf 是个什么？</span></p>
+</div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp;简单说， Thymeleaf 是一个跟 Velocity、FreeMarker 类似的模板引擎，它可以完全替代 JSP 。相较与其他的模板引擎，它有如下三个极吸引人的特点：</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; 1.Thymeleaf 在有网络和无网络的环境下皆可运行，即它可以让美工在浏览器查看页面的静态效果，也可以让程序员在服务器查看带数据的动态页面效果。这是由于它支持 html 原型，然后在 html 标签里增加额外的属性来达到模板+数据的展示方式。浏览器解释 html 时会忽略未定义的标签属性，所以 thymeleaf 的模板可以静态地运行；当有数据返回到页面时，Thymeleaf 标签会动态地替换掉静态内容，使页面动态显示。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; 2.Thymeleaf 开箱即用的特性。它提供标准和spring标准两种方言，可以直接套用模板实现JSTL、 OGNL表达式效果，避免每天套模板、该jstl、改标签的困扰。同时开发人员也可以扩展和创建自定义的方言。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; 3. Thymeleaf 提供spring标准方言和一个与 SpringMVC 完美集成的可选模块，可以快速的实现表单绑定、属性编辑器、国际化等功能。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp;（二）应用</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">　　1.简单的 Thymeleaf 应用</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">　　　1）只需加入thymeleaf-2.1.4.RELEASE.jar（<a href="http://www.thymeleaf.org/download.html">http://www.thymeleaf.org/download.html</a>&nbsp;）包，若用maven，则加入如下配置</span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;dependency&gt;
+    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
+    &lt;artifactId&gt;thymeleaf&lt;/artifactId&gt;
+    &lt;version&gt;2.1.4&lt;/version&gt;
+&lt;/dependency&gt;</span></pre>
+</div>
+</div>
+<div><span style="font-family: 宋体; font-size: 16px;">　　　2）然后增加头文件（如下）</span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"<span style="color: #000000;">
+      xmlns:th</span>="http://www.thymeleaf.org"&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 &nbsp; &nbsp;3）就可以用th标签动态替换掉静态数据了。如下图，后台传出的message会将静态数据“Red Chair”替换掉，若访问静态页面，则显示数据“Red Chair”。</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;td th:text="${message}"&gt;Red Chair&lt;/td&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">&nbsp;　&nbsp;2.整合spring</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 1）加入thymeleaf-spring4-2.1.4.RELEASE.jar（<a href="http://www.thymeleaf.org/download.html">http://www.thymeleaf.org/download.html</a>&nbsp;）包，若用maven，则加入如下配置</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;dependency&gt;
+    &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
+    &lt;artifactId&gt;thymeleaf-spring3&lt;/artifactId&gt;
+    &lt;version&gt;2.1.4&lt;/version&gt;
+&lt;/dependency&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 2）在servlet配置文件中加入如下代码</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!-- Scans the classpath of <span style="color: #0000ff;">this</span> application <span style="color: #0000ff;">for</span> @Components to deploy as beans --&gt;
+       &lt;context:component-scan base-<span style="color: #0000ff;">package</span>="com.test.thymeleaf.controller" /&gt;
+
+       &lt;!-- Configures the @Controller programming model --&gt;
+       &lt;mvc:annotation-driven /&gt;
+
+        &lt;!--Resolves view names to <span style="color: #0000ff;">protected</span> .jsp resources within the /WEB-INF/views directory --&gt;
+        &lt;!--springMVC+jsp的跳转页面配置--&gt;
+       &lt;!--&lt;bean <span style="color: #0000ff;">class</span>="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;--&gt;
+              &lt;!--&lt;property name="prefix" value="/WEB-INF/views/" /&gt;--&gt;
+              &lt;!--&lt;property name="suffix" value=".jsp" /&gt;--&gt;
+       &lt;!--&lt;/bean&gt;--&gt;
+
+       &lt;!--springMVC+thymeleaf的跳转页面配置--&gt;
+       &lt;bean id="templateResolver"
+          <span style="color: #0000ff;">class</span>="org.thymeleaf.templateresolver.ServletContextTemplateResolver"&gt;
+         &lt;property name="prefix" value="/WEB-INF/views/" /&gt;
+         &lt;property name="suffix" value=".html" /&gt;
+         &lt;property name="templateMode" value="HTML5" /&gt;
+       &lt;/bean&gt;
+
+       &lt;bean id="templateEngine"
+           <span style="color: #0000ff;">class</span>="org.thymeleaf.spring4.SpringTemplateEngine"&gt;
+          &lt;property name="templateResolver" ref="templateResolver" /&gt;
+       &lt;/bean&gt;
+
+       &lt;bean <span style="color: #0000ff;">class</span>="org.thymeleaf.spring4.view.ThymeleafViewResolver"&gt;
+         &lt;property name="templateEngine" ref="templateEngine" /&gt;
+       &lt;/bean&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　3）将静态页面加到项目中，更改文件头，加入th标签即可。</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　3.th标签整理</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　1）简单表达式</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　--变量表达式 &nbsp;${……}</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;input type="text" name="userName" value="James Carrot" th:value="${user.name}" /&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　　上述代码为引用user对象的name属性值。</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 &nbsp; --选择/星号表达式 *{……}</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;div th:object="${session.user}"&gt;                                                                       
+     &lt;p&gt;Nationality: &lt;span th:text="*{nationality}"&gt;Saturn&lt;/span&gt;.&lt;/p&gt;    
+&lt;/div&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　选择表达式一般跟在th:object后，直接取object中的属性。</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 &nbsp;&nbsp;--文字国际化表达式 &nbsp;#{……}</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;p th:utext="#{home.welcome}"&gt;Welcome to our grocery store!&lt;/p&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">&nbsp;　　调用国际化的welcome语句,国际化资源文件如下</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;"><span style="color: #000000;">resource_en_US.properties：<br>
+home.welcome</span>=<span style="color: #000000;">Welcome to here！
+<br>
+resource_zh_CN.properties：<br><br></span>home.welcome=欢迎您的到来！</span></pre>
+<pre></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　-- URL表达式 &nbsp;@{……}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+<div>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;a href="details.html" th:href="@{/order/details(orderId=${o.id})}"&gt;view&lt;/a&gt;</span></pre>
+</div>
+</div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @{……}支持决定路径和相对路径。其中相对路径又支持跨上下文调用url和协议的引用（//code.jquery.com/jquery-2.0.3.min.js）。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">　　　当URL为后台传出的参数时，代码如下</span></div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;img src="../../static/assets/images/qr-code.jpg" th:src="@{${path}}" alt="二维码" /&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　2）常用的th标签</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　--简单数据转换（数字，日期）</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;"> 　　&lt;dt&gt;价格&lt;/dt&gt;
+  　 &lt;dd th:text="${#numbers.formatDecimal(product.price, 1, 2)}"&gt;180&lt;/dd&gt;
+　　 &lt;dt&gt;进货日期&lt;/dt&gt;
+　　 &lt;dd th:text="${#dates.format(product.availableFrom, 'yyyy-MM-dd')}"&gt;2014-12-01&lt;/dd&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　--字符串拼接</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;dd th:text="${'$'+product.price}"&gt;235&lt;/dd&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　 &nbsp;--转义和非转义文本</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　　当后台传出的数据为“This is an &amp;lt;em&amp;gt;HTML&amp;lt;/em&amp;gt; text. &amp;lt;b&amp;gt;Enjoy yourself!&amp;lt;/b&amp;gt;”时，若页面代码如下则出现两种不同的结果</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;div th:text="${html}"&gt;</span></pre>
+<pre><span style="font-family: 宋体; font-size: 16px;">　　This is an &amp;lt;em&amp;gt;HTML&amp;lt;/em&amp;gt; text. &amp;lt;b&amp;gt;Enjoy yourself!&amp;lt;/b&amp;gt;</span></pre>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;/div&gt; </span><br><span style="font-family: 宋体; font-size: 16px;">&lt;div th:utext="${html}"&gt;</span></pre>
+<pre><span style="font-family: 宋体; font-size: 16px;">　　This is an &lt;em&gt;HTML&lt;/em&gt; text. &lt;b&gt;Enjoy yourself!&lt;/b&gt;</span></pre>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;/div&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　--表单中</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;form th:action="@{/bb}" th:object="${user}" method="post" th:method="post"&gt;
+
+    &lt;input type="text" th:field="*{name}"/&gt;
+    &lt;input type="text" th:field="*{msg}"/&gt;
+
+    &lt;input type="submit"/&gt;
+&lt;/form&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　&nbsp;--显示页面的数据迭代</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;"><span style="color: #008000;">//</span><span style="color: #008000;">用 th:remove 移除除了第一个外的静态数据，用第一个tr标签进行循环迭代显示</span>
+　　　　&lt;tbody th:remove="all-but-first"&gt;
+　　　　　　　　　　<span style="color: #008000;">//</span><span style="color: #008000;">将后台传出的 productList 的集合进行迭代，用product参数接收，通过product访问属性值</span>
+                &lt;tr th:each="product:${productList}"&gt;</span><br><span style="font-family: 宋体; font-size: 16px;">　　　　　　　　　　　　//用count进行统计，有顺序的显示
+　　　　　　　　　　　　&lt;td th:text="${productStat.count}"&gt;1&lt;/td&gt;
+                    &lt;td th:text="${product.description}"&gt;Red Chair&lt;/td&gt;
+                    &lt;td th:text="${'$' + #numbers.formatDecimal(product.price, 1, 2)}"&gt;$123&lt;/td&gt;
+                    &lt;td th:text="${#dates.format(product.availableFrom, 'yyyy-MM-dd')}"&gt;2014-12-01&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;White table&lt;/td&gt;
+                    &lt;td&gt;$200&lt;/td&gt;
+                    &lt;td&gt;15-Jul-2013&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Reb table&lt;/td&gt;
+                    &lt;td&gt;$200&lt;/td&gt;
+                    &lt;td&gt;15-Jul-2013&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Blue table&lt;/td&gt;
+                    &lt;td&gt;$200&lt;/td&gt;
+                    &lt;td&gt;15-Jul-2013&lt;/td&gt;
+                &lt;/tr&gt;
+      &lt;/tbody&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--条件判断</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;span th:<span style="color: #0000ff;">if</span>="${product.price lt 100}" <span style="color: #0000ff;">class</span>="offer"&gt;Special offer!&lt;/span&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　不能用"&lt;”，"&gt;"等符号，要用"lt"等替代</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!-- 当gender存在时，选择对应的选项；若gender不存在或为null时，取得customer对象的name--&gt;
+&lt;td th:<span style="color: #0000ff;">switch</span>="${customer.gender?.name()}"&gt;
+    &lt;img th:<span style="color: #0000ff;">case</span>="'MALE'" src="../../../images/male.png" th:src="@{/images/male.png}" alt="Male" /&gt; &lt;!-- Use "/images/male.png" image --&gt;
+    &lt;img th:<span style="color: #0000ff;">case</span>="'FEMALE'" src="../../../images/female.png" th:src="@{/images/female.png}" alt="Female" /&gt; &lt;!-- Use "/images/female.png" image --&gt;
+    &lt;span th:<span style="color: #0000ff;">case</span>="*"&gt;Unknown&lt;/span&gt;
+&lt;/td&gt;</span></pre>
+</div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!--在页面先显示，然后再在显示的数据基础上进行修改--&gt;<br>&lt;div class="form-group col-lg-6"&gt;</span><br><span style="font-family: 宋体; font-size: 16px;">    &lt;label&gt;姓名&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;/label&gt;<br></span> 　　&lt;！--除非resume对象的name属性值为null，否则就用name的值作为placeholder值--&gt;<br><span style="font-family: 宋体; font-size: 16px;">    &lt;input type="text" class="form-control" th:unless="${resumes.name} eq '' or ${resumes.name} eq null"  </span><br><span style="font-family: 宋体; font-size: 16px;">           data-required="true" th:placeholder="${resumes.name}" /&gt;<br></span>　　 &lt;!--除非resume对象的name属性不为空，否则就定义一个field方便封装对象，并用placeholder提示--&gt;<br><span style="font-family: 宋体; font-size: 16px;">    &lt;input type="text" th:field="${resume.name}" class="form-control" th:unless="${resumes.name} ne null" </span><br><span style="font-family: 宋体; font-size: 16px;">           data-required="true" th:placeholder="请填写您的真实姓名"  /&gt;</span><br><span style="font-family: 宋体; font-size: 16px;">&lt;/div&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!-- 增加<span style="color: #0000ff;">class</span>="enhanced"当balance大雨10000 --&gt;
+&lt;td th:<span style="color: #0000ff;">class</span>="${customer.balance gt 10000} ? 'enhanced'" th:text="${customer.balance}"&gt;350&lt;/td&gt;</span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--根据后台数据选中select的选项</span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre> &lt;div <span style="color: #0000ff;">class</span>="form-group col-lg-6"&gt;
+      &lt;label &gt;性别&lt;span&gt;&amp;nbsp;Sex:&lt;/span&gt;&lt;/label&gt;
+      &lt;select th:field="${resume.gender}" <span style="color: #0000ff;">class</span>="form-control" th:<span style="color: #0000ff;">switch</span>="${resumes.gender.toString()}"<span style="color: #000000;">
+            data</span>-required="true"&gt;
+              &lt;option value="男" th:<span style="color: #0000ff;">case</span>="'男'" th:selected="selected" &gt;男&lt;/option&gt;
+              &lt;option value="女" th:<span style="color: #0000ff;">case</span>="'女'" th:selected="selected" &gt;女&lt;/option&gt;
+              &lt;option value=""&gt;请选择&lt;/option&gt;
+      &lt;/select&gt;
+ &lt;/div&gt;</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　因为gender是定义的Enum（枚举）类型，所以要用toString方法。用th:switch指定传出的变量,用th:case对变量的值进行匹配。！"请选择"放在第一项会出现永远选择的是这个选项。或者用th:if</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>&lt;div <span style="color: #0000ff;">class</span>='form-group col-lg-4'&gt;
+          &lt;select <span style="color: #0000ff;">class</span>='form-control' name="skill[4].proficiency"&gt;
+                &lt;option &gt;掌握程度&lt;/option&gt;
+                &lt;option th:<span style="color: #0000ff;">if</span>="${skill.level eq '一般'}" th:selected="selected"&gt;一般&lt;/option&gt;
+                 &lt;option th:<span style="color: #0000ff;">if</span>="${skill.level eq '熟练'}" th:selected="selected"&gt;熟练&lt;/option&gt;
+                 &lt;option th:<span style="color: #0000ff;">if</span>="${skill.level eq '精通'}" th:selected="selected"&gt;精通&lt;/option&gt;
+           &lt;/select&gt;
+&lt;/div&gt;</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--spring表达式语言</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Thymeleaf tutorial: exercise 10&lt;/title&gt;
+        &lt;link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" /&gt;
+        &lt;meta charset="utf-8" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Thymeleaf tutorial - Solution <span style="color: #0000ff;">for</span> exercise 10: Spring Expression language&lt;/h1&gt;
+  
+        &lt;h2&gt;Arithmetic expressions&lt;/h2&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="label"&gt;Four multiplied by minus six multiplied by minus two module seven:&lt;/p&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="answer" th:text="${4 * -6 * -2 % 7}"&gt;123&lt;/p&gt;
+ 
+        &lt;h2&gt;Object navigation&lt;/h2&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="label"&gt;Description field of paymentMethod field of the third element of customerList bean:&lt;/p&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="answer" th:text="${customerList[2].paymentMethod.description}"&gt;Credit card&lt;/p&gt;
+ 
+        &lt;h2&gt;Object instantiation&lt;/h2&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="label"&gt;Current time milliseconds:&lt;/p&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="answer" th:text="${new java.util.Date().getTime()}"&gt;22-Jun-2013&lt;/p&gt;
+        
+        &lt;h2&gt;T operator&lt;/h2&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="label"&gt;Random number:&lt;/p&gt;
+        &lt;p <span style="color: #0000ff;">class</span>="answer" th:text="${T(java.lang.Math).random()}"&gt;123456&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　 --内联</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="font-family: 宋体; font-size: 16px;">&lt;label <span style="color: #0000ff;">for</span>="body"&gt;Message body:&lt;/label&gt;
+&lt;textarea id="body" name="body" th:inline="text"&gt;<span style="color: #000000;">
+Dear [[${customerName}]],
+
+it is our sincere pleasure to congratulate your in your birthday:
+    Happy birthday [[${customerName}]]</span>!!!<span style="color: #000000;">
+
+See you soon, [[${customerName}]].
+
+Regards,
+    The Thymeleaf team
+</span>&lt;/textarea&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p><span style="font-family: 宋体; font-size: 16px;">　--内联JS &lt;js起止加入如下代码，否则引号嵌套或者"&lt;""&gt;"等不能用&gt;</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;"><span style="color: #008000;">/*</span><span style="color: #008000;">&lt;![CDATA[</span><span style="color: #008000;">*/</span><span style="color: #000000;">
+……
+</span><span style="color: #008000;">/*</span><span style="color: #008000;">]]&gt;</span><span style="color: #008000;">*/</span></span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--js附加代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;"><span style="color: #008000;">/*</span><span style="color: #008000;">[+
+var msg = 'This is a working application';
++]</span><span style="color: #008000;">*/</span></span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--js移除代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="font-family: 宋体; font-size: 16px;"><span style="color: #008000;">/*</span><span style="color: #008000;">[- </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+var msg </span>= 'This is a non-working template'<span style="color: #000000;">;
+</span><span style="color: #008000;">/*</span><span style="color: #008000;"> -]</span><span style="color: #008000;">*/</span></span></pre>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　4.不常用</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--表达式</span></p>
+<p><span style="font-family: 宋体; font-size: 16px;">　　　2）文字</span></p>
+<div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a)文本文字 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'one text','Another one',……</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b)数字文字 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0,34,3.0,12.3，……</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c)布尔文字 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;true，flase</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; d)空文字 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;null</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; e)文字标记 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; one，sometext，main，……</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 3）文本处理</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a)字符串连接 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b)文字替换 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | The name id ${name} | &nbsp; &nbsp; &nbsp; &nbsp;</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 4）算术表达式</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a)基本表达式 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;+，-，*，/，%</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b)减号（一元运算符） &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 5）布尔表达式</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a)基本表达式 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;and，or</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b)布尔否定（一元运算符） &nbsp; &nbsp;！,not</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 6）比较和相等</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a)比较 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&gt;，&lt;，&gt;=，&lt;=(gt，lt，ge，le) &nbsp; &nbsp;</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b)相等表达式 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ==，！=(eq，ne)</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 7）条件表达式</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;a)If-then &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(if) ? (then)</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;b)If-then-else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(if) ? (then) : (else)</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;c)Default &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (value) ? : (defaltvalue) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;所有这些标签能够结合和嵌套：</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;User is of type ' + (${user.isAdmin()} ? 'Administrator' : (${user.type} ?: 'Unknown'))</span></div>
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">　　--表达式基本对象</span></p>
+<div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 在上下文变量评估OGNL表达式时，一些对象表达式可获得更高的灵活性。这些对象将由#号开始引用。</span></div>
+<div>
+<div data-front-font-size="16px">
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#ctx: 上下文对象.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#vars:&nbsp;上下文变量.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#locale: 上下文语言环境.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#httpServletRequest: (仅在web上文)HttpServletRequest&nbsp;对象.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#httpSession: (仅在web上文) &nbsp;HttpSession&nbsp;对象.</span></div>
+</div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; --表达式功能对象</span></div>
+<div>
+<div data-front-font-size="16px">
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#dates:java.util.Date对象的实用方法。&nbsp;</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#calendars:和dates类似, 但是&nbsp;java.util.Calendar&nbsp;对象.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#numbers: 格式化数字对象的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#strings: 字符创对象的实用方法：&nbsp;contains, startsWith, prepending/appending等.</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#objects: 对objects操作的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#bools: 对布尔值求值的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#arrays: 数组的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#lists: list的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#sets: set的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#maps: map的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#aggregates: 对数组或集合创建聚合的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#messages: 在表达式中获取外部信息的实用方法。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; -&nbsp;#ids: 处理可能重复的id属性的实用方法 (比如：迭代的结果)。</span></div>
+</div>
+</div>
+<span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp;--给特定的属性设值</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 下面是用th:action给action设值。</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&lt;form action="subscribe.html" th:action="@{/subscribe}"&gt;</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; 还有很多这样的属性，它们每一个都针对一个特定的XHTML或者HTML5属性：</span></div>
+</div>
+<div>
+<div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:text="${data}"</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;将data的值替换该属性所在标签的body。字符常量要用引号，比如th:text="'hello world'",th:text="2011+3",th:text="'my name is '+${user.name}"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:utext</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;和th:text的区别是"unescaped text"。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:with</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;定义变量，th:with="isEven=${prodStat.count}%2==0"，定义多个变量可以用逗号分隔。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:attr</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;设置标签属性，多个属性可以用逗号分隔，比如th:attr="src=@{/image/aa.jpg},title=#{logo}"，此标签不太优雅，一般用的比较少。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:[tagAttr]</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;设置标签的各个属性，比如th:value,th:action等。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;可以一次设置两个属性，比如：th:alt-title="#{logo}"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;对属性增加前缀和后缀，用th:attrappend，th:attrprepend,比如：th:attrappend="class=${' '+cssStyle}"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;对于属性是有些特定值的，比如checked属性，thymeleaf都采用bool值，比如th:checked=${user.isActive}<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:each</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;循环，&lt;tr th:each="user,userStat:${users}"&gt;,userStat是状态变量，有 index,count,size,current,even,odd,first,last等属性，如果没有显示设置状态变量， &nbsp; &nbsp;thymeleaf会默 认给个“变量名+Stat"的状态变量。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:if or th:unless</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;条件判断，支持布尔值，数字（非零为true)，字符，字符串等。<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; th:switch，th:case</span></div>
+<div><span style="font-family: 宋体; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;选择语句。 th:case="*"表示default case。</span></div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+<p><span style="font-family: 宋体; font-size: 16px;">&nbsp;</span></p>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/vinphy/tag/thymeleaf/">thymeleaf</a>, <a href="http://www.cnblogs.com/vinphy/tag/%E6%A8%A1%E6%9D%BF/">模板</a>, <a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E4%B8%AD%E6%96%87/">thymeleaf中文</a>, <a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E6%95%99%E7%A8%8B/">thymeleaf教程</a>, <a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E5%9F%BA%E6%9C%AC%E8%B5%84%E6%96%99/">thymeleaf基本资料</a>, <a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E6%A0%87%E7%AD%BE/">thymeleaf标签</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(4674247,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;d7fc8bbd-6315-e511-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/vinphy/" target="_blank"><img src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/20160526131644.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/vinphy/">文依悠然</a><br>
+            <a href="http://home.cnblogs.com/u/vinphy/followees">关注 - 2</a><br>
+            <a href="http://home.cnblogs.com/u/vinphy/followers">粉丝 - 9</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;d7fc8bbd-6315-e511-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(4674247,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">7</span>
+    </div>
+    <div class="buryit" onclick="votePost(4674247,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/vinphy/p/4673918.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/vinphy/p/4673918.html" title="发布于2015-07-24 16:33">Thymeleaf 学习笔记-实例demo（中文教程）</a><br><a href="http://www.cnblogs.com/vinphy/p/5289708.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/vinphy/p/5289708.html" title="发布于2016-03-17 22:14">github团队协作教程</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2015-07-24 18:15</span> <a href="http://www.cnblogs.com/vinphy/">文依悠然</a> Views(<span id="post_view_count">62332</span>) Comments(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=4674247" rel="nofollow">Edit</a> <a href="http://www.cnblogs.com/vinphy/p/4674247.html#" onclick="AddToWz(4674247);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=233419,cb_entryId=4674247,cb_blogApp=currentBlogApp,cb_blogUserGuid='d7fc8bbd-6315-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2015/7/24 18:15:00';loadViewCount(cb_entryId);</script>
+	
+</div>
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/vinphy/p/4674247.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/vinphy/p/4674247.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/solution/la?fromSource=gwzcw.436846.436846.436846" target="_blank">【推荐】搭建微信小程序 就选腾讯云</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://www.mtyun.com/promote/69f73a72-f46d-4103-88e5-94ed2f81259d/" target="_blank"><img width="300" height="250" src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/24442-20170921101521025-1845913848.jpg" alt="美团云0921"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/579662/" target="_blank">任正非：经理就是经营理财，如果不会经营理财，你为什么叫“经理”？</a><br> ·  <a href="http://news.cnblogs.com/n/579661/" target="_blank">iOS端Edge浏览器上手体验</a><br> ·  <a href="http://news.cnblogs.com/n/579660/" target="_blank">仅限iPhone 6s 苹果重新开放iOS 10.3.3验证通道</a><br> ·  <a href="http://news.cnblogs.com/n/579659/" target="_blank">iPhone X正式批准开售：已通过FCC认证</a><br> ·  <a href="http://news.cnblogs.com/n/579658/" target="_blank">谷歌Pixel 2/XL支持27W快充 需另外购买充电器</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/22446/" target="_blank"><img width="468" height="60" src="./thymeleaf 学习笔记-基础篇(中文教程) - 文依悠然 - 博客园_files/24442-20171001085719794-417760373.jpg" alt="阿里云1001"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br> ·  <a href="http://kb.cnblogs.com/page/575829/" target="_blank">做到这一点，你也可以成为优秀的程序员</a><br> ·  <a href="http://kb.cnblogs.com/page/566880/" target="_blank">写给立志做码农的大学生</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/vinphy/">文依悠然</a><br>园龄：<a href="http://home.cnblogs.com/u/vinphy/" title="入园时间：2015-06-18">2年3个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/vinphy/followers/">9</a><br>关注：<a href="http://home.cnblogs.com/u/vinphy/followees/">2</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;d7fc8bbd-6315-e511-b908-9dcfd8948a71&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div class="mySearch">
+<h3 class="catListTitle">Search</h3>
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="ZZK" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="Google" class="btn_my_zzk"></div>
+</div></div><div id="sidebar_shortcut" class="sidebar-block">
+<!--
+<div class="catListLink">
+<h3 class ="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/vinphy/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/vinphy/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/vinphy/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/vinphy/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/vinphy/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass('itemListLink', 'itemListLin_con');return false;" href="#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div>
+--></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">My Tags</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/vinphy/tag/thymeleaf/">thymeleaf</a>(2)</li><li><a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E6%95%99%E7%A8%8B/">thymeleaf教程</a>(2)</li><li><a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E4%B8%AD%E6%96%87/">thymeleaf中文</a>(2)</li><li><a href="http://www.cnblogs.com/vinphy/tag/%E6%A8%A1%E6%9D%BF/">模板</a>(2)</li><li><a href="http://www.cnblogs.com/vinphy/tag/intellij%20%E5%BF%AB%E6%8D%B7%E9%94%AE/">intellij 快捷键</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/java%20zxing/">java zxing</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/springMVC/">springMVC</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%E8%B5%84%E6%96%99/">thymeleaf资料</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/%E4%BA%8C%E7%BB%B4%E7%A0%81/">二维码</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/thymeleaf%2Bspring/">thymeleaf+spring</a>(1)</li><li><a href="http://www.cnblogs.com/vinphy/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostArchive">
+<h3 class="catListTitle">Post Archives</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/vinphy/archive/2017/03.html">2017/3 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/vinphy/archive/2016/03.html">2016/3 (1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/vinphy/archive/2015/07.html">2015/7 (2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/vinphy/archive/2015/06.html">2015/6 (1)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">Recent Comments</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/vinphy/p/4673918.html#3721426">1. Re:Thymeleaf 学习笔记-实例demo（中文教程）</a></li>
+        <li class="recent_comment_body">艹，写的好详细啊。我前端的人都能看懂了。牛笔</li>
+        <li class="recent_comment_author">--luogeger</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/vinphy/p/4673918.html#3621844">2. Re:Thymeleaf 学习笔记-实例demo（中文教程）</a></li>
+        <li class="recent_comment_body">请问1）gradle加jar什么意思？需要具体怎么操作，谢谢！</li>
+        <li class="recent_comment_author">--tarking</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">Top Posts</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/vinphy/p/4674247.html">1. thymeleaf 学习笔记-基础篇(中文教程)(62328)</a></li><li><a href="http://www.cnblogs.com/vinphy/p/4673918.html">2. Thymeleaf 学习笔记-实例demo（中文教程）(25026)</a></li><li><a href="http://www.cnblogs.com/vinphy/p/5289708.html">3. github团队协作教程(894)</a></li><li><a href="http://www.cnblogs.com/vinphy/p/4610425.html">4. 二维码的生成(234)</a></li><li><a href="http://www.cnblogs.com/vinphy/p/6627378.html">5. IntelliJ IDEA 快捷键(198)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap" style="display: none;">
+<!--
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"></div>
+</div>
+-->
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/vinphy/p/4674247.html">1. thymeleaf 学习笔记-基础篇(中文教程)(7)</a></li><li><a href="http://www.cnblogs.com/vinphy/p/4673918.html">2. Thymeleaf 学习笔记-实例demo（中文教程）(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 文依悠然
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

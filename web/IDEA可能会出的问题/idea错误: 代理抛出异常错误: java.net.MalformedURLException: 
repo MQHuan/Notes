@@ -1,0 +1,11 @@
+错误: 代理抛出异常错误: java.net.MalformedURLException: Local host name unknown: java.net.UnknownHostException: xxx: xxx: nodename nor servname provided, or not known
+
+解决办法： 
+修改/etc/hosts 
+将
+
+127.0.0.1       localhost
+改成
+
+127.0.0.1       localhost xxx
+即可~ 

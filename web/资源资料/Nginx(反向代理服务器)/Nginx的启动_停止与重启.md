@@ -3,7 +3,7 @@
 
 例如：
 ```
-[root@LinuxServer sbin]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+[root@LinuxServer sbin]#/etc/nginx/nginx -c /etc/nginx/nginx.conf
 ```
 
 ###停止

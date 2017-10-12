@@ -1,0 +1,5 @@
+<c:set>
+<c:set>标签用于设置变量值和对象属性。
+<c:set>标签就是<jsp:setProperty>行为标签的孪生兄弟。
+这个标签之所以很有用呢，是因为它会计算表达式的值，然后使用计算结果来设置 JavaBean 对象或 java.util.Map 对象的值。
+详细： http://www.runoob.com/jsp/jstl-core-set-tag.html

@@ -39,3 +39,19 @@ Starter POMs是可以包含到应用中的一个方便的依赖关系描述符�
 ### 基于Bootstrap的web应用－－angular P212　要敲
 P216
 angular 有角的;用角测量的，用弧度测量的;
+### Web相关配置
+P182
+Negotiating 兑现
+Converter  转换器
+Formatter  格式化程序
+Encompassing  包括
+
+### 替换Tomcat
+P190
+exclusions 排除
+
+### Websocker
+P200
+domain 范围，领域;
+wisely 明智地;聪明地
+subscribe [səbˈskrīb]订阅

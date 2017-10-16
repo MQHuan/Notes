@@ -15,20 +15,20 @@ P24
 * 其中符合条件的每一个被拦截处为连接点(JoinPoint)
 
 ### Bean的Scope
-scope 　范围
+scope　范围  [skəʊp]
 
 ### Spring Aware
-aware  觉察到
+aware 觉察到  [əˈweə(r)] 
 
 ### Spring MVC的常用注解
-dispatcher 调度员
-variable 变量
-produces　生产
-interceptor 拦截器
+dispatcher 调度员 [dɪˈspætʃə(r)] 
+variable 变量 [ˈveəriəbl] 
+produces　生产 [prəˈdju:s] 
+interceptor 拦截器 [ˌɪntəˈseptə(r)]
 
 ### Spring  Boot 核心
-banner 旗帜
-fluent 流利
+banner 旗帜 [ˈbænə(r)] 
+fluent 流利 [ˈflu:ənt] 
 
 ### starter pom
 P121
@@ -38,20 +38,25 @@ Starter POMs是可以包含到应用中的一个方便的依赖关系描述符�
 
 ### 基于Bootstrap的web应用－－angular P212　要敲
 P216
-angular 有角的;用角测量的，用弧度测量的;
+angular 有角的;用角测量的，用弧度测量的; [ˈæŋgjələ(r)] 
 ### Web相关配置
 P182
-Negotiating 兑现
-Converter  转换器
+Negotiating 兑现 [nɪ'ɡəʊʃɪeɪtɪŋ]
+Converter  转换器  [kənˈvɜ:tə(r)]
 Formatter  格式化程序
-Encompassing  包括
+Encompassing  包括 [enˈkʌmpəs]
 
 ### 替换Tomcat
 P190
-exclusions 排除
+exclusions 排除 [ɪkˈsklu:ʒn] 
 
 ### Websocker
 P200
-domain 范围，领域;
-wisely 明智地;聪明地
-subscribe [səbˈskrīb]订阅
+domain 范围，领域; [dəˈmeɪn] 
+wisely 明智地;聪明地 [waɪzlɪ] 
+subscribe 订阅  [səbˈskraɪb] 
+permit 许可证
+authentication [ɔ:ˌθentɪ'keɪʃn] 认证;身份验证;证明，
+destination  [ˌdestɪˈneɪʃn] 目的，目标;目的地
+### 基于Bootstrap和AngularJS的现代Web应用
+Bootstrap  引导程序  [ˈbu:tstræp]

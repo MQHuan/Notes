@@ -15,20 +15,20 @@ P24
 * 其中符合条件的每一个被拦截处为连接点(JoinPoint)
 
 ### Bean的Scope
-scope 　范围
+scope　范围  [skəʊp]
 
 ### Spring Aware
-aware  觉察到
+aware 觉察到  [əˈweə(r)] 
 
 ### Spring MVC的常用注解
-dispatcher 调度员
-variable 变量
-produces　生产
-interceptor 拦截器
+dispatcher 调度员 [dɪˈspætʃə(r)] 
+variable 变量 [ˈveəriəbl] 
+produces　生产 [prəˈdju:s] 
+interceptor 拦截器 [ˌɪntəˈseptə(r)]
 
 ### Spring  Boot 核心
-banner 旗帜
-fluent 流利
+banner 旗帜 [ˈbænə(r)] 
+fluent 流利 [ˈflu:ənt] 
 
 ### starter pom
 P121
@@ -44,3 +44,26 @@ angular 有角的;用角测量的，用弧度测量的;
 SpringMVC用于处理视图最重要的两个接口是ViewResolver和View。
 * ViewResolver的主要作用是把一个逻辑上的视图名称解析为一个真正的视图，SpringMVC中用于把View对象呈现给客户端的是View对象本身，而ViewResolver只是把逻辑视图名称解析为对象的View对象。
 * View接口的主要作用是用于处理视图，然后返回给客户端。
+
+angular 有角的;用角测量的，用弧度测量的; [ˈæŋgjələ(r)] 
+### Web相关配置
+P182
+Negotiating 兑现 [nɪ'ɡəʊʃɪeɪtɪŋ]
+Converter  转换器  [kənˈvɜ:tə(r)]
+Formatter  格式化程序
+Encompassing  包括 [enˈkʌmpəs]
+
+### 替换Tomcat
+P190
+exclusions 排除 [ɪkˈsklu:ʒn] 
+
+### Websocker
+P200
+domain 范围，领域; [dəˈmeɪn] 
+wisely 明智地;聪明地 [waɪzlɪ] 
+subscribe 订阅  [səbˈskraɪb] 
+permit 许可证
+authentication [ɔ:ˌθentɪ'keɪʃn] 认证;身份验证;证明，
+destination  [ˌdestɪˈneɪʃn] 目的，目标;目的地
+### 基于Bootstrap和AngularJS的现代Web应用
+Bootstrap  引导程序  [ˈbu:tstræp]

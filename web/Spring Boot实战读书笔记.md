@@ -38,6 +38,13 @@ Starter POMs是可以包含到应用中的一个方便的依赖关系描述符�
 
 ### 基于Bootstrap的web应用－－angular P212　要敲
 P216
+angular 有角的;用角测量的，用弧度测量的;
+
+### ViewResolver和View介绍
+SpringMVC用于处理视图最重要的两个接口是ViewResolver和View。
+* ViewResolver的主要作用是把一个逻辑上的视图名称解析为一个真正的视图，SpringMVC中用于把View对象呈现给客户端的是View对象本身，而ViewResolver只是把逻辑视图名称解析为对象的View对象。
+* View接口的主要作用是用于处理视图，然后返回给客户端。
+
 angular 有角的;用角测量的，用弧度测量的; [ˈæŋgjələ(r)] 
 ### Web相关配置
 P182
@@ -60,6 +67,7 @@ authentication [ɔ:ˌθentɪ'keɪʃn] 认证;身份验证;证明，
 destination  [ˌdestɪˈneɪʃn] 目的，目标;目的地
 ### 基于Bootstrap和AngularJS的现代Web应用
 Bootstrap  引导程序  [ˈbu:tstræp]
+<<<<<<< HEAD
 produce 生产 [prəˈdju:s] 
 directive  指令  [dəˈrektɪv] 
 restrict  限制 [rɪˈstrɪkt] 
@@ -68,3 +76,5 @@ restrict  限制 [rɪˈstrɪkt]
 P235
 Repository 仓库; [rɪˈpɒzətri] 
 Iterable 可迭代的
+=======
+>>>>>>> 65062f40e091de042cbe69de8f97b7a72819eb00

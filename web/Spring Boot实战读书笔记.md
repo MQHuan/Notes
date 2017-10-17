@@ -69,3 +69,12 @@ destination  [ˌdestɪˈneɪʃn] 目的，目标;目的地
 Bootstrap  引导程序  [ˈbu:tstræp]
 P222
 directive  指令  [dəˈrektɪv] 
+produce 生产 [prəˈdju:s] 
+directive  指令  [dəˈrektɪv] 
+restrict  限制 [rɪˈstrɪkt] 
+
+#### Spring Boot的数据访问 
+P235
+Repository 仓库; [rɪˈpɒzətri] 
+Iterable 可迭代的
+

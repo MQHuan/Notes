@@ -60,3 +60,11 @@ authentication [ɔ:ˌθentɪ'keɪʃn] 认证;身份验证;证明，
 destination  [ˌdestɪˈneɪʃn] 目的，目标;目的地
 ### 基于Bootstrap和AngularJS的现代Web应用
 Bootstrap  引导程序  [ˈbu:tstræp]
+produce 生产 [prəˈdju:s] 
+directive  指令  [dəˈrektɪv] 
+restrict  限制 [rɪˈstrɪkt] 
+
+#### Spring Boot的数据访问 
+P235
+Repository 仓库; [rɪˈpɒzətri] 
+Iterable 可迭代的

@@ -1,0 +1,13 @@
+fix 滚动 , 重写EditText
+@Override
+public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_MOVE)
+            this.getParent().requestDisallowInterceptTouchEvent(true);
+        return super.onTouchEvent(event);
+}
+
+fix  焦点跳动, 重写ScrollView
+@Override
+public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
+        return child instanceof EditText;
+}

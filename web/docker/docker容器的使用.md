@@ -53,3 +53,8 @@ sudo docker restart ID或者名字
 ```
 sudo docker rm ID或者名字
 ```
+
+### 进入容器
+```
+docker attach ID或者名字
+```

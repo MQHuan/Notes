@@ -78,3 +78,10 @@ P235
 Repository 仓库; [rɪˈpɒzətri] 
 Iterable 可迭代的
 
+criteria [kraɪ'tɪərɪə] 标准
+predicate [ˈpredɪkət] 宣布
+specs   [speks] 规格
+
+**更改后的oracle密码为boot**
+
+jdbc6.jar的下载地址 ：http://www.oracle.com/technetwork/cn/database/enterprise-edition/jdbc-111060-097826-zhs.html

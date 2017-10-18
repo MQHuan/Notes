@@ -112,3 +112,22 @@ declared 公然的  [dɪˈkleəd]
 specification  规范 [ˌspesɪfɪˈkeɪʃn]
 conjunction  连接  [kənˈdʒʌŋkʃn] 
 repository  仓库;贮藏室   [rɪˈpɒzətri] 
+
+#####REST
+其实就是API接口，把oracle中存储的数据提供出去，因为oracle有问题，所以没有成功运行，这个好像只要在已经配置好数据库的情况下引入REST的依赖就可以了，没什么要做的
+```
+   <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+
+```
+### Spring boot的事务
+propagation 宣传 传播，传输[ˌprɒpə'ɡeɪʃn]
+required  必须的 rɪ'kwaɪəd]
+support  支持 [səˈpɔ:t]
+mandatory  强制性的  [ˈmændətəri] 
+isolation  隔离  [ˌaɪsəˈleɪʃn] 
+committed  保证   [kəˈmɪtɪd]
+repeatable  可重复的 [rɪˈpi:təbl] 
+conditional  有条件的 [kənˈdɪʃənl]

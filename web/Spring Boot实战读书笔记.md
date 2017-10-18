@@ -82,3 +82,38 @@ Iterable 可迭代的
 relational 有关的[rɪˈleɪʃənl]
 persistence 持续  [pəˈsɪstəns]
 
+criteria [kraɪ'tɪərɪə] 标准
+predicate [ˈpredɪkət] 宣布
+specs   [speks] 规格
+
+**更改后的oracle密码为boot**
+
+jdbc6.jar的下载地址 ：http://www.oracle.com/technetwork/cn/database/enterprise-edition/jdbc-111060-097826-zhs.html
+
+将ojdbc6.jar装到本地
+```
+ mvn install:install-file -DgroupId=com.oracle "-DartifactId=ojdbc6" "-Dversion=11.2.0.2.0" "-Dpackaging=jar" "-Dfile=/home/mai/Desktop/Notes/web/ojdbc6.jar"
+```
+####
+P248的例子中，数据库用户名和密码配置如下可以跑起来
+```
+spring.datasource.username=system
+spring.datasource.password=oracle
+```
+新建的用户没办法跑起来，原因未知，
+写这部分的时候要注意，自定义的方法名，变量名一定不能错，
+测试的时候就因为下面的少了一个字母，跑不起来
+```
+// @NamedQuery(name = "Person.withNameAndAddressNameQuery",//这里的Name 少了个d
+
+@NamedQuery(name = "Person.withNameAndAddressNamedQuery",//这里必须和PersonRepository定义的withNameAndAddressNamedQuery方法一致
+        query = "select p from Person p where p.name=?1 and address=?2")
+```
+
+singular <语>单数的 [ˈsɪŋgjələ(r)] 
+attribute 属性  [əˈtrɪbju:t] 
+declared 公然的  [dɪˈkleəd]
+specification  规范 [ˌspesɪfɪˈkeɪʃn]
+conjunction  连接  [kənˈdʒʌŋkʃn] 
+repository  仓库;贮藏室   [rɪˈpɒzətri] 
+

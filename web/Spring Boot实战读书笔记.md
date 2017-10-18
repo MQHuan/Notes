@@ -78,3 +78,7 @@ P235
 Repository 仓库; [rɪˈpɒzətri] 
 Iterable 可迭代的
 
+### Spring Data JPA
+relational 有关的[rɪˈleɪʃənl]
+persistence 持续  [pəˈsɪstəns]
+

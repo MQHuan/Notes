@@ -1,0 +1,702 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0053)http://blog.csdn.net/netwalk/article/details/50949287 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">          
+            <link rel="canonical" href="http://blog.csdn.net/netwalk/article/details/50949287"> 
+
+   
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp"><link rel="alternate" media="handheld" href="http://blog.csdn.net/netwalk/article/details/50949287#">
+
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+       
+    <title>Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏
+        - CSDN博客</title>
+    
+    <meta name="description" content="Android一个应用（APK）多个入口的实现方式整理概要：某些情况下，需要为apk设置多个执行入口，也就是安装后在应用程序列表中出现多个图标，各个图标是APP不同模块的入口点，并且各个模块运行在不同的进程中。Android一个应用多个入口有以下三种实现方式;第一种：使用intent-filter第二种：使用process属性第三种：使用别名（activity-alias）">
+
+    <meta name="keywords" content="">
+
+   
+    <script type="text/javascript" async="" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/pr.js"></script><script type="text/javascript" async="" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/lpjnmjnpdmhhmyojn.js"></script><script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/hm.js"></script><script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+       
+       
+        <!--new top-->
+    
+      <!-- ad begin -->
+         
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/style.css">
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/netwalk/rss/list">
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/default.css">
+ 
+
+
+
+    <link href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet">
+     
+         <link rel="stylesheet" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/csdn_blog_detail.min.css">
+
+  
+
+
+    <!-- 请置于所有广告位代码之前 --> 
+            <script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/ds.js"></script>
+
+<script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/share.js"></script><link href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/bdsstyle.css" rel="stylesheet" type="text/css"><script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/wxLogin.js"></script><link rel="stylesheet" type="text/css" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/style(1).css"><link rel="stylesheet" type="text/css" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/style(2).css"><link type="text/css" rel="stylesheet" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/style(3).css"><script src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/logger.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><link rel="stylesheet" href="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/share_style0_16.css"></head>
+
+
+<body>
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/netwalk">netwalk的专栏</a></h2>
+            <h3>每一个人成长的过程都不一样，人生的酸甜苦辣应当自己尝一尝，尝试才是人生...</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/netwalk?viewmode=contents"><span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_mulu&#39;])">
+                    <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/netwalk?viewmode=list"><span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_zhaiyao&#39;])">
+                    <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/netwalk/rss/list"><span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_RSS&#39;])">
+                    <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "netwalk";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/netwalk";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "q171884957";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod="popu_3"> 
+
+
+</div>                        </div>
+
+                        
+
+
+
+  
+
+
+
+
+
+
+<script type="text/javascript" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+      var isBole = false; 
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=Android%e4%b8%80%e4%b8%aa%e5%ba%94%e7%94%a8(APK)%e5%a4%9a%e4%b8%aa%e5%85%a5%e5%8f%a3%e7%9a%84%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f%e6%95%b4%e7%90%86&u=http://blog.csdn.net/netwalk/article/details/50949287"
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+    <h1>
+        <span class="link_title"><a href="http://blog.csdn.net/netwalk/article/details/50949287">
+        Android一个应用(APK)多个入口的实现方式整理        
+           
+        </a>
+        </span>
+
+         
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_r">
+            <span class="link_postdate">2016-03-21 18:51</span>
+            <span class="link_view" title="阅读次数">2716人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="http://blog.csdn.net/netwalk/article/details/50949287#comments" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_pinglun&#39;])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle(&#39;Android%e4%b8%80%e4%b8%aa%e5%ba%94%e7%94%a8(APK)%e5%a4%9a%e4%b8%aa%e5%85%a5%e5%8f%a3%e7%9a%84%e5%ae%9e%e7%8e%b0%e6%96%b9%e5%bc%8f%e6%95%b4%e7%90%86&#39;,&#39;50949287&#39;);return false;" title="收藏" target="_blank">收藏</a></span>
+             <span class="link_report"> <a href="http://blog.csdn.net/netwalk/article/details/50949287#report" onclick="javascript:report(50949287,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label onclick="GetCategoryArticles(&#39;627263&#39;,&#39;netwalk&#39;,&#39;top&#39;,&#39;50949287&#39;);">
+                        <span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_fenlei&#39;]);">Android<em>（86）</em></span>
+                      <img class="arrow-down" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a href="http://blog.csdn.net/netwalk/article/category/627263" target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_627263">                            
+                            </ul>
+                        </div>
+                    </label>                    
+                    <label onclick="GetCategoryArticles(&#39;589480&#39;,&#39;netwalk&#39;,&#39;top&#39;,&#39;50949287&#39;);">
+                        <span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_fenlei&#39;]);">Eclipse工具<em>（9）</em></span>
+                      <img class="arrow-down" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a href="http://blog.csdn.net/netwalk/article/category/589480" target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_589480">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+        <div class="bog_copyright">         
+            <p class="copyright_p">版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div style="clear:both"></div><div style="border:solid 1px #ccc; background:#eee; float:left; min-width:200px;padding:4px 10px;"><p style="text-align:right;margin:0;"><span style="float:left;">目录<a href="http://blog.csdn.net/netwalk/article/details/50949287#" title="系统根据文章中H1到H6标签自动生成文章目录">(?)</a></span><a href="http://blog.csdn.net/netwalk/article/details/50949287#" onclick="javascript:return openct(this);" title="展开">[+]</a></p><ol style="display:none;margin-left:14px;padding-left:14px;line-height:160%;"><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t0">Android一个应用APK多个入口的实现方式整理</a></li><ol><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t1">概要</a></li><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t2">方法一直接在Activity节点中添加intent-filter</a></li><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t3">方法二使用Activity的属性process不同的Activity是运行在不同的进程中</a></li><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t4">方法三使用activity-alias&nbsp;</a></li><li><a href="http://blog.csdn.net/netwalk/article/details/50949287#t5">问题</a></li></ol></ol></div><div style="clear:both"></div><div id="article_content" class="article_content tracking-ad" data-mod="popu_307" data-dsm="post">
+
+<h1 style="text-align:center"><a name="t0" target="_blank"></a><strong><span style="color:rgb(51,51,51)">Android</span><span style="color:rgb(51,51,51)">一个应用（APK）多个入口的实现方式整理</span></strong></h1>
+<h2><a name="t1" target="_blank"></a><strong><span style="color:rgb(51,51,51)">概要：</span></strong></h2>
+<p align="left"><span style="color:rgb(51,51,51)">某些情况下，需要为</span><span style="color:rgb(51,51,51)">apk</span><span style="color:rgb(51,51,51)">设置多个执行入口，也就是安装后在应用程序列表中出现多个</span><span style="color:rgb(51,51,51)">图标，各个图标</span><span style="color:rgb(51,51,51)">是</span><span style="color:rgb(51,51,51)">APP</span><span style="color:rgb(51,51,51)">不同模块的入口点，并且各个模块运行在不同的进程中。</span></p>
+<p align="left"><span style="color:rgb(51,51,51)">Android</span><span style="color:rgb(51,51,51)">一个应用多个入口有以下三种实现方式</span><span style="color:rgb(51,51,51)">;</span></p>
+<p align="left"><strong><span style="color:rgb(51,51,51)">第一种：使用</span><span style="color:#393939; background:#FAF7EF">intent-filter</span></strong></p>
+<p align="left"><strong><span style="color:rgb(51,51,51)">第二种：使用</span><span style="color:rgb(51,51,51)">process</span><span style="color:rgb(51,51,51)">属性</span></strong></p>
+<p align="left"><strong><span style="color:rgb(51,51,51)">第三种：使用别名（</span><span style="color:#393939; background:#FAF7EF">activity-alias</span><span style="color:rgb(51,51,51)">）</span></strong></p>
+<p align="left"><strong><span style="color:rgb(51,51,51)"><br>
+</span></strong></p>
+<h2><a name="t2" target="_blank"></a><strong><span style="color:rgb(51,51,51)">1</span><span style="color:rgb(51,51,51)">、方法一：直接在</span><span style="color:rgb(51,51,51)">Activity</span><span style="color:rgb(51,51,51)">节点中添加</span><span style="color:#393939; background:#FAF7EF">intent-filter</span></strong></h2>
+<p align="left"><span style="color:#393939; background:#FAF7EF">给相应的</span><span style="color:#393939; background:#FAF7EF">Activity</span><span style="color:#393939; background:#FAF7EF">增加如下代码：</span></p>
+<div style="background:#D9D9D9">
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left"><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+</div>
+<p align="left"><strong><span style="color:rgb(51,51,51)">&nbsp;</span></strong></p>
+<h2><a name="t3" target="_blank"></a><strong><span style="color:#333333">2</span><span style="color:#333333">、方法二：使用</span><span style="color:#333333">Activity</span><span style="color:#333333">的属性</span><span style="color:#333333">process</span><span style="color:#333333">，不同的</span><span style="color:#333333">Activity</span><span style="color:#333333">是运行在不同的进程中</span></strong></h2>
+<p align="left">Activity有一个重要的属性process，这个属性是指定Activity运行时所在的进程。没有指定此属性的话，所有程序组件运行在应用程序默认的进程中，这个进程名跟应用程序的包名一致。在AndroidManifest.xml文件中所有组件元素的process属性能够为该组件设定一个新的默认值。但是任何组件都可以覆盖这个默认值，允许你将你的程序放在多进程中运行。如果这个属性被分配的名字以:开头，当这个activity运行时, 一个新的专属于这个程序的进程将会被创建。<span style="background:#FAFAF6">所以可以通过给每一个Activity</span>指定标签、图标和进程名来区分不同的入口，具体实现如下：<strong></strong></p>
+<div style="background:#D9D9D9">
+<p align="left"><span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">".MainActivity"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:label</span>=<em><span style="color:#2A00FF">"@string/app_name"</span></em></p>
+<p align="left">android:process=”:process.main”<span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; &nbsp;<span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left"><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity</span><span style="color:teal">&gt;</span></p>
+<p align="left"><span style="color:teal">&nbsp;</span></p>
+<p align="left"><span style="color:teal">&nbsp;</span></p>
+<p align="left"><span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">".MainActivityB"</span></em></p>
+<p align="left"><span style="color:#7F007F">android:label</span>=<em><span style="color:#2A00FF">"@string/app_nameB"</span></em></p>
+<p align="left">android:process=”:process.sub”</p>
+<p align="left">android:icon=”@drawable/icon1”</p>
+<p align="left">android:launchMode = “singleInstance”<span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left"><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity</span><span style="color:teal">&gt;</span></p>
+</div>
+<p><span style="color:#333333; background:#FAFAF6">需要注意的是，为</span><span style="color:#333333; background:#FAFAF6">Activity</span><span style="color:#333333; background:#FAFAF6">指定</span><span style="color:#333333; background:#FAFAF6">process</span><span style="color:#333333; background:#FAFAF6">属性后，还必须为其指定</span><span style="color:#333333; background:#FAFAF6">launchMode</span><span style="color:#333333; background:#FAFAF6">为</span><span style="color:#333333; background:#FAFAF6">singleInstance</span><span style="color:#333333; background:#FAFAF6">，这样才有效。</span></p>
+<h2><a name="t4" target="_blank"></a><strong><span style="color:#333333">3</span><span style="color:#333333">、方法三：使用</span><span style="color:#333333">activity-alias&nbsp;</span></strong></h2>
+<p><span style="color:#333333">activity-alias</span><span style="color:#333333">是</span><span style="color:#333333">android</span><span style="color:#333333">里为了重复使用</span><span style="color:#333333">Activity</span><span style="color:#333333">而设计的。</span></p>
+<p><span style="color:#333333">当在</span><span style="color:#333333">Activity</span><span style="color:#333333">的</span><span style="color:#333333">onCreate()</span><span style="color:#333333">方法里，执行</span><span style="color:#333333">getIntent().getComponent().getClassName();</span><span style="color:#333333">得到的可能不是这个</span><span style="color:#333333">Activity</span><span style="color:#333333">的名字，有可能是别名的名字</span></p>
+<p><span style="color:#333333">创建两个图标：</span></p>
+<div style="background:#D9D9D9">
+<p align="left">&nbsp;<span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">".MainActivityB"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; &nbsp;<span style="color:#7F007F">android:exported</span>=<em><span style="color:#2A00FF">"true"</span></em>&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:label</span>=<em><span style="color:#2A00FF">"@string/app_nameB"</span></em><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;<span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p align="left">&nbsp;<span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity-alias</span></p>
+<p align="left">&nbsp;&nbsp; &nbsp;<span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"ActivityB_copy"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:icon</span>=<em><span style="color:#2A00FF">"@drawable/icon1"</span></em>&nbsp;&nbsp;&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:screenOrientation</span>=<em><span style="color:#2A00FF">"landscape"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:targetActivity</span>=<em><span style="color:#2A00FF">".MainActivityB"</span></em><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity-alias</span><span style="color:teal">&gt;</span></p>
+</div>
+<p>创建一个图标：</p>
+<div style="background:#D9D9D9">
+<p align="left"><span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">".MainActivityB"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; &nbsp;<span style="color:#7F007F">android:exported</span>=<em><span style="color:#2A00FF">"true"</span></em>&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:label</span>=<em><span style="color:#2A00FF">"@string/app_nameB"</span></em><span style="color:teal">&gt;</span></p>
+<p align="left"><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p align="left">&nbsp;<span style="color:teal">&lt;</span><span style="color:#3F7F7F">activity-alias</span></p>
+<p align="left">&nbsp;&nbsp; &nbsp;<span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"ActivityB_copy"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:icon</span>=<em><span style="color:#2A00FF">"@drawable/icon1"</span></em>&nbsp;&nbsp;&nbsp;</p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:screenOrientation</span>=<em><span style="color:#2A00FF">"landscape"</span></em></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:#7F007F">android:targetActivity</span>=<em><span style="color:#2A00FF">".MainActivityB"</span></em><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p><span style="color:teal">&lt;/</span><span style="color:#3F7F7F">activity-alias</span><span style="color:teal">&gt;</span></p>
+</div>
+<p>&nbsp;</p>
+<p><span style="color:rgb(51,51,51)">其中</span><span style="color:rgb(51,51,51)">android:exported="true"</span><span style="color:rgb(51,51,51)">表示允许别的</span><span style="color:rgb(51,51,51)">app</span><span style="color:rgb(51,51,51)">调用该</span><span style="color:rgb(51,51,51)">activity</span><span style="color:rgb(51,51,51)">。</span></p>
+<p><span style="color:rgb(51,51,51)">&nbsp;</span></p>
+<p><span style="color:rgb(51,51,51)">这个应用会在桌面上建两个进入点，即建两个可以进入</span><em><span style="color:#2A00FF">MainActivityB</span></em><span style="color:rgb(51,51,51)">这个</span><span style="color:rgb(51,51,51)">Activity</span><span style="color:rgb(51,51,51)">的快捷图标。这时</span><span style="color:rgb(51,51,51)">getIntent().getComponent().getClassName()</span><span style="color:rgb(51,51,51)">得到的名字就不一样，一个是</span><span style="color:rgb(51,51,51)">com.test.<span style="color:rgb(42,0,255); background-color:rgb(217,217,217)"><em>MainActivityB</em></span></span><span style="color:rgb(51,51,51)">，一个是</span><span style="color:rgb(51,51,51)">com.test.<span style="color:rgb(42,0,255); background-color:rgb(217,217,217)"><em>ActivityB_copy</em></span></span><span style="color:rgb(51,51,51)">。</span></p>
+<p><span style="color:rgb(51,51,51)">&nbsp;</span></p>
+<p align="left"><span style="color:rgb(57,57,57)">总结：上面三种实现方式其实原理都是一样的，都是为第二个</span><span style="color:rgb(57,57,57)">Activity</span><span style="color:rgb(57,57,57)">添加</span></p>
+<div style="background:#D9D9D9">
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">action</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.action.MAIN"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;</span><span style="color:#3F7F7F">category</span><span style="color:#7F007F">android:name</span>=<em><span style="color:#2A00FF">"android.intent.category.LAUNCHER"</span></em><span style="color:teal">/&gt;</span></p>
+<p align="left">&nbsp;&nbsp;&nbsp; <span style="color:teal">&lt;/</span><span style="color:#3F7F7F">intent-filter</span><span style="color:teal">&gt;</span></p>
+</div>
+<p align="left"><span style="color:rgb(57,57,57)">"intent-filter</span><span style="color:rgb(57,57,57)">为程序增加入口图标。</span></p>
+<p align="left"><span style="color:rgb(57,57,57)">&nbsp;</span><span style="color:rgb(57,57,57)">&nbsp;</span></p>
+<h2 style="background:#FAFAF6"><a name="t5" target="_blank"></a><span style="color:rgb(51,51,51)">问题</span></h2>
+<p style="background:#FAFAF6"><span style="color:#333333">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#333333">因为多个图标共用一个包名，所以只要卸载一个程序，与这个APK</span>包名相同的程序也都会在桌面上消失；</p>
+<p style="background:#FAFAF6"><span style="color:#333333">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#333333">从其它应用跳转到该APK</span>时，需要通过ACTION区分跳转到具体哪一个模块（比如从资源管理器选择一个数据时，到底打开哪一个应用，需要通过action加以区分）；</p>
+<p style="background:#FAFAF6"><span style="color:#333333">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#333333">由于多个图标、splash</span>、标题等需要区分的资源都放在一个APK中，这增加了APK的大小。</p>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad bdshare-button-style0-16" style="float: right;" data-mod="popu_172" data-bd-bind="1508296774860">
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important" target="_blank"></a>
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间" style="background-position:0 -52px !important" target="_blank"></a>
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博" style="background-position:0 -104px !important" target="_blank"></a>
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博" style="background-position:0 -260px !important" target="_blank"></a>
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_renren" data-cmd="renren" title="分享到人人网" style="background-position:0 -208px !important" target="_blank"></a>
+<a href="http://blog.csdn.net/netwalk/article/details/50949287#" class="bds_weixin" data-cmd="weixin" title="分享到微信" style="background-position:0 -1612px !important" target="_blank"></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+<!--172.16.140.15-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/bds_s_v2.js"></script>
+
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+
+
+ 
+
+
+        <div id="digg" articleid="50949287">
+            <dl id="btnDigg" class="digg digg_enable" onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>3</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_enable" onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" target="_blank">&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" target="_blank">&nbsp;</a></div>
+    <script type="text/javascript">
+        function btndigga() {
+            $(".tracking-ad[data-mod='popu_222'] a").click();
+        }
+        function btnburya() {
+            $(".tracking-ad[data-mod='popu_223'] a").click();
+        }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_shangyipian&#39;]);location.href=&#39;http://blog.csdn.net/netwalk/article/details/49302903&#39;;">上一篇</span><a href="http://blog.csdn.net/netwalk/article/details/49302903" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_shangyipian&#39;])">SecureCRT配色方案</a></li>
+                <li class="next_article"><span onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_xiayipian&#39;]);location.href=&#39;http://blog.csdn.net/netwalk/article/details/52005546&#39;;">下一篇</span><a href="http://blog.csdn.net/netwalk/article/details/52005546" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_xiayipian&#39;])">Error处理： “非法字符： \65279”的解决办法</a></li>
+    </ul>
+
+                           
+            <!-- 广告位：PC端-博客内容页-banner1-960*90 --> 
+           
+         <!-- 广告位：PC端-博客详情页底部banner-960*90 -->
+            <script>
+                (function() {
+                    var s = "_" + Math.random().toString(36).slice(2);
+                    document.write('<div id="' + s + '"></div>');
+                    (window.slotbydup=window.slotbydup || []).push({
+                        id: '4770928',
+                        container: s,
+                        size: '960,90',
+                        display: 'inlay-fix'
+                    });
+                })();
+            </script><div id="_p0veknldnw"></div><script charset="utf-8" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/acmm(1)"></script><div id="_l5zg5g0esee"><iframe width="960" frameborder="0" height="90" scrolling="no" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/s.html"></iframe></div><script type="text/javascript" src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/kfunnhoouimhnlou.js"></script>
+    </div>
+
+<div id="suggest">
+
+</div>
+         <script language="javascript" type="text/javascript">     
+             $(function(){
+                 $.get("/netwalk/svc/GetSuggestContent/50949287",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+
+            
+                                    
+            
+                                    
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list"><br>&nbsp;&nbsp;暂无评论<br><br><div class="clear"></div></div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form"><a name="commentbox"></a><a name="reply"></a><a name="quote"></a><form action="http://blog.csdn.net/netwalk/comment/submit?id=50949287" method="post" onsubmit="return subform(this);"><div class="commentform"><div class="panel_head">发表评论</div><ul><li class="left">用 户 名：</li><li class="right">q171884957</li></ul><ul><li class="left">评论内容：</li><li class="right" style="position:relative;"><div id="ubbtools"><a href="http://blog.csdn.net/netwalk/article/details/50949287#insertcode" code="code"><img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/code.gif" border="0" alt="插入代码" title="插入代码"></a></div><div id="lang_list" style="position: absolute; top: 28px; left: 0px; display: none;"><a class="long_name" href="http://blog.csdn.net/netwalk/article/details/50949287#html">HTML/XML</a><a class="long_name" href="http://blog.csdn.net/netwalk/article/details/50949287#objc">objective-c</a><a class="zhong_name" href="http://blog.csdn.net/netwalk/article/details/50949287#delphi">Delphi</a><a class="zhong_name" href="http://blog.csdn.net/netwalk/article/details/50949287#ruby">Ruby</a><a href="http://blog.csdn.net/netwalk/article/details/50949287#php">PHP</a><a class="duan_name" href="http://blog.csdn.net/netwalk/article/details/50949287#csharp">C#</a><a style=" border-right: none;" class="duan_name" href="http://blog.csdn.net/netwalk/article/details/50949287#cpp">C++</a><a style=" border-bottom:none;" class="long_name" href="http://blog.csdn.net/netwalk/article/details/50949287#javascript">JavaScript</a><a style=" border-bottom:none;" class="long_name" href="http://blog.csdn.net/netwalk/article/details/50949287#vb">Visual Basic</a><a style=" border-bottom:none;" class="zhong_name" href="http://blog.csdn.net/netwalk/article/details/50949287#python">Python</a><a style=" border-bottom:none;" class="zhong_name" href="http://blog.csdn.net/netwalk/article/details/50949287#java">Java</a><a style="border-bottom:none;" class="duan_name" href="http://blog.csdn.net/netwalk/article/details/50949287#css">CSS</a><a style="border-bottom:none;" class="duan_name" href="http://blog.csdn.net/netwalk/article/details/50949287#sql">SQL</a><a style="border:none;" class="duan_name" href="http://blog.csdn.net/netwalk/article/details/50949287#plain">其它</a></div><textarea class="comment_content" name="comment_content" id="comment_content" style="width: 400px; height: 200px;"></textarea></li></ul><ul><input type="hidden" id="comment_replyId" name="comment_replyId"><input type="hidden" id="comment_userId" name="comment_userId" value="521203"><input type="hidden" id="commentId" name="commentId" value=""><input type="submit" class="comment_btn" value="提交">&nbsp;&nbsp;<span id="tip_comment" style="color: Red; display: none;"></span></ul></div></form></div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '50949287';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top" style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop" style="display: none;" title="返回顶部" onclick="_gaq.push([&#39;_trackEvent&#39;,&#39;function&#39;, &#39;onclick&#39;, &#39;blog_articles_huidaodingbu&#39;])">         
+         <img src="./Android一个应用(APK)多个入口的实现方式整理 - netwalk的专栏 - CSDN博客_files/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='Android一个应用(APK)多个入口的实现方式整理';
+
+</script>
+
+
+
+
+
+
+
+
+
+       
+</body></html>

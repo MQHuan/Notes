@@ -78,6 +78,10 @@ P235
 Repository 仓库; [rɪˈpɒzətri] 
 Iterable 可迭代的
 
+### Spring Data JPA
+relational 有关的[rɪˈleɪʃənl]
+persistence 持续  [pəˈsɪstəns]
+
 criteria [kraɪ'tɪərɪə] 标准
 predicate [ˈpredɪkət] 宣布
 specs   [speks] 规格
@@ -113,6 +117,7 @@ specification  规范 [ˌspesɪfɪˈkeɪʃn]
 conjunction  连接  [kənˈdʒʌŋkʃn] 
 repository  仓库;贮藏室   [rɪˈpɒzətri] 
 
+
 #####REST
 其实就是API接口，把oracle中存储的数据提供出去，因为oracle有问题，所以没有成功运行，这个好像只要在已经配置好数据库的情况下引入REST的依赖就可以了，没什么要做的
 ```
@@ -131,3 +136,4 @@ isolation  隔离  [ˌaɪsəˈleɪʃn]
 committed  保证   [kəˈmɪtɪd]
 repeatable  可重复的 [rɪˈpi:təbl] 
 conditional  有条件的 [kənˈdɪʃənl]
+

@@ -1,0 +1,33 @@
+主要注意  
+android:process=":process.main"
+和
+     android:process=":process.sub"
+     android:launchMode = "singleInstance"
+
+
+e.g:
+<activity android:name="com.imco.mvp.scan.ScanActivity"
+            android:process=":process.main"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:icon="@mipmap/lightning"
+            android:name="com.imco.mvp.fast.FastTestActivity"
+            android:keepScreenOn="true"
+            android:process=":process.sub"
+            android:launchMode = "singleInstance"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+更多方案：http://blog.csdn.net/netwalk/article/details/50949287

@@ -137,3 +137,10 @@ committed  保证   [kəˈmɪtɪd]
 repeatable  可重复的 [rɪˈpi:təbl] 
 conditional  有条件的 [kənˈdɪʃənl]
 
+### Spring Boot 企业级开发
+Authentication   身份验证  [ɔ:ˌθentɪ'keɪʃn] 
+Authorization 授权  [ˌɔ:θəraɪˈzeɪʃn] 
+Delegate 代表 [ˈdelɪgət]
+initializer  [ɪ'nɪʃəlaɪzə]
+token  象征;记号;   [ˈtəʊkən] 
+validity  有效性   [vəˈlɪdəti] 

@@ -1,0 +1,8 @@
+插入：
+http://localhost:8080/put?name=cc&age=22&address=%E6%88%90%E9%83%BD
+
+查询：
+http://localhost:8080/able?id=41
+
+删除缓存：
+http://localhost:8080/evit?id=1

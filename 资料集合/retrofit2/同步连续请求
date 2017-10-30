@@ -1,0 +1,51 @@
+下面就是我们的重点了，我们要使用Rxjava为我们提供的十分丰富的操作符来完成这个连续的请求。声明一下我是在点击事件中完成的请求
+
+public void getWeather(){
+     mLocationService.getLoation("31.407452,119.490523", "json", "6eea93095ae93db2c77be9ac910ff311")
+     .flatMap(new Func1<LocationEntity, Observable<WeatherEntity>>() {
+           @Override
+           public Observable<WeatherEntity> call(LocationEntity locationEntity) {
+               return mWeatherService.getWeather(locationEntity.getResult().getAddressComponent().getCity());
+           }
+     }).map(new Func1<WeatherEntity, String>() {
+           @Override
+           public String call(WeatherEntity weatherEntity) {
+                String text = weatherEntity.getResults().get(0).getLocation().getName() + ":" + weatherEntity.getResults().get(0).getNow().getText()+ " 温度:" + weatherEntity.getResults().get(0).getNow().getTemperature() + "";
+                return text;
+          }
+     }).subscribeOn(Schedulers.io())
+       .observeOn(AndroidSchedulers.mainThread())
+       .subscribe(new Subscriber<SpannableString>() {
+           @Override
+           public void onCompleted() {
+                 Log.d(TAG, "onCompleted: " + "完成数据获取");
+           }
+
+           @Override
+           public void onError(Throwable e) {
+                 tv.setText(e.toString());
+            }
+
+
+            @Override
+            public void onNext(String s) {
+                  tv.setText(s);
+                  Log.d(TAG,"当前天气为："+s)
+             }   
+      });
+}
+首先我们通过系统的Api拿到我们目前所在位置的经纬度信息，这里我就直接随意写了一个，接下来我们就要开始传入接口所需要的参数进行请求了，第一步我们先要通过经纬度获得我们所在的城市位置，这里我使用了Map和FlatMap这两个操作符。
+
+Map
+transform the items emitted by an Observable by applying a function to each item
+
+FlatMap
+transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable
+从文档中我们可以看出，FlatMap可以将Observable对象发射到一个Observables对象中，然后排列为一个Observable对象，通过该操作符，我们可以将得到的位置信息传入天气服务的Api中，将或得到的天气实体发射到Observables中，之后我们再通过map操作符将天气的Observable对象通过处理，得到我们所需要的具体信息，即文中的text，之后我们订阅这个事件，在onNext方法中取得我们所需的信息。
+
+这样的链式结构相对于文中开头的回调地狱来说，虽说学习成本较高，但是一旦学会使用Rxjava，好处确实是非常多的，最后谢谢大家的阅读。
+
+作者：冰红儿茶
+链接：http://www.jianshu.com/p/83b8f0c308a2
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

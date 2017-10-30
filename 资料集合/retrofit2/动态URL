@@ -1,0 +1,12 @@
+实际上，它只需要你加入一个单独的注解 @Url 在你的定义的结点，一图胜千言
+
+public interface UserService {  
+    @GET
+    public Call<ResponseBody> profilePicture(@Url String url);
+}
+可以看到，在 GET 上不需要结点url，我们可以直接在方法中去添加这个url
+
+作者：sheepm
+链接：http://www.jianshu.com/p/4268e434150a
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

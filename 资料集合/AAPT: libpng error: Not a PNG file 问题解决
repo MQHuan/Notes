@@ -1,0 +1,32 @@
+AAPT: libpng error: Not a PNG file 问题解决
+导入项目到Android Studio的时候，Gradle Build失败了，报的错是
+
+
+FAILURE: Build failed with an exception.
+
+Execution failed for task ':app:mergeDebugResources'.
+> Some file crunching failed, see logs for details
+
+AAPT: libpng error: Not a PNG file
+
+AAPT err(Facade for 197782496) : No Delegate set : lost message:libpng error: Not a PNG file
+
+说文件不是PNG文件，可是没有说是哪一张图。
+
+解决方法
+
+在build.gradle里加入
+
+android {
+
+    ......
+
+aaptOptions {         cruncherEnabled = false     }
+
+ 
+
+}
+
+ 
+
+可以正常运行了！

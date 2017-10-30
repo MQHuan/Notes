@@ -1,0 +1,87 @@
+定义：JSR-303 是JAVA EE 6 中的一项子规范，叫做Bean Validation,现在一共有两个规范:BeanValidation1.0(即JSR303)和BeanValidation1.1(即JSR349),主要用于对数据进行校验,确保输入进来的数据从语 义上来讲是正确的。
+特点：1.JSR 303 用于对Java Bean 中的字段的值进行验证,使得验证逻辑从业务代码中脱离出来。
+          2.是一个运行时的数据验证框架，在验证之后验证的错误信息会被马上返回。
+应用场景:一般用于表单提交页面(如用户名必填、只能由数字字母组成等等)
+
+使用：                                      
+-----------------------------------------------------------------------------------------------------------------
+1.@NotNull/@Null        
+  验证字段： 引用数据类型      
+  注解说明：注解元素必须是非空或空
+2.@Digits
+  验证字段：byte、short、int、long及各自的包装类型以及BigDecimal、BigInteger、String
+  注解说明：验证数字构成是否合法
+  属性说明：integer:指定整数部分数字位数，fraction:指定小数部分数字位数
+3.@Future/Past
+  验证字段：java.util.Date,java.util.Calendar
+  注解说明：验证是否在当前系统时间之后/之前
+4.@Max/@Min
+  验证字段：byte、short、int、long及对应的包装类型以及BigDecimal、BigInteger
+  注解说明：验证值是否小于等于最大指定整数值或大于等于最小指定整数值
+5.@Pattern
+  验证字段：String
+  注解说明：验证字符串是否匹配指定的正则表达式
+  属性说明：regexp:匹配的正则表达式，flags:指定Pattern.Flag的数值，表示正则表达式的选项
+6.@Size
+  验证字段：String、Collection、Map和数组
+  注解说明：验证元素大小是否在指定范围内
+  属性说明：max:最大长度，min:最小长度，message:提示信息,默认：{constraint.size}
+7.@DecimalMax/@DecimalMin
+  验证字段：byte、short、int、long及对应的包装类型以及BigDecimal、BigInteger、String
+  属性说明：验证值是否小于等于最大指定小数值或大于等于最小指定小数值
+8.@Valid
+  属性说明：验证值是否需要递归调用
+---------------------------------------------------------------------------------------------------
+Hibernate Validator 附加的 constraint
+9.@Email  被注释的元素必须是电子邮箱地址
+10.@Length          被注释的字符串的大小必须在指定的范围内
+11.@NotEmpty  被注释的字符串的必须非空
+12.@Range          被注释的元素必须在合适的范围内
+-----------------------------------------------------------------------------------------------------------------
+hibernate validate：
+相关jar包:1.下载jar包4.0.2版本的jar文件
+   2.解压下载的压缩包hibernate-validator和validation-api jar包
+                注意:这里面既包含了javax下的约束也包含了org.hibernate 下的约束，在之前的版本中，javax下的约束hibernate是不认的。
+一、约束种类：
+A：字段级的约束：
+class Person(){
+  @NotNull
+  private Integer id
+}
+当约束被定义在字段上的时候, 这个字段的值是通过字段访问策略来获取并验证的. 也就是说Bean Validation的实现者会直接访问这个实例变量而不会调用属性的访问器(getter) 即使这个方法存在。静态字段或者属性是不会被校验的
+
+B：属性级的约束
+class Person(){
+  @NotNull
+  private String getUsername(){
+  }
+}
+必须遵守JavaBeans规范，且定义在getter上，不能定义在setter上
+
+C：类级的约束
+D：约束的继承
+  public class Cart extends Animal{
+   @NotNull
+       private String name
+  }
+  不仅会验证Cart中的约束，同时会验证Animal中的约束
+
+E：对象图
+   @Valid
+      private Person person; 一个类中有一个对象属性
+
+二、约束的校验  
+  接口:Validator  校验的主要接口
+  怎么获取实例对象?
+   ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+   Validator validator =  factory.getValidator();
+  调用实例对象中的方法返回Set对象,用来校验整个实体对象或者对象的属性
+  
+         validate()：对一个给定的实体对象中定义的所有约束进行校验  Cart cart = new Cart(null, false, 5);  
+                         Set> constraintViolations = validator.validate(cart);
+        validateProperty()：通过validateProperty()可以对一个给定实体对象的单个属性进行校验，需要符合JavaBean命名规范.Cart cart = new Cart(null, false, 5);
+                        Set> constraintViolations = validator.validateProperty(car, "manufacturer");
+        validateValue() ：通过validateValue() 方法,你能够校验如果把一个特定的值赋给一个类的某一个属性的话,是否会违反此类中定义的约束条件. Cart cart = new Cart(null, false, 5);
+                        Set> constraintViolations = validator.validateValue(Car.class, "manufacturer", null);
+  约束提示信息
+   可以直接通过message=”提示信息”；也可以通过message提供模板，具体的错误信息在ValidationMessages.properties（src目录下）中定义

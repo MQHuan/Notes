@@ -1,0 +1,28 @@
+
+    private Cipher mCipher = null;// 创建密码器
+ public boolean aesInit(byte[] key) {
+        try {
+            mCipher = Cipher.getInstance("AES");
+            SecretKeySpec aes = new SecretKeySpec(key, "AES");
+            mCipher.init(Cipher.ENCRYPT_MODE, aes);
+            return true;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public byte[] aesEncrypt(byte[] input) {
+        try {
+            return mCipher.doFinal(input);
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return new byte[]{};
+    }
+

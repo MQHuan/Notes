@@ -144,6 +144,7 @@ Delegate 代表 [ˈdelɪgət]
 initializer  [ɪ'nɪʃəlaɪzə]
 token  象征;记号;   [ˈtəʊkən] 
 validity  有效性   [vəˈlɪdəti] 
+
 #### 批处理 Spring Batch
 incrementer 加法器 ['ɪnkrəməntər] 
 validator 验证器 ['vɑlɪˌdeɪtə]
@@ -151,4 +152,9 @@ validator 验证器 ['vɑlɪˌdeɪtə]
 ### 系统集成 Spring Integration
 integration  [ˌɪntɪˈgreɪʃn]n.	整合; 一体化; 结合
 
+
+
+hibernate  冬眠 [ˈhaɪbəneɪt]
+validator 验证器 ['vɑlɪˌdeɪtə]
+constraint  约束  [kənˈstreɪnt] 
 

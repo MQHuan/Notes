@@ -1,0 +1,9 @@
+在调试ijkplayer和vitamio时都出现过这个问题，解决方法是在moudle项目的build.gradle加上
+
+android {
+	defaultConfig {
+	   ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }	
+	}
+}

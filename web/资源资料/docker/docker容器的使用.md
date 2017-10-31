@@ -58,3 +58,8 @@ sudo docker rm ID或者名字
 ```
 docker attach ID或者名字
 ```
+或者
+```
+
+docker exec -it ID或者名字 /bin/bash
+```

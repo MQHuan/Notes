@@ -1,0 +1,9 @@
+你说apache的ActiveMQ啊，名字都说的很明白了MQ，也就是message queue，也就是消息队列，也就是处理消息的，也就是处理JMS的。
+jms是发送消息的java中发送消息的中间件，包括5中数据流：
+  · StreamMessage -- Java原始值的数据流
+  · MapMessage--一套名称-值对
+  · TextMessage--一个字符串对象
+  · ObjectMessage--一个序列化的 Java对象
+  · BytesMessage--一个未解释字节的数据流
+数据流就是传递数据的了，够白话了吧。
+用途吧，一般人用不到，一般是大型企业内部或与别的企业之间传递消息数据的手段，比如公司boss发送消息（TextMessage）,内容为"周末不放假，都来给我加班",每个员工可以通过ActiveMQ到端口61616接收消息，这是一种数据传输方式，不是么？因为用的少，所以很安全。

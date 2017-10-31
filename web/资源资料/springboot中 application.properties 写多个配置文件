@@ -1,0 +1,10 @@
+Springboot的多配置文件是指：项目中存在多个配置文件，可以在不同的运行环境指定使用不同的配置文件。
+
+指定方式如下：
+例如，一个项目里面有三个properties文件
+application.properties
+application-dev.properties
+application-test.properties
+
+现在启用application-test.properties的配置，需要在application.properties中添加如下语句
+spring.profiles.active=dev

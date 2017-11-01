@@ -1,11 +1,11 @@
 ####进入redis安装目录的bin目录下
-![](进入redis安装目录.png) 
+![](image/进入redis安装目录.png) 
 #开启redis的前端启动模式
-![](开启redis前端模式.png)
+![](image/开启redis前端模式.png)
 
 ###打开redis客户端 存储一个数据
 新开一个控制台窗口
-![](新开一个控制台窗口.png)
+![](image/新开一个控制台窗口.png)
 
 ####注意：启动redis, 客户端连接6370端口
 ```

@@ -7,7 +7,7 @@ make
 ```
 make PREFIX=/usr/local/redis install
 ```
-![](install.png) 
+![](image/install.png) 
 
 /usr/local/redis是用户定义的安装目录
 
@@ -15,3 +15,5 @@ make PREFIX=/usr/local/redis install
 ```
 ~/Downloads/redis-4.0.2$ sudo cp redis.conf /usr/local/redis/
 ```
+
+[Redis 安装 启动 连接 配置 重启](http://www.cnblogs.com/GoQC/p/5764201.html) 

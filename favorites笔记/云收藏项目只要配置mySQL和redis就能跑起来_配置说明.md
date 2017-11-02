@@ -84,6 +84,11 @@ docker pull  redis
 这个不是必须的，但redis默认是没有密码的，如果要配置密码需要提供一个redis.conf
 创建一个 redis/data 目录，如果需要指定配置文件，那么请在redis目录下放一个redis.conf配置文件。配置文件去redis安装包中找一个
 * 3.启动redis容器
+简单版本：
+```
+docker run -d -p 6379:6379 redis
+```
+复杂版本，好像跑不起来？
 ```
 docker run -p 6379:6379 --name myredis -v $PWD/redis.conf:/etc/redis/redis.conf -v $PWD/data:/data -d redis:3.2 redis-server /etc/redis/redis.conf --appendonly yes
 ```

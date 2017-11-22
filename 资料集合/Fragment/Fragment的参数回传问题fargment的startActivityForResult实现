@@ -1,0 +1,42 @@
+一 第一个Fragment如下：
+
+public class FirstFragment extends Fragment  {  
+    public static final String TAG = "SecondFragment";
+
+```
+    public static final int REQUEST_CODE = 0x10;
+
+
+```
+
+   Bundle bundle = new Bundle();
+   SecondFragment secondFragment = new SecondFragment();
+   secondFragment.setTargetFragment(SecondFragment.this, REQUEST_CODE);
+
+// 下面是一个自己封装的fragment跳转的方法
+   addFragment(secondFragment, SecondFragment.TAG, true, bundle);
+
+```
+ @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+// 处理回调
+}
+
+```
+}
+
+二 第二个Fragment如下：
+public class SecondFragment extends Fragment  {  
+    public final static String IS_FRIEND = "is_friend";
+
+
+```
+    Intent intent = new Intent();
+    intent.putExtra(IS_FRIEND, false);
+    getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
+
+```
+}
+
+原文地址：http://blog.csdn.net/lmj623565791/article/details/42628537/

@@ -1,0 +1,42 @@
+https://github.com/xuningjack/ServiceKeep
+
+
+http://www.jianshu.com/p/1da4541b70ad
+4、JobSheduler
+JobSheduler是作为进程死后复活的一种手段，native进程方式最大缺点是费电， Native 进程费电的原因是感知主进程是否存活有两种实现方式，在 Native 进程中通过死循环或定时器，轮训判断主进程是否存活，当主进程不存活时进行拉活。其次5.0以上系统不支持。 但是JobSheduler可以替代在Android5.0以上native进程方式，这种方式即使用户强制关闭，也能被拉起来，亲测可行。
+
+  JobSheduler@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+public class MyJobService extends JobService {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        startJobSheduler();
+    }
+
+    public void startJobSheduler() {
+        try {
+            JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), MyJobService.class.getName()));
+            builder.setPeriodic(5);
+            builder.setPersisted(true);
+            JobScheduler jobScheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            jobScheduler.schedule(builder.build());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onStartJob(JobParameters jobParameters) {
+        return false;
+    }
+
+    @Override
+    public boolean onStopJob(JobParameters jobParameters) {
+        return false;
+    }
+}
+
+作者：LooperJing
+链接：http://www.jianshu.com/p/1da4541b70ad
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

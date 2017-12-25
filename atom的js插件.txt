@@ -1,3 +1,6 @@
 atom-ternjs
 linter
 linter-eslint
+go definition
+js-hyperclick
+atom-ide-ui

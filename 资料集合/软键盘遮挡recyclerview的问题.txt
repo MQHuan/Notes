@@ -1,0 +1,17 @@
+        mViewBinding.fragmentChatRvChat.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom) {
+                    mViewBinding.fragmentChatRvChat.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mViewBinding.fragmentChatRvChat.scrollToPosition(mAdapter.getItemCount() - 1);
+                        }
+                    }, 100);
+                }
+            }
+        });
+
+
+
+http://www.jianshu.com/p/be61759632d9

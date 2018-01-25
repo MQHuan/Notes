@@ -1,0 +1,16 @@
+
+不要挣扎了，SQLite的alter不支持添加多列，一列一列来吧：
+
+String ADD_COLUMNS_SOURCE = "ALTER TABLE mytable ADD source INTEGER DEFAULT 0";
+
+String ADD_COLUMNS_TIME = "ALTER TABLE mytable ADD time TEXT";
+
+String ADD_COLUMNS_DURA = "ALTER TABLE mytable ADD dura TEXT";
+
+ 
+
+this.execQuery(ADD_COLUMNS_SOURCE);
+
+this.execQuery(ADD_COLUMNS_TIME);
+
+this.execQuery(ADD_COLUMNS_DURA);

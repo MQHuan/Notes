@@ -1,0 +1,2 @@
+在AndroidManifest 配置了ajustSize后，recyclerView还是会被挡住，请在键盘弹出的时候用
+getRecyclerView().smoothScrollToPosition(mList.size()-1);

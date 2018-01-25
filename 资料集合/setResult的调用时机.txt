@@ -1,0 +1,17 @@
+
+https://www.cnblogs.com/shaweng/p/3875825.html
+
+setResult()的调用时机
+　　今天遇到这样一个问题，我在Activity-A中用startActivityForResult()方法启动了Activity-B，并且在B中通过setResult()方法给A返回值，由于某些原因不能在setResult()之后立刻调用finish()函数，只能通过用户按Back键自己退出到A。按理说从B退出回到Aactivity-A过程中，A中的 onActivityResult() 应该被调用， 可是通过log发现，整个操作过程中 onActivityResult() 始终没有被调用。 前后研究了半天才发现 是 setResult() 的调用时机不对造成的，因为在我是在B的onStop() 函数中调用setResult()函数的，这个时候的seResult是没有任何意义的，因为已经错过了A onActivityResult() 的调用时机。
+
+　　因为在 B 退回 A过程中，执行过程是
+
+　　B---onPause
+　　A---onActivityResult
+　　A---onRestart
+　　A---onStart
+　　A---onResume
+　　B---onStop
+　　B---onDestroy
+
+　　从上面过程可以看出，首先是B处于Pause 状态，然后等待A执行 onRestart——> onStart ——〉onResume，然后才是B 的onSstop——>onSdestroy，而A的 onActivityResult() 需要在B的onPause之后，A的onRestart之前这中间调用，所以B中的setResult()函数应该放在B的onPause之前调用。

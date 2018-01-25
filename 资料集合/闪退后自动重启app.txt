@@ -1,0 +1,51 @@
+http://blog.csdn.net/chy555chy/article/details/51560196
+
+Android UncaughtExceptionHandler 记录异常并重启程序
+原创 2016年06月02日 00:14:18 2127
+异常捕获主要是在全局的Application中来处理的，Android提供了一个CrashHandler用来进行错误处理。
+
+intent添加 “Intent.FLAG_ACTIVITY_NEW_TASK” 标记的原因是——Content的startActivity方法，需要开启一个新的task。如果使用 Activity的startActivity方法，不会有任何限制，因为Activity继承自Context，重载了startActivity方法。所以如果是context启动Activity就需要添加这个标记。
+
+[java] view plain copy
+package com.chy.global;  
+  
+import java.lang.Thread.UncaughtExceptionHandler;  
+  
+import android.app.Application;  
+import android.content.Intent;  
+  
+import com.chy.activity.MainActivity;  
+import com.chy.utils.LogUtils;  
+  
+public class CrashApplication extends Application {  
+    //异常处理器  
+    private CrashHandler crashHandler = null;  
+      
+    @Override  
+    public void onCreate() {  
+        super.onCreate();  
+        crashHandler = new CrashHandler(this);  
+        Thread.setDefaultUncaughtExceptionHandler(crashHandler);  
+    }  
+  
+    class CrashHandler implements UncaughtExceptionHandler {  
+  
+        private Application app = null;  
+          
+        public CrashHandler(Application app) {  
+            this.app = app;  
+        }  
+          
+        @Override  
+        public void uncaughtException(Thread thread, Throwable ex) {  
+            ex.printStackTrace();  
+            LogUtils.log(ex);  
+            // 此处示例发生异常后，重新启动应用  
+            Intent intent = new Intent(app, MainActivity.class);  
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+            app.startActivity(intent);  
+            android.os.Process.killProcess(android.os.Process.myPid());  
+        }  
+    }  
+      
+}  

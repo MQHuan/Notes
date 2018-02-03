@@ -1,0 +1,19 @@
+
+http://blog.csdn.net/ming656025633/article/details/51830953
+
+
+其中有的头像是彩色的，即正常在线的好友。有的是不在线的，则需要置灰，那么如何置灰呢？
+
+看了很多文章都是对BitMap的置灰，可是在实际开发中我们在加载图片的时候都是通过第三方的框架拿到图片将，此时图片已经显示在控件上了，此时我们已经没法对图片进行处理，那么问题来了。。
+
+没法对图片进行处理，那就，那就对显示图片的控件进行处理:通过以下方法将已经显示图片的Imageview设置透明度。
+
+ColorMatrix matrix = new ColorMatrix(); 
+matrix.setSaturation(0); 
+ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix); 
+控件.setColorFilter(filter);
+
+以上代码是将正常显示的控件置灰，在实际开发中置灰之后的控件一直是灰色的，要通过条件进行判断是否置灰，如不需要置灰应该将控件还原为正常显示的状态
+
+matrix.setSaturation(1); 
+将这个值设置为1即可。

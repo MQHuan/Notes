@@ -1,0 +1,12 @@
+如果是多层嵌套的fragment跳转要参考https://www.cnblogs.com/tangZH/archive/2016/10/04/5930491.html
+一旦用了这样的解决方案就要用getActivity().startActivityForResult(intent, 1); 如果没有getActivity
+requestCode就会错误
+
+Intent intent=new Intent(getActivity(), Test.class);
+startActivityForResult(intent, 1);
+
+onActivityResult本来返回应该是1的,但是却返回了9001,仔细一看是从Fragment跳转到Activity,要使用
+
+Intent intent=new Intent(getActivity(), Test.class);
+getActivity().startActivityForResult(intent, 1);
+

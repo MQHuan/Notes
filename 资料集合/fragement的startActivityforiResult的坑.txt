@@ -1,0 +1,18 @@
+https://www.cnblogs.com/tangZH/archive/2016/10/04/5930491.html
+
+
+大家或许有遇到这个神坑，在Fragment中使用startActivityForResult能够成功，可是在Fragment中的onActivityResult却无法被调用。一不注意就让人一夜愁白了头。苦经探索（当然包括亲爱的百度和谷歌），终于总结出了一些规律。
+
+在Fragment中使用startActivityForResult之后，onActivityResult的调用是从activity中开始的（即会先调用activity中的onActivityResult）。
+
+一.只嵌套了一层Fragment（比如activity中使用了viewPager，viewPager中添加了几个Fragment）
+
+在这种情况下要注意几个点：
+
+1.在Fragment中使用startActivityForResult的时候，不要使用getActivity().startActivityForResult,而是应该直接使startActivityForResult()。
+
+2.如果activity中重写了onActivityResult，那么activity中的onActivityResult一定要加上super.onActivityResult(requestCode, resultCode, data)。
+
+如果违反了上面两种情况，那么onActivityResult只能够传递到activity中的，无法传递到Fragment中的。
+
+没有违反上面两种情况的前提下，可以直接在Fragment中使用startActivityForResult和onActivityResult，和在activity中使用的一样。

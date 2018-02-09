@@ -1,14 +1,15 @@
 字符串切割函数：
-substr(X,Y,Z)
+substr(X,Y,Z) X是字符串（可以是对应的列名）， Y是起始位置索引(这里的第一个索引是1，不是0，如果写了0，会在截取长度减一)，Z是截取长度
 substr(X,Y)
 
 The substr(X,Y,Z) function returns a substring of input string X that begins with the Y-th character and which is Z characters long. If Z is omitted then substr(X,Y) returns all characters through the end of the string X beginning with the Y-th. The left-most character of X is number 1. If Y is negative then the first character of the substring is found by counting from the right rather than the left. If Z is negative then the abs(Z) characters preceding the Y-th character are returned. If X is a string then characters indices refer to actual UTF-8 characters. If X is a BLOB then the indices refer to bytes.
 
 来源： http://www.sqlite.org/lang_corefunc.html#substr
-用法： substr(Time,0,11)  就是把Time这个字段的字符串，截取11位的长度
+用法： substr(Time,1,10)  就是从Time这个字段的字符串第一位开始，截取10位的长度
 
-查询Time这个字段前11位里面大于100000的数据
-Select * form table_name where substr(Time,0,11) > 100000
+
+查询Time这个字段前10位里面大于100000的数据
+Select * form table_name where substr(Time,1,10) > 100000
 
 查询Time这个字段，每个只返回前11位
 Select substr(Time,0,11) form table_name 

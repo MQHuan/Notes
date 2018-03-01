@@ -1,0 +1,33 @@
+框架里面通过添加注解@Controller 和@RequestMapping来获得get和post请求
+
+如果需要给html传值，如下：
+```
+    @RequestMapping("/list")
+    public String list(Model model) {
+        List<User> users=userService.getUserList();
+        model.addAttribute("users", users);
+        return "user/list";
+    }
+```
+
+如果需要获得html传过来的值，如下
+```
+  <form class="form-signin" rel="stylesheet" action="/login">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="autofocus" name="userName"/>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="autofocus" name="password"/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+
+```
+上面的name="userName" 和 name="password"分别对应User里面的userName 和 password字段，应该是自动转化的
+
+```	
+    @RequestMapping("/login")
+    public String login(User user) {
+        if (user.getUserName() != null) {
+            System.out.print("userName: " + user.getUserName());
+            return "redirect:/hello";
+        }
+        return "login/index";
+    }
+```

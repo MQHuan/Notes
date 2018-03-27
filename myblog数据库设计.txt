@@ -1,0 +1,8 @@
+articleTable
+ id articleContent articleTitle createTime updateTime author tag
+
+tagTable
+ id tagName author
+
+userTable
+ id name password

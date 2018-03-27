@@ -1,0 +1,26 @@
+.postBody h1
+{
+    margin: 15px 0;
+    padding: 0;
+    font-size: 135%;
+}
+.postBody h2
+{
+    margin: 15px 0;
+    padding: 0;
+    font-size: 125%;
+}
+.postBody h3
+{
+    margin: 15px 0;
+    padding: 0;
+    font-size: 110%;
+}
+.code
+{
+    background: #fbedbb;
+    border: #c0c0c0 1px solid;
+    padding: 5px;
+    margin: 0 40px 0 20px;
+    font-family: Verdana,Helvetica, "微软雅黑" , Arial, "宋体" , sans-serif;
+}

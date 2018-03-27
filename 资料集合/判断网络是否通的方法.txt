@@ -1,0 +1,24 @@
+如果只是想检测网络是否连接，则直接使用 isNetworkConnected()
+如果想检测网络连通性（是否能访问网络），则 isNetworkConnected() 与 isNetworkOnline() 结合使用
+
+private boolean isNetworkConnected() {
+    ConnectivityManager connMgr = (ConnectivityManager)
+            getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+    return (networkInfo != null && networkInfo.isConnected());
+}
+
+public boolean isNetworkOnline() {
+    Runtime runtime = Runtime.getRuntime();
+    try {
+        Process ipProcess = runtime.exec("ping -c 1 114.114.114.114");
+        int exitValue = ipProcess.waitFor();
+        return (exitValue == 0);
+    } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+注：114.114.114.114 可以改成你信任的网站（例如: www.baidu.com）
+
+地址： https://segmentfault.com/q/1010000003890964

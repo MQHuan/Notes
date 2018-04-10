@@ -1,2 +1,73 @@
+﻿第一坑
 /************************************
 用Handle.postDelayed进行延时操作时，一定要对里面的变量进行非空判断，如果里面用了Activity之类的变量，一定要弱引用，否则很容易内存泄露(因为handle会拉着Activity,在它应该释放时，不让它释放)
+/************************************end
+
+
+
+
+
+
+第二坑
+/************************************http://www.cnblogs.com/jingmo0319/p/5730963.html
+在子线程中new Handler报错--Can't create handler inside thread that has not called Looper.prepare()
+在子线程中new一个Handler为什么会报以下错误？
+
+java.lang.RuntimeException: 
+
+Can't create handler inside thread that has not called Looper.prepare() 
+
+这是因为Handler对象与其调用者在同一线程中，如果在Handler中设置了延时操作，则调用线程也会堵塞。每个Handler对象都会绑定一个Looper对象，每个Looper对象对应一个消息队列（MessageQueue）。如果在创建Handler时不指定与其绑定的Looper对象，系统默认会将当前线程的Looper绑定到该Handler上。
+在主线程中，可以直接使用new Handler()创建Handler对象，其将自动与主线程的Looper对象绑定；在非主线程中直接这样创建Handler则会报错，因为Android系统默认情况下非主线程中没有开启Looper，而Handler对象必须绑定Looper对象。这种情况下，则有两种方法可以解决此问题：
+
+方法1：需先在该线程中手动开启Looper（Looper.prepare()-->Looper.loop()），然后将其绑定到Handler对象上；
+
+final Runnable runnable = new Runnable() {
+　　@Override
+　　public void run() {
+　　　　//执行耗时操作
+　　　　try {
+
+　　　　　　Log.e("bm", "runnable线程： " + Thread.currentThread().getId()+ " name:" + Thread.currentThread().getName());
+
+　　　　　　Thread.sleep(2000);
+　　　　　　Log.e("bm", "执行完耗时操作了~");
+　　　　} catch (InterruptedException e) {
+　　　　e.printStackTrace();
+　　　　}
+　　}
+};
+new Thread() {
+　　public void run() {
+　　　　Looper.prepare();
+　　　　new Handler().post(runnable);//在子线程中直接去new 一个handler
+　　　　Looper.loop();　　　　//这种情况下，Runnable对象是运行在子线程中的，可以进行联网操作，但是不能更新UI
+　　}
+}.start();
+
+ 
+
+方法2：通过Looper.getMainLooper()，获得主线程的Looper，将其绑定到此Handler对象上。
+
+final Runnable runnable = new Runnable() {
+　　@Override
+　　public void run() {
+　　　　//执行耗时操作
+　　　　try {
+
+　　　　　　Log.e("bm", "runnable线程： " + Thread.currentThread().getId()+ " name:" + Thread.currentThread().getName());
+　　　　　　Thread.sleep(2000);
+　　　　　　Log.e("bm", "执行完耗时操作了~");
+　　　　} catch (InterruptedException e) {
+　　　　e.printStackTrace();
+　　　　}
+　　}
+};
+new Thread() {
+　　public void run() {
+　　　　new Handler(Looper.getMainLooper()).post(runnable);//在子线程中直接去new 一个handler
+
+　　　　//这种情况下，Runnable对象是运行在主线程中的，不可以进行联网操作，但是可以更新UI
+　　}
+}.start();
+/************************************end

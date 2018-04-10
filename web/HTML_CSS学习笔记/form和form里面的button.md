@@ -1,6 +1,6 @@
 http://www.w3school.com.cn/tags/att_button_type.asp
 
-ÈçÏÂ button µÄsubmit¶ÔÓ¦×ÅformµÄaction,µã»÷ÁËtypeÎªsubmitµÄ°´Å¥»á°ÑÊı¾İÌá½»µ½actionÀïÃæÈ¥
+å¦‚ä¸‹ button çš„submitå¯¹åº”ç€formçš„action,ç‚¹å‡»äº†typeä¸ºsubmitçš„æŒ‰é’®ä¼šæŠŠæ•°æ®æäº¤åˆ°actioné‡Œé¢å»
 
 ```
 <html>
@@ -18,7 +18,8 @@ http://www.w3school.com.cn/tags/att_button_type.asp
 
 ```
 
-Èç¹ûÏëÒª×Ô¼º´¦Àí£¬ÈçÏÂ
+
+å¦‚æœæƒ³è¦è‡ªå·±å¤„ç†ï¼Œå¦‚ä¸‹
 ```
 <html>
 <body>
@@ -26,7 +27,7 @@ http://www.w3school.com.cn/tags/att_button_type.asp
 <form action="/example/html/form_action.asp" method="get"  onsubmit="return false">
   First name: <input type="text" name="fname" /><br />
   Last name: <input type="text" name="lname" /><br />
-  <button type="submit" v-on:click="login">Submit</button> // ¶ÔÓ¦VueÀïÃæµÄlogin·½·¨
+  <button type="submit" v-on:click="login">Submit</button> // å¯¹åº”Vueé‡Œé¢çš„loginæ–¹æ³•
   <button type="reset" value="Reset">Reset</button>
 </form>
 

@@ -1,0 +1,10 @@
+ReentrantLock 可重入锁
+
+一个排他锁，同一时间只允许一个线程访问
+
+
+升级版 
+ReentrantReadWriteLock
+允许多个读线程同时访问，但不允许写线程和读线程、写线程和写线程同时访问。
+
+这两个比synchronize好用，用法记不住就上网搜

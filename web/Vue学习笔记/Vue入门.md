@@ -91,7 +91,7 @@ new Vue({
 <p>{{a}}</p>
 ```
 
-#### methods 字段
+#### methods 普通方法
 ```
 new Vue({
   data: {
@@ -106,7 +106,8 @@ new Vue({
   })
 ```
 
-#### watch 字段
+
+#### watch 侦听属性
 数据变化监听
 ```
 new Vue({
@@ -126,6 +127,33 @@ new Vue({
   }
   })
 ```
+
+#### comptued 计算属性
+![官网地址](https://cn.vuejs.org/v2/guide/computed.html#%E5%9F%BA%E7%A1%80%E4%BE%8B%E5%AD%90)
+```
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // 计算属性的 getter
+    reversedMessage: function () {
+      // `this` 指向 vm 实例
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+```
+##### 计算属性和普通方法的区别：
+计算属性是基于它们的依赖进行缓存的。计算属性只有在它的相关依赖发生改变时才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。
+
+
 
 #### 模板指令 - html和vue对象的粘合剂
 ###### 数据渲染的三个指令：

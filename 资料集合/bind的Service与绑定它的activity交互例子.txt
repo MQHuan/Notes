@@ -1,0 +1,6 @@
+https://blog.csdn.net/shaw1994/article/details/43854553
+
+简略步骤：
+step 1: 在Service里面创建一个继承Binder的内部类(里面可以添加想给activity调用的的方法)，并在onBind方法中返回它的实例
+
+step 2: 在要绑定step 1中Service的Activity中创建一个ServiceConnection的实例，并在调用bindService的时候作为第二个参数传入，在ServiceConnection的实例中就可以拿到step 1的继承Binder的内部类

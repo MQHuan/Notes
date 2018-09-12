@@ -1,0 +1,13 @@
+1，如果要直接识别跳转，在layout文件里面添加autoLink="all"
+
+
+2,代码里面添加就
+                textView.setAutoLinkMask(Linkify.ALL);// 可跳转链接
+                textView.setTextIsSelectable(true);// 可选择复制
+                textView.setClickable(true);
+                textView.setLinkTextColor(Color.parseColor("#6FE6FF"));
+
+3,解析a标签就如下，注意setMovementMethod(LinkMovementMethod.getInstance()) 与setAutoLinkMask(Linkify.ALL)不可以同时生效
+textView.setText(Html.fromHtml(message);
+textView.setMovementMethod(LinkMovementMethod.getInstance());
+

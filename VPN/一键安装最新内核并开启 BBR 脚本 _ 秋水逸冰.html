@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://teddysun.com/489.html -->
+<html class="gr__teddysun_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>一键安装最新内核并开启 BBR 脚本  |  秋水逸冰</title>
+<script src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/osd.js.download"></script><script async="" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/analytics.js.download"></script><script src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/ca-pub-6679514888902709.js.download"></script><script>
+window._deel = {
+    name: '秋水逸冰',
+    url: 'https://teddysun.com/wp-content/themes/d8',
+    rss: '',
+    ajaxpager: '',
+    maillist: '',
+    maillistCode: '',
+    commenton: 1,
+    roll: [0,0],
+    tougaoContentmin: 200,
+    tougaoContentmax: 5000,
+    appkey: {
+    	tqq: '801494063',
+    	tsina: '1106777879',
+    	t163: '',
+    	tsohu: ''
+    }
+}
+</script>
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":false,"svgExt":".svg","source":{"concatemoji":"https:\/\/teddysun.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="style-css" href="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/jquery-ui.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://teddysun.com/wp-json/">
+<link rel="prev" title="Shadowsocks 一键安装脚本（四合一）" href="https://teddysun.com/486.html">
+<link rel="next" title="使用 GPG 加密 Github Commits" href="https://teddysun.com/496.html">
+<link rel="canonical" href="https://teddysun.com/489.html">
+<link rel="shortlink" href="https://teddysun.com/?p=489">
+<link rel="alternate" type="application/json+oembed" href="https://teddysun.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fteddysun.com%2F489.html">
+<link rel="alternate" type="text/xml+oembed" href="https://teddysun.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fteddysun.com%2F489.html&amp;format=xml">
+<meta name="keywords" content="bbr, Google, kernel, Lin, Linux, 技术">
+<meta name="description" content="最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，从 4.9 开始，Linux 内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。 根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。 于是我根据目前三大发行版的最新内核，开发了一键安装最新内核并开启 TCP BBR 脚本。  	本脚本适">
+<script async="" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/f(4).txt"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6679514888902709",
+          enable_page_level_ads: true
+     });
+</script><style>.article-content{font-size: 14px;}@media (max-width:640px){.article-content{font-size:16px}}</style><!--[if lt IE 9]><script src="https://teddysun.com/wp-content/themes/d8/js/html5.js"></script><![endif]-->
+<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=teddysun.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=teddysun.com"></script><link rel="preload" href="https://pagead2.googlesyndication.com/pagead/js/r20190204/r20190131/show_ads_impl.js" as="script"></head>
+<body class="post-template-default single single-post postid-489 single-format-standard" data-gr-c-s-loaded="true">
+<div class="navbar-wrap">
+<div class="navbar">
+		<div class="logo"><a href="https://teddysun.com/" title="秋水逸冰">秋水逸冰</a></div>
+		<ul class="nav">
+			<li id="menu-item-132" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-132"><a href="https://teddysun.com/">首页</a></li>
+<li id="menu-item-95" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-95"><a href="https://teddysun.com/wen">文学</a></li>
+<li id="menu-item-109" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-109"><a href="https://teddysun.com/pic">相册</a></li>
+<li id="menu-item-94" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><a href="https://teddysun.com/about">关于</a></li>
+		</ul>
+		<div class="menu pull-right">
+			<form method="get" class="dropdown search-form" action="https://teddysun.com/">
+				<input class="search-input" name="s" type="text" placeholder="输入关键字搜索" x-webkit-speech=""><input class="btn btn-success search-submit" type="submit" value="搜索">
+				<ul class="dropdown-menu search-suggest"></ul>
+			</form>
+			<div class="btn-group pull-left">
+							</div>
+		</div>
+</div>
+</div>
+<header class="header">
+	<div class="speedbar">
+			</div>
+</header>
+<section class="container">
+	<div class="content-wrap">
+	<div class="content">
+		<div class="breadcrumbs">你的位置：<a href="https://teddysun.com/">秋水逸冰</a> <small>&gt;</small> <a href="https://teddysun.com/category/tech">技术</a> <small>&gt;</small> <span class="muted">一键安装最新内核并开启 BBR 脚本</span></div>
+				<header class="article-header">
+			<h1 class="article-title"><a href="https://teddysun.com/489.html">一键安装最新内核并开启 BBR 脚本</a></h1>
+			<div class="meta">
+				<span class="muted"><a href="https://teddysun.com/category/tech"><i class="icon-list-alt icon12"></i> 技术</a></span>				<span class="muted"><i class="icon-user icon12"></i> <a href="https://plus.google.com/103396485017390034127" rel="author">秋水逸冰</a></span>
+				<time class="muted"><i class="ico icon-time icon12"></i> 发布于: 2016-12-24</time>
+				<time class="muted"><i class="ico icon-time icon12"></i> 更新于: 2018-12-14</time>
+				<span class="muted"><i class="ico icon-eye-open icon12"></i> 1045466 次围观</span>
+				<span class="muted"><i class="icon-comment icon12"></i> <a href="https://teddysun.com/489.html#comments">647 次吐槽</a></span>							</div>
+		</header>
+
+		<div class="banner banner-post"><script async="" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/f(4).txt"></script>
+<!-- recommed -->
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6679514888902709" data-ad-slot="2147980674" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><iframe width="950" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:950px;height:90px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(18).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>		
+		<article class="article-content">
+			<p><a href="https://teddysun.com/489.html"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/bbr.jpg" title="一键安装最新内核并开启 BBR 脚本" class="aligncenter" style="width:auto;height:auto;"></a></p>
+<p><span style="font-size:14px;">最近，Google 开源了其 TCP BBR 拥塞控制算法，并提交到了 Linux 内核，从 4.9 开始，Linux 内核已经用上了该算法。根据以往的传统，Google 总是先在自家的生产环境上线运用后，才会将代码开源，此次也不例外。</span><br>
+<span style="font-size:14px;">根据实地测试，在部署了最新版内核并开启了 TCP BBR 的机器上，网速甚至可以提升好几个数量级。</span><br>
+<span style="font-size:14px;">于是我根据目前三大发行版的最新内核，开发了一键安装最新内核并开启 TCP BBR 脚本。</span></p>
+<h2>
+	<span style="color:red;">本脚本适用环境</span><br>
+</h2>
+<p><span style="font-size:14px;">系统支持：CentOS 6+，Debian 7+，Ubuntu 12+</span><br>
+<span style="font-size:14px;">虚拟技术：OpenVZ 以外的，比如 KVM、Xen、VMware 等</span><br>
+<span style="font-size:14px;">内存要求：≥128M</span><br>
+<span style="font-size:14px;color:red;">日期　　：2018 年 12 月 14 日</span></p>
+<p>
+	<span id="more-489"></span>
+</p>
+<h3>
+	<span style="color:red;">关于本脚本</span><br>
+</h3>
+<div class="google-auto-placed" style="text-align: center; width: 100%; height: auto; clear: none;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-6679514888902709" data-adsbygoogle-status="done" style="display: block; margin: 10px auto 15px; background-color: transparent; height: 113px; width: 910px;"><ins id="aswift_3_expand" style="display: inline-table; border: none; height: 113px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 910px; background-color: transparent;"><ins id="aswift_3_anchor" style="display: block; border: none; height: 113px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 910px; background-color: transparent; overflow: hidden;"><iframe width="910" height="113" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 910px; height: 113px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(19).html"></iframe></ins></ins></ins></div><p><span style="font-size:14px;">1、本脚本已在 <a href="https://qiu.sh/vultr" target="_blank"><strong>Vultr</strong></a> 上的 VPS 全部测试通过。</span><br>
+<span style="font-size:14px;">2、当脚本检测到 VPS 的虚拟方式为 OpenVZ 时，会提示错误，并自动退出安装。</span><br>
+<span style="font-size:14px;">3、脚本运行完重启发现开不了机的，打开 VPS 后台控制面板的 VNC, 开机卡在 grub 引导, 手动选择内核即可。</span><br>
+<span style="font-size:14px;">4、由于是使用最新版系统内核，最好请勿在生产环境安装，以免产生不可预测之后果。</span></p>
+<h3>
+	<span style="color:red;">使用方法</span><br>
+</h3>
+<p><span style="font-size:14px;">使用root用户登录，运行以下命令：</span></p>
+<pre class="prettyprint lang-bsh">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</pre>
+<p>
+<span style="font-size:14px;">安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。</span><br>
+<span style="font-size:14px;">重启完成后，进入 VPS，验证一下是否成功安装最新内核并开启 TCP BBR，输入以下命令：</span></p>
+<pre class="prettyprint lang-bsh">uname -r</pre>
+<p><span style="font-size:14px;">查看内核版本，显示为最新版就表示 OK 了</span></p>
+<pre class="prettyprint lang-bsh">sysctl net.ipv4.tcp_available_congestion_control</pre>
+<div class="google-auto-placed" style="text-align: center; width: 100%; height: auto; clear: none;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-6679514888902709" data-adsbygoogle-status="done" style="display: block; margin: 10px auto 20px; background-color: transparent; height: 90px;"><ins id="aswift_4_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:910px;background-color:transparent;"><ins id="aswift_4_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:910px;background-color:transparent;"><iframe width="910" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;border:0px;width:910px;height:90px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(20).html"></iframe></ins></ins></ins></div><p><span style="font-size:14px;">返回值一般为：</span><br>
+<span style="font-size:14px;">net.ipv4.tcp_available_congestion_control = bbr cubic reno</span><br>
+<span style="font-size:14px;">或者为：</span><br>
+<span style="font-size:14px;">net.ipv4.tcp_available_congestion_control = reno cubic bbr</span></p>
+<pre class="prettyprint lang-bsh">sysctl net.ipv4.tcp_congestion_control</pre>
+<p><span style="font-size:14px;">返回值一般为：</span><br>
+<span style="font-size:14px;">net.ipv4.tcp_congestion_control = bbr</span></p>
+<pre class="prettyprint lang-bsh">sysctl net.core.default_qdisc</pre>
+<p><span style="font-size:14px;">返回值一般为：</span><br>
+<span style="font-size:14px;">net.core.default_qdisc = fq</span></p>
+<pre class="prettyprint lang-bsh">lsmod | grep bbr</pre>
+<p><span style="font-size:14px;">返回值有 tcp_bbr 模块即说明 bbr 已启动。<span style="color:red;">注意：并不是所有的 VPS 都会有此返回值，若没有也属正常。</span></span></p>
+<h3>
+	<span style="color:red;">CentOS 下最新版内核 headers 安装方法</span><br>
+</h3>
+<p><span style="font-size:14px;">本来打算在脚本里直接安装 kernel-ml-headers，但会出现和原版内核 headers 冲突的问题。因此在这里添加一个脚本执行完后，手动安装最新版内核 headers 之教程。</span><br>
+<span style="font-size:14px;">执行以下命令</span></p>
+<pre class="prettyprint lang-bsh">yum --enablerepo=elrepo-kernel -y install kernel-ml-headers</pre>
+<p><span style="font-size:14px;">根据 CentOS 版本的不同，此时一般会出现类似于以下的错误提示：</span></p>
+<pre class="prettyprint lang-bsh">Error: kernel-ml-headers conflicts with kernel-headers-2.6.32-696.20.1.el6.x86_64
+Error: kernel-ml-headers conflicts with kernel-headers-3.10.0-693.17.1.el7.x86_64</pre>
+<p><span style="font-size:14px;">因此需要先卸载原版内核 headers ，然后再安装最新版内核 headers。执行命令：</span></p>
+<pre class="prettyprint lang-bsh">yum remove kernel-headers</pre>
+<p><span style="font-size:14px;">确认无误后，输入 y，回车开始卸载。注意，有时候这么操作还会卸载一些对内核 headers 依赖的安装包，比如 gcc、gcc-c++ 之类的。不过不要紧，我们可以在安装完最新版内核 headers 后再重新安装回来即可。</span><br>
+<span style="font-size:14px;">卸载完成后，再次执行上面给出的安装命令。</span></p>
+<pre class="prettyprint lang-bsh">yum --enablerepo=elrepo-kernel -y install kernel-ml-headers</pre>
+<p><span style="font-size:14px;">成功安装后，再把那些之前对内核 headers 依赖的安装包，比如 gcc、gcc-c++ 之类的再安装一次即可。</span></p>
+<p><span style="font-size:14px;">为什么要安装最新版内核 headers 呢？</span><br>
+<span style="font-size:14px;">这是因为 shadowsocks-libev 版有个 tcp fast open 功能，如果不安装的话，这个功能是无法开启的。</span></p>
+<h3>
+	<span style="color:red;">内核升级方法</span><br>
+</h3>
+<p><span style="font-size:14px;"><strong>如果是 CentOS 系统，执行如下命令即可升级内核：</strong></span></p>
+<pre class="prettyprint lang-bsh">yum -y install kernel-ml kernel-ml-devel</pre>
+<p><span style="font-size:14px;">如果你还手动安装了新版内核 headers ，那么还需要以下命令来升级 headers ：</span></p>
+<pre class="prettyprint lang-bsh">yum -y install kernel-ml-headers</pre>
+<p><span style="font-size:14px;">CentOS 6 的话，执行命令：</span></p>
+<pre class="prettyprint lang-bsh">sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf</pre>
+<p><span style="font-size:14px;">CentOS 7 的话，执行命令：</span></p>
+<pre class="prettyprint lang-bsh">grub2-set-default 0</pre>
+<p>
+<span style="font-size:14px;"><strong>如果是 Debian/Ubuntu 系统，则需要手动下载最新版内核来安装升级。</strong></span><br>
+<span style="font-size:14px;">去<a href="http://kernel.ubuntu.com/~kernel-ppa/mainline/" target="_blank">这里</a>下载最新版的内核 deb 安装包。</span><br>
+<span style="font-size:14px;">如果系统是 64 位，则下载 amd64 的 linux-image 中含有 generic 这个 deb 包；</span><br>
+<span style="font-size:14px;">如果系统是 32 位，则下载 i386 的 linux-image 中含有 generic 这个 deb 包；</span><br>
+<span style="font-size:14px;">安装的命令如下（以最新版的 64 位 4.12.4 举例而已，请替换为下载好的 deb 包）：</span></p>
+<pre class="prettyprint lang-bsh">dpkg -i linux-image-4.12.4-041204-generic_4.12.4-041204.201707271932_amd64.deb</pre>
+<p><span style="font-size:14px;">安装完成后，再执行命令：</span></p>
+<pre class="prettyprint lang-bsh">/usr/sbin/update-grub</pre>
+<p><span style="font-size:14px;">最后，重启 VPS 即可。</span></p>
+<h3>
+	<span style="color:red;">特别说明</span><br>
+</h3>
+<p><span style="font-size:14px;">如果你使用的是 Google Cloud Platform （GCP）更换内核，有时会遇到重启后，整个磁盘变为只读的情况。只需执行以下命令即可恢复：</span></p>
+<pre class="prettyprint lang-bsh">mount -o remount rw /</pre>
+<p></p>
+<h3>
+	<span style="color:red;">更新日志：</span><br>
+</h3>
+<p><span style="font-size:14px;color:red;">2018 年 12 月 14 日：</span><br>
+<span style="font-size:14px;">1、修正：在 CentOS 6 系统下 kernel-ml 及 kernel-ml-devel 无法安装的问题。原因是 elrepo 官方最近取消了 kernel-ml 及 kernel-ml-devel 的 rpm 资源。脚本已改为下载 rpm 来安装的方式。版本 4.18.20 将会是 CentOS 6 下最新的内核，目测以后也不会再有升级了，请尽快迁移到 CentOS 7 系统。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 06 月 09 日：</span><br>
+<span style="font-size:14px;">1、修正：在 CentOS 系统下将 elrepo-kernel 默认启用，以解决在安装新内核后执行 yum update 再次安装旧内核的问题。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 05 月 12 日：</span><br>
+<span style="font-size:14px;">1、修正：在 Ubuntu 或 Debian 系统中某些情况下获取不到某个编译失败的安装包导致退出安装的问题。并且现在可以手动选择安装从 4.14 到最新版本的内核。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 02 月 24 日：</span><br>
+<span style="font-size:14px;">1、新增：手动安装最新版内核 headers 的教程。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 10 月 28 日：</span><br>
+<span style="font-size:14px;">1、更新：自动判断内核版本。如果内核版本已经大于或等于 4.9 且没有开启 BBR，脚本会直接设置好 BBR；</span><br>
+<span style="font-size:14px;">2、新增：脚本执行时会在当前目录下创建日志（install_bbr.log），方便查看及排错。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 02 月 22 日：</span><br>
+<span style="font-size:14px;">1、更新：自动获取最新版 4.10 内核。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 01 月 20 日：</span><br>
+<span style="font-size:14px;">1、新增：自动获取并下载安装最新版内核的功能。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 01 月 13 日：</span><br>
+<span style="font-size:14px;">1、更新：内核到 4.9.3。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 01 月 09 日：</span><br>
+<span style="font-size:14px;">1、更新：内核到 4.9.1。</span></p>
+<h3>
+	<span style="color:blue;">参考链接：</span><br>
+</h3>
+<p><span style="font-size:14px;"><a href="https://github.com/google/bbr/blob/master/Documentation/bbr-quick-start.md" target="_blank">https://github.com/google/bbr/blob/master/Documentation/bbr-quick-start.md</a></span><br>
+<span style="font-size:14px;"><a href="http://elrepo.org/tiki/tiki-index.php" target="_blank">http://elrepo.org/tiki/tiki-index.php</a></span><br>
+<span style="font-size:14px;"><a href="http://kernel.ubuntu.com/~kernel-ppa/mainline/" target="_blank">http://kernel.ubuntu.com/~kernel-ppa/mainline/</a></span></p>
+<p>转载请注明：<a href="https://teddysun.com/">秋水逸冰</a> » <a href="https://teddysun.com/489.html">一键安装最新内核并开启 BBR 脚本</a></p>		</article>
+
+		
+		<footer class="article-footer">
+			<div class="article-tags">继续浏览有关 <a href="https://teddysun.com/tag/bbr" rel="tag">bbr</a><a href="https://teddysun.com/tag/google" rel="tag">Google</a><a href="https://teddysun.com/tag/kernel" rel="tag">kernel</a><a href="https://teddysun.com/tag/lin" rel="tag">Lin</a><a href="https://teddysun.com/tag/linux" rel="tag">Linux</a> 的文章</div>		</footer>
+
+		<nav class="article-nav">
+			<span class="article-nav-prev">上一篇 <a href="https://teddysun.com/486.html" rel="prev">Shadowsocks 一键安装脚本（四合一）</a></span>
+			<span class="article-nav-next"><a href="https://teddysun.com/496.html" rel="next">使用 GPG 加密 Github Commits</a> 下一篇</span>
+		</nav>
+
+		<div class="relates">
+			<h3>与本文相关的文章</h3>
+			<ul>
+<li><a href="https://teddysun.com/451.html">一键脚本那些事儿</a></li><li><a href="https://teddysun.com/415.html">Windows和Linux下Whois命令的安装和使用</a></li><li><a href="https://teddysun.com/406.html">Windows系统下安装dig命令</a></li><li><a href="https://teddysun.com/390.html">少壮不努力，一生在内地</a></li><li><a href="https://teddysun.com/389.html">Google日语输入法离线安装包</a></li><li><a href="https://teddysun.com/377.html">Linux多线程下载工具Axel</a></li><li><a href="https://teddysun.com/351.html">Linux系统中常用操作命令</a></li><li><a href="https://teddysun.com/325.html">Linux Shell逻辑运算符和表达式详解</a></li><li><a href="https://teddysun.com/321.html">DigitalOcean：如何在CentOS中添加Swap</a></li><li><a href="https://teddysun.com/294.html">如何创建和解压tar.xz文件</a></li><li><a href="https://teddysun.com/291.html">Google Code迁移到Github的过程</a></li><li><a href="https://teddysun.com/284.html">利用iptables屏蔽俄罗斯和土耳其的IP</a></li></ul>		</div>
+	
+
+		<div class="banner banner-related"><script async="" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/f(4).txt"></script>
+<!-- recommed -->
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6679514888902709" data-ad-slot="2147980674" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><iframe width="950" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:950px;height:90px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(21).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		<div id="respond" class="no_webshot">
+		<form action="https://teddysun.com/wp-comments-post.php" method="post" id="commentform">
+		
+		<div class="comt-title">
+			<div class="comt-avatar pull-left">
+				<img alt="" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource" srcset="https://secure.gravatar.com/avatar/?s=56&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-28 photo avatar-default" height="28" width="28">			</div>
+			<div class="comt-author pull-left">
+			发表评论			</div>
+			<a id="cancel-comment-reply-link" class="pull-right" href="javascript:;">取消评论</a>
+		</div>
+		
+											<div class="comt-comterinfo" id="comment-author-info">
+						<ul>
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="help-inline">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="help-inline">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="help-inline">网址</span></li>
+						</ul>
+					</div>
+									
+		<div class="comt">
+			<div class="comt-box">
+				<div class="QapTcha"><div class="bgSlider"><div class="Slider ui-draggable" style="position: relative;"></div></div><div class="Icons"></div><div class=" TxtStatus dropError">发表评论前，请滑动滚动条解锁</div><div class="clr"></div><input name="PzRw7_ZztnT5-dkAD6nvkYwX9PAy5d@k" value="Bgb9r#" type="hidden"></div><textarea placeholder="写点什么..." class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById(&#39;submit&#39;).click();return false};"></textarea>
+				<div class="comt-ctrl">
+					<button class="btn btn-primary pull-right" type="submit" name="submit" id="submit" tabindex="5"><i class="icon-ok-circle icon-white icon12"></i> 提交评论</button>
+					<div class="comt-tips pull-right"><input type="hidden" name="comment_post_ID" value="489" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</div>
+					<span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="icon-thumbs-up icon12"></i>表情</span>
+					<span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
+				</div>
+			</div>
+		</div>
+
+		
+	</form>
+	</div>
+<div id="postcomments">
+	<h3 id="comments">
+		已有评论<b> (647)</b>
+	</h3>
+	<ol class="commentlist">
+		<li class="comment even thread-even depth-1" id="comment-15458"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/23933d5c6c96fa4d01d70fbf761cdf49?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/23933d5c6c96fa4d01d70fbf761cdf49?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15458">系统：Linux Ubuntu 14.04 Server X86 64 Min Gen2 V1
+安装	内核4.14.96、	4.19.18、	4.20.5 都是类似的错误。内核没有更新，请问是什么出现问题了吗
+dpkg-deb: error: archive 'linux-modules-4.20.5-amd64.deb' has premature member 'control.tar.xz' before 'control.tar.gz', giving up
+dpkg: error processing archive linux-modules-4.20.5-amd64.deb (--install):
+ subprocess dpkg-deb --control returned error exit status 2
+Errors were encountered while processing:
+ linux-modules-4.20.5-amd64.deb
+dpkg-deb: error: archive 'linux-image-4.20.5-amd64.deb' has premature member 'control.tar.xz' before 'control.tar.gz', giving up
+dpkg: error processing archive linux-image-4.20.5-amd64.deb (--install):
+ subprocess dpkg-deb --control returned error exit status 2
+Errors were encountered while processing:
+ linux-image-4.20.5-amd64.deb
+Generating grub configuration file ...
+Warning: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported.
+Found linux image: /boot/vmlinuz-3.13.0-24-generic
+Found initrd image: /boot/initrd.img-3.13.0-24-generic
+done<div class="c-meta"><span class="c-author">Lin</span>2周前 (2019-01-28)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15458#respond" onclick="return addComment.moveForm( &quot;div-comment-15458&quot;, &quot;15458&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给Lin">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15455"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/2bf71f08a69302595bc77581610464eb?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/2bf71f08a69302595bc77581610464eb?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15455">请问下，vultr的debian9系统是不是已经自带了bbr了呢？还需要使用这个脚本吗？<div class="c-meta"><span class="c-author">404 NotFound</span>2周前 (2019-01-28)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15455#respond" onclick="return addComment.moveForm( &quot;div-comment-15455&quot;, &quot;15455&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给404 NotFound">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-15418"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/43908c60803a7db32d9bee671ba7b089?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/43908c60803a7db32d9bee671ba7b089?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15418">GCP的CentOS和Ubuntu更换内核后SSH全部无法连接了<div class="c-meta"><span class="c-author">Admin</span>1个月前 (2019-01-03)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15418#respond" onclick="return addComment.moveForm( &quot;div-comment-15418&quot;, &quot;15418&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给Admin">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15411"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/16f13cd1190a8d0e716072a23d1d7081?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/16f13cd1190a8d0e716072a23d1d7081?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15411">CentOS 7.6.1810 安装BBR并重启后未生效(无报错)
+Retrieving https://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+Preparing...                          ########################################
+	package elrepo-release-7.0-3.el7.elrepo.noarch is already installed
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp-srv2.kddilabs.jp
+ * elrepo: ftp.ne.jp
+ * elrepo-kernel: ftp.ne.jp
+ * extras: ftp-srv2.kddilabs.jp
+ * updates: ftp-srv2.kddilabs.jp
+Package kernel-ml-4.20.0-1.el7.elrepo.x86_64 already installed and latest version
+Package kernel-ml-devel-4.20.0-1.el7.elrepo.x86_64 already installed and latest version
+Nothing to do
+
+Info: The system needs to reboot.
+Do you want to restart system? [y/n]
+
+sysctl net.ipv4.tcp_available_congestion_control
+net.ipv4.tcp_available_congestion_control = cubic reno<div class="c-meta"><span class="c-author">Excalibur</span>1个月前 (2019-01-01)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15411#respond" onclick="return addComment.moveForm( &quot;div-comment-15411&quot;, &quot;15411&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给Excalibur">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor even depth-2" id="comment-15434"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15434">从你贴出的 log 来看，是系统里已经安装了最新的内核，但却没有适用。
+你可以尝试用以下的命令来手动适用新内核。
+<code>awk -F\' '$1=="menuentry " {print i++ " : " $2}' /boot/grub2/grub.cfg</code>
+第一步是确认新内核的顺序，执行后会出现目前系统上所有已经安装的内核版本。类似于如下：
+0 : CentOS Linux (4.20.0-1.el7.elrepo.x86_64) 7 (Core)
+1 : CentOS Linux (3.10.0-514.el7.x86_64) 7 (Core)
+
+第二步是适用你想启用的内核。
+<code>grub2-set-default 数字</code>
+此处的数字，就是第一步返回的结果，输入你想要适用的内核版本的序号。
+
+第三步是确认。
+<code>grub2-editenv list</code>
+看看返回的结果是不是你想要的内核版本。
+
+最后一步，重启系统。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>4周前 (2019-01-11)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15434#respond" onclick="return addComment.moveForm( &quot;div-comment-15434&quot;, &quot;15434&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="comment-15410"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dcb3159d490645d855f164d1851e914d?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dcb3159d490645d855f164d1851e914d?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15410">作者感觉你的脚本好像有点问题，好像除了vultr机器都有些奇怪的错误，总之我用你的脚本弄坏了两个不同提供商的vps，都重装了系统才解决....<div class="c-meta"><span class="c-author">achemg</span>1个月前 (2018-12-30)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15410#respond" onclick="return addComment.moveForm( &quot;div-comment-15410&quot;, &quot;15410&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给achemg">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment even thread-odd thread-alt depth-1" id="comment-15397"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/398d2bf65814d675eecb4a3611406b22?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/398d2bf65814d675eecb4a3611406b22?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15397">请教楼主运行脚本最后报错，是怎么回事啊？apt --fix-broken install已使用，重新运行还是出错，谷歌云
+OS: Debian GNU/Linux 9.6 (stretch) x86_64
+Model: Google Compute Engine
+Kernel: 4.10.15-041015-generic
+
+
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-4.10.15-041015-generic
+Found initrd image: /boot/initrd.img-4.10.15-041015-generic
+Found linux image: /boot/vmlinuz-4.9.0-8-amd64
+Found initrd image: /boot/initrd.img-4.9.0-8-amd64
+done
+检测到 2 个其余内核，开始卸载...
+开始卸载 linux-image-4.9.0-8-amd64 内核...
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ linux-headers-4.10.15-041015-generic : Depends: libssl1.0.0 (&gt;= 1.0.0) but it is not installable
+ linux-image-amd64 : Depends: linux-image-4.9.0-8-amd64 but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+卸载 linux-image-4.9.0-8-amd64 内核卸载完成，继续...
+开始卸载 linux-image-4.9.0-8-amd64
+linux-image-amd64 内核...
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ linux-headers-4.10.15-041015-generic : Depends: libssl1.0.0 (&gt;= 1.0.0) but it is not installable
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+卸载 linux-image-4.9.0-8-amd64
+linux-image-amd64 内核卸载完成，继续...
+ 内核卸载异常，请检查 !<div class="c-meta"><span class="c-author">45度的回忆</span>2个月前 (2018-12-23)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15397#respond" onclick="return addComment.moveForm( &quot;div-comment-15397&quot;, &quot;15397&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给45度的回忆">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="comment-15380"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/12244d7f4085713db563391550321e0a?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/12244d7f4085713db563391550321e0a?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15380">楼主你测试一下谷歌云的debian，我新开了debian，用你的脚本，提示重启后，ssh连不上了……<div class="c-meta"><span class="c-author">Geralt</span>2个月前 (2018-12-17)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15380#respond" onclick="return addComment.moveForm( &quot;div-comment-15380&quot;, &quot;15380&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给Geralt">回复</a></div></div><ul class="children">
+<li class="comment even depth-2" id="comment-15460"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/9c574859f5fda3b44e4d3d68b2770b38?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/9c574859f5fda3b44e4d3d68b2770b38?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15460">我也是Debian安装内核后，SSH连接不上了,请问你后面如何解决的？<div class="c-meta"><span class="c-author">anson</span>1周前 (2019-01-31)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15460#respond" onclick="return addComment.moveForm( &quot;div-comment-15460&quot;, &quot;15460&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给anson">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15375"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/9b9190e5379c63ed4a6e324bc9aeddf1?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/9b9190e5379c63ed4a6e324bc9aeddf1?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15375">目前装bbr 总是出这个提示:chmod: cannot access 'x': No such file or directory<div class="c-meta"><span class="c-author">badun</span>2个月前 (2018-12-17)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15375#respond" onclick="return addComment.moveForm( &quot;div-comment-15375&quot;, &quot;15375&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给badun">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor even depth-2" id="comment-15390"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15390">请把完整的命令复制完全后，粘贴到你的 SSH 客户端执行。
+出现这种情况还有一种可能就是下载脚本失败了。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-19)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15390#respond" onclick="return addComment.moveForm( &quot;div-comment-15390&quot;, &quot;15390&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="comment-15372"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/54090ad08b80d9ae8da0d17617849ee3?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/54090ad08b80d9ae8da0d17617849ee3?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15372">秋大请教一下，手头有台阿里云服务器，安装bbr卡在输入r的那一步，请问下有什么办法？<div class="c-meta"><span class="c-author">时光末路</span>2个月前 (2018-12-15)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15372#respond" onclick="return addComment.moveForm( &quot;div-comment-15372&quot;, &quot;15372&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给时光末路">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor even depth-2" id="comment-15389"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15389">哪有输入r？
+最后的步骤要求重启 VPS 是输入 y，更换内核必须要重启才能生效。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-19)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15389#respond" onclick="return addComment.moveForm( &quot;div-comment-15389&quot;, &quot;15389&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15363"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/68de712a94836b95432ce6db2ebf2565?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/68de712a94836b95432ce6db2ebf2565?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15363">广告事宜如何联系？<div class="c-meta"><span class="c-author">SSR</span>2个月前 (2018-12-13)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15363#respond" onclick="return addComment.moveForm( &quot;div-comment-15363&quot;, &quot;15363&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给SSR">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor even depth-2" id="comment-15365"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15365">请在关于页面查看邮箱地址，写邮件联系我即可<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-13)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15365#respond" onclick="return addComment.moveForm( &quot;div-comment-15365&quot;, &quot;15365&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="comment-15361"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/b67ae6acd863094eba636b8d94139fde?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/b67ae6acd863094eba636b8d94139fde?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15361">今天在centos6上装不上了，系统已经更新最新了，好像kernel-ml改了什么东西，看来下代码一头雾水，centos7倒是OK。
+
+Retrieving http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm
+Preparing...                ##################################################
+        package elrepo-release-6-8.el6.elrepo.noarch is already installed
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+ * base: repos.lax.quadranet.com
+ * elrepo: repos.lax-noc.com
+ * elrepo-kernel: repos.lax-noc.com
+ * extras: mirror.hmc.edu
+ * updates: repos.lax.quadranet.com
+No package kernel-ml available.
+No package kernel-ml-devel available.
+Error: Nothing to do
+Error: Install latest kernel failed, please check it.<div class="c-meta"><span class="c-author">rootcom</span>2个月前 (2018-12-12)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15361#respond" onclick="return addComment.moveForm( &quot;div-comment-15361&quot;, &quot;15361&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给rootcom">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor even depth-2" id="comment-15366"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15366">这个问题的出现，是因为 elrepo 官方最近取消了 kernel-ml 内核的下载，以及各个镜像站都不再提供下载了。
+但是，我找到了 kernel-ml-4.18.20-1.el6.elrepo 的 rpm 包，于是重新修改了安装脚本，改为下载 rpm 后安装。
+你可以试试用最新的脚本在 CentOS 6 下安装试试看。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-14)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15366#respond" onclick="return addComment.moveForm( &quot;div-comment-15366&quot;, &quot;15366&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div><ul class="children">
+<li class="comment odd alt depth-3" id="comment-15370"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/b67ae6acd863094eba636b8d94139fde?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/b67ae6acd863094eba636b8d94139fde?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15370">ok,可以了，看来要升级centos7了<div class="c-meta"><span class="c-author">cmcd</span>2个月前 (2018-12-15)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15370#respond" onclick="return addComment.moveForm( &quot;div-comment-15370&quot;, &quot;15370&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给cmcd">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment even thread-odd thread-alt depth-1" id="comment-15356"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/7bb6c62d6b1542dcf98a03c75d0d700b?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/7bb6c62d6b1542dcf98a03c75d0d700b?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15356">---------- System Information ----------
+ OS      : CentOS 6.10
+ Arch    : x86_64 (64 Bit)
+ Kernel  : 2.6.32-754.9.1.el6.x86_64
+----------------------------------------
+ Auto install latest kernel for TCP BBR
+
+ URL: https://teddysun.com/489.html
+----------------------------------------
+
+Press any key to start...or Press Ctrl+C to cancel
+Retrieving http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm
+Preparing...                ##################################################
+	package elrepo-release-6-8.el6.elrepo.noarch is already installed
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.serversaustralia.com.au
+ * elrepo: mirror.ventraip.net.au
+ * elrepo-kernel: mirror.ventraip.net.au
+ * epel: mirror.intergrid.com.au
+ * extras: centos.mirror.serversaustralia.com.au
+ * updates: centos.mirror.serversaustralia.com.au
+No package kernel-ml available.
+No package kernel-ml-devel available.
+Error: Nothing to do
+Error: Install latest kernel failed, please check it.
+您好请问这个问题怎么解决呢？谢谢！<div class="c-meta"><span class="c-author">Spk</span>2个月前 (2018-12-11)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15356#respond" onclick="return addComment.moveForm( &quot;div-comment-15356&quot;, &quot;15356&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给Spk">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor odd alt depth-2" id="comment-15367"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15367">这个问题的出现，是因为 elrepo 官方最近取消了 kernel-ml 内核的下载，以及各个镜像站都不再提供下载了。
+但是，我找到了 kernel-ml-4.18.20-1.el6.elrepo 的 rpm 包，于是重新修改了安装脚本，改为下载 rpm 后安装。
+你可以试试用最新的脚本在 CentOS 6 下安装试试看。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-14)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15367#respond" onclick="return addComment.moveForm( &quot;div-comment-15367&quot;, &quot;15367&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-15353"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/3f61ba97a64145213a32fa20899b1db0?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/3f61ba97a64145213a32fa20899b1db0?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15353">小白一枚，今早服务器被封了，重新装SSR之后再装BBR就弹出错误，用的vultr服务器centos6 x64，想问一下出了什么问题，上述方法都用过了，错误都一样
+---------- System Information ----------
+ OS      : CentOS 6.10
+ Arch    : x86_64 (64 Bit)
+ Kernel  : 2.6.32-754.6.3.el6.x86_64
+Retrieving http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm
+Preparing...                ##################################################
+	package elrepo-release-6-8.el6.elrepo.noarch is already installed
+Loaded plugins: fastestmirror
+Setting up Install Process
+Loading mirror speeds from cached hostfile
+ * base: ftp.iij.ad.jp
+ * elrepo: ftp.yz.yamagata-u.ac.jp
+ * elrepo-kernel: ftp.yz.yamagata-u.ac.jp
+ * epel: ftp.iij.ad.jp
+ * extras: ftp.iij.ad.jp
+ * updates: ftp.iij.ad.jp
+No package kernel-ml available.
+No package kernel-ml-devel available.
+Error: Nothing to do
+Error: Install latest kernel failed, please check it.
+升级内核弹出
+No package kernel-ml-headers available.
+Error: Nothing to do<div class="c-meta"><span class="c-author">mk</span>2个月前 (2018-12-10)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15353#respond" onclick="return addComment.moveForm( &quot;div-comment-15353&quot;, &quot;15353&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给mk">回复</a></div></div><ul class="children">
+<li class="comment byuser comment-author-teddysun bypostauthor odd alt depth-2" id="comment-15368"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/dbb802d47421650d5f0c22595a30b172?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15368">这个问题的出现，是因为 elrepo 官方最近取消了 kernel-ml 内核的下载，以及各个镜像站都不再提供下载了。
+但是，我找到了 kernel-ml-4.18.20-1.el6.elrepo 的 rpm 包，于是重新修改了安装脚本，改为下载 rpm 后安装。
+你可以试试用最新的脚本在 CentOS 6 下安装试试看。<div class="c-meta"><span class="c-author"><a href="https://teddysun.com/" rel="external nofollow" class="url">秋水逸冰</a></span>2个月前 (2018-12-14)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15368#respond" onclick="return addComment.moveForm( &quot;div-comment-15368&quot;, &quot;15368&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给秋水逸冰">回复</a></div></div></li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+<li class="comment even thread-odd thread-alt depth-1" id="comment-15342"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/1c16b822e2d4c6b51cebabe6ed859581?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/1c16b822e2d4c6b51cebabe6ed859581?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15342">No package kernel-ml available.
+No package kernel-ml-devel available.
+错误：无须任何处理
+Error: Install latest kernel failed, please check it.
+大神，提示没有包，内核升级失败了，请问怎么解决？CentOS 6.10<div class="c-meta"><span class="c-author">viruspq</span>2个月前 (2018-12-09)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15342#respond" onclick="return addComment.moveForm( &quot;div-comment-15342&quot;, &quot;15342&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给viruspq">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-even depth-1" id="comment-15341"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/1c16b822e2d4c6b51cebabe6ed859581?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/1c16b822e2d4c6b51cebabe6ed859581?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15341">Press any key to start...or Press Ctrl+C to cancel
+Retrieving http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm
+Preparing...                ##################################################
+	package elrepo-release-6-8.el6.elrepo.noarch is already installed
+已加载插件：fastestmirror
+设置安装进程
+Loading mirror speeds from cached hostfile
+ * base: mirror.ventraip.net.au
+ * elrepo: mirror.ventraip.net.au
+ * elrepo-kernel: mirror.ventraip.net.au
+ * epel: d2lzkl7pfhq30w.cloudfront.net
+ * extras: mirror.intergrid.com.au
+ * updates: centos.melbourneitmirror.net
+No package kernel-ml available.
+No package kernel-ml-devel available.
+错误：无须任何处理
+Error: Install latest kernel failed, please check it.
+大神，CentOS 6.10安装BBR提示这个，请问怎么解决？<div class="c-meta"><span class="c-author">viruspq</span>2个月前 (2018-12-09)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/489.html?replytocom=15341#respond" onclick="return addComment.moveForm( &quot;div-comment-15341&quot;, &quot;15341&quot;, &quot;respond&quot;, &quot;489&quot; )" aria-label="回复给viruspq">回复</a></div></div></li><!-- #comment-## -->
+	</ol>
+	<div class="pagenav">
+		<a class="page-numbers" href="https://teddysun.com/489.html/comment-page-1#comments">1</a>
+<span class="page-numbers dots">…</span>
+<a class="page-numbers" href="https://teddysun.com/489.html/comment-page-26#comments">26</a>
+<a class="page-numbers" href="https://teddysun.com/489.html/comment-page-27#comments">27</a>
+<span aria-current="page" class="page-numbers current">28</span>	</div>
+</div>
+
+		
+	</div>
+</div>
+<aside class="sidebar">	
+<div class="widget_text widget widget_custom_html"><h3 class="widget_tit">推荐资源</h3><div class="textwidget custom-html-widget"><ul class="resource">
+	    <li><a href="https://www.csr.sh/" target="_blank"><span class="text">CSR 在线生成工具</span></a></li>
+    <li><a href="https://teddysun.com/448.html" target="_blank"><span class="text">L2TP 一键安装脚本</span></a></li>
+    <li><a href="https://lamp.sh/" target="_blank"><span class="text">LAMP 一键安装脚本</span></a></li>
+    <li><a href="https://teddysun.com/444.html" target="_blank"><span class="text">Bench 一键测试脚本</span></a></li>
+    <li><a href="https://qiu.sh/freess" target="_blank"><span class="text">Shadowsocks 免费帐号</span></a></li>
+    <li><a href="https://teddysun.com/392.html" target="_blank"><span class="text">Shadowsocks-Go 一键脚本</span></a></li>
+    <li><a href="https://shadowsocks.be/9.html" target="_blank"><span class="text">ShadowsocksR 一键安装脚本</span></a></li>
+    <li><a href="https://teddysun.com/342.html" target="_blank"><span class="text">Shadowsocks-Python 一键脚本</span></a></li>
+    <li><a href="https://teddysun.com/486.html" target="_blank"><span class="text">Shadowsocks 一键脚本（四合一）</span></a></li>
+    <li><a href="https://teddysun.com/358.html" target="_blank"><span class="text">Shadowsocks-libev for Debian 一键脚本</span></a></li>
+    <li><a href="https://teddysun.com/357.html" target="_blank"><span class="text">Shadowsocks-libev for CentOS 一键脚本</span></a></li>
+</ul></div></div><div class="widget_text widget widget_custom_html"><h3 class="widget_tit">Shadowcosks推荐</h3><div class="textwidget custom-html-widget"><table border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td><a href="https://qiu.sh/getss" target="_blank"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/getss.jpg" width="220" height="220" alt="getss" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/getss" target="_blank">稳定可靠的 Shadowsocks 服务，其服务器分布于：<br>美国，俄罗斯，日本，韩国，新加坡，香港，台湾。<br>同时兼容 SS 和 SSR 客户端连接。<br>
+最低只需 1 元 1GB 3 天，先体验再付费。</a>
+        </td>
+    </tr>
+</tbody></table></div></div><div class="widget_text widget widget_custom_html"><h3 class="widget_tit">经典VPS</h3><div class="textwidget custom-html-widget"><table border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td><a href="https://qiu.sh/bwh" target="_blank"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/bandwagon.png" width="300" height="150" alt="bandwagonhost" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/bwh" target="_blank">使用优惠码 BWH26FXH3HIQ 后仅需$18.79/年起</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/vultr" target="_blank"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/vultr.png" width="300" height="250" alt="vultr" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/vultr" target="_blank">15个数据中心，低至$2.5/月，新用户注册就送$10</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/do" target="_blank"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/do.png" width="300" height="250" alt="digitalocean" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/do" target="_blank">1GB内存，25G SSD，$5/月，新用户注册就送$10</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/linode" target="_blank"><img src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/linode.png" width="300" height="117" alt="ramnode" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/linode" target="_blank">经典Linode，新用户优惠码podcastinit2018，充$5送$20</a>
+        </td>
+    </tr>
+</tbody></table></div></div><div class="widget d_tag"><h3 class="widget_tit">标签云</h3><div class="d_tags"><a href="https://teddysun.com/tag/vps">VPS (22)</a><a href="https://teddysun.com/tag/centos">CentOS (21)</a><a href="https://teddysun.com/tag/linux">Linux (16)</a><a href="https://teddysun.com/tag/shadowsocks">shadowsocks (13)</a><a href="https://teddysun.com/tag/apache">apache (11)</a><a href="https://teddysun.com/tag/php">PHP (10)</a><a href="https://teddysun.com/tag/wordpress">wordpress (9)</a><a href="https://teddysun.com/tag/lamp">LAMP (9)</a><a href="https://teddysun.com/tag/web">web (9)</a><a href="https://teddysun.com/tag/google">Google (8)</a><a href="https://teddysun.com/tag/shell">Shell (6)</a><a href="https://teddysun.com/tag/google-drive">Google Drive (5)</a><a href="https://teddysun.com/tag/%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8">网络安全 (5)</a><a href="https://teddysun.com/tag/windows">Windows (5)</a><a href="https://teddysun.com/tag/vpn">VPN (4)</a><a href="https://teddysun.com/tag/digitalocean">DigitalOcean (4)</a><a href="https://teddysun.com/tag/webmin">webmin (4)</a><a href="https://teddysun.com/tag/%e7%bd%91%e7%9b%98">网盘 (4)</a><a href="https://teddysun.com/tag/debian">Debian (4)</a><a href="https://teddysun.com/tag/ssl">ssl (4)</a><a href="https://teddysun.com/tag/domain">domain (4)</a><a href="https://teddysun.com/tag/python">Python (3)</a><a href="https://teddysun.com/tag/iptables">iptables (3)</a><a href="https://teddysun.com/tag/%e7%94%b5%e5%bd%b1">电影 (3)</a><a href="https://teddysun.com/tag/owncloud">ownCloud (3)</a><a href="https://teddysun.com/tag/eclipse">eclipse (3)</a><a href="https://teddysun.com/tag/phpmyadmin">phpMyAdmin (3)</a><a href="https://teddysun.com/tag/pip">pip (3)</a><a href="https://teddysun.com/tag/pptp">PPTP (2)</a><a href="https://teddysun.com/tag/l2tp">L2TP (2)</a><a href="https://teddysun.com/tag/%e7%94%9f%e6%b4%bb">生活 (2)</a><a href="https://teddysun.com/tag/jdk7">JDK7 (2)</a></div></div>		<div class="widget widget_recent_entries">		<h3 class="widget_tit">最新文章</h3>		<ul>
+											<li>
+					<a href="https://teddysun.com/545.html">介绍几款 Windows DD 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/544.html">如何制作 Windows Server 2019 的 DD 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/536.html">介绍几款 Docker 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/532.html">如何启用 Shadowsocks 的多端口</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/530.html">一键安装KMS服务脚本</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/527.html">关于免费SSL证书的那些事儿</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/525.html">使用定时任务cron监视Shadowsocks进程</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/517.html">LAMP新增Letsencrypt支持</a>
+									</li>
+					</ul>
+		</div></aside></section><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(22).html"></iframe></ins></ins></ins>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="copyright">
+            © 2013-2019 <a href="https://teddysun.com/" style="color:#06c; rel=" home"="">秋水逸冰</a> Powered by <a href="http://cn.wordpress.org/" target="_blank" style="color:#06c;" rel="generator">WordPress</a> &amp; <a href="https://qiu.sh/linode" target="_blank" style="color:#06c;">Linode</a> Theme <a href="http://www.daqianduan.com/" target="_blank" style="color:#06c;">D8</a>
+        </div>
+        <div class="trackcode pull-right">
+            <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-38776518-1', 'auto');
+ga('send', 'pageview');
+</script>        </div>
+    </div>
+</footer>
+<link rel="stylesheet" href="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/myQaptcha.jquery.css" type="text/css"><iframe id="google_osd_static_frame_1091956969085" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(23).html"></iframe>
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/jquery.ui.touch.js.download"></script>
+<script type="text/javascript">var myQaptchaJqueryPage="https://teddysun.com/wp-content/plugins/myqaptcha/jquery/myQaptcha.jquery.php";</script>
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/myqaptcha.jquery.js.download"></script>
+<script type="text/javascript">jQuery(document).ready(function(){if(jQuery("p:has('textarea')").length>0) jQuery("p:has('textarea')").before('<div class="QapTcha"></div>'); else jQuery("#comment").before('<div class="QapTcha"></div>');jQuery('.QapTcha').QapTcha({disabledSubmit:true,autoRevert:true});});</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"https:\/\/teddysun.com\/wp-admin\/admin-ajax.php","post_id":"489"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/postviews-cache.js.download"></script>
+<script type="text/javascript" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/wp-embed.min.js.download"></script>
+
+</body><iframe id="google_shimpl" style="display: none;" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/saved_resource(24).html"></iframe><iframe id="google_esf" name="google_esf" src="./一键安装最新内核并开启 BBR 脚本 _ 秋水逸冰_files/zrt_lookup.html" data-ad-client="ca-pub-6679514888902709" style="display: none;"></iframe></html>

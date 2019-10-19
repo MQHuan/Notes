@@ -1,0 +1,1 @@
+低版本的xml文件里面在drawableLeft系列的属性直接引用svg会引发crash, 最简单的解决方案是用一个selector把svg文件引用，再在drawableLeft属性中引用

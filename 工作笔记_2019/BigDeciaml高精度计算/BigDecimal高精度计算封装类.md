@@ -1,0 +1,3 @@
+Java在java.math包中提供的API类BigDecimal，用来对超过16位有效位的数进行精确的运算。双精度浮点型变量double可以处理16位有效数。
+
+https://github.com/yangyoupeng/Componentized/blob/1fe15b065225043a74e8024e807e8bbd2852aa4c/common/src/main/java/com/maoliicai/common/utils/ArithmeticUtil.java

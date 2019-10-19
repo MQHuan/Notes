@@ -1,0 +1,3 @@
+https://blog.csdn.net/u010520146/article/details/82250689
+
+getFragmentManager到的是activity对所包含fragment的Manager，而如果是fragment嵌套fragment，那么就需要利用getChildFragmentManager()。

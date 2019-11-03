@@ -1,0 +1,26 @@
+接下来就要进入到真正的Android4.2蓝牙系统的学习了，Are you ready?
+
+![](/android蓝牙架构.jpg)
+
+本文不会涉及任何代码，主要对整个Android的蓝牙结构进行一个框架上的分析。
+Android4.2使用了Bluetooth.apk管理所有蓝牙相关的操作，Bluedroid作为蓝牙协议栈。整个蓝牙的关系架构如下图所示：
+
+下面逐一进行讲解：
+Applications：Android蓝牙应用程序，就是使用了蓝牙的API的程序
+java Framework：提供给应用使用的API，我们平时使用的BluetoothAdapter，BluetoothDevice，BluetoothSocket等
+BluetoothAPP：其实说起来，这个应该也是属于java framework范畴，不过由于它比较特殊，所以独立出来了，提供所有的上层服务以及与Bluedroid底层进行交互。
+其中btAdapter主要提供蓝牙的基本操作，比如enable, disable, discovery, pair, unpair, createRfcomm等，其他的就都是Profile的各自的Service了。
+Bluedroid：蓝牙协议栈，提供所有蓝牙的实际操作，开关蓝牙，HCI，ACL，SCO，L2CAP，RFComm，蓝牙的所有Profile等。
+这里Bluedroid分为三部分：
+BTIF(Bluetooth Interface）：提供所有Bluetooth.apk需要的API（使用HAL）
+BTA(Bluetooth Application)：蓝牙应用，一般是指蓝牙的Profile的Bluedroid实现。
+Stack：这个很复杂，实现的所有蓝牙底层的操作，其中还要分为btm(Bluetooth manager),btu(Bluetooth Upper Layer)等。后面会进行详细分析（我目前这一部分也不怎么熟悉，希望能够在写到这里的时候很熟）
+
+整个系统的架构很简单，因为大多的事情都是在Bluedroid层里面做的，上层只管去Call和Callback就是了。接下来我会通过详细分析蓝牙的Enable功能给大家一个简单的认识。
+
+PS:Android系统的代码并不简单，里面有很多代码会让人迷惑，一个简单的功能也要跳很多个文件，这对初学者来说有点困难，不过慢慢深入了就会觉得其实设计得真的很好。
+--------------------- 
+作者：鱼塘鱼汤 
+来源：CSDN 
+原文：https://blog.csdn.net/yutao52shi/article/details/12685167 
+版权声明：本文为博主原创文章，转载请附上博文链接！

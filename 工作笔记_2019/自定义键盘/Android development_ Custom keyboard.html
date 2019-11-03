@@ -1,0 +1,947 @@
+
+<!-- saved from url=(0062)http://www.fampennings.nl/maarten/android/09keyboard/index.htm -->
+<html class="gr__fampennings_nl"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Android development: Custom keyboard</title>
+  <link href="./Android development_ Custom keyboard_files/fampen.css" type="text/css" rel="stylesheet">
+  <meta name="author" content="Maarten Pennings">
+  <meta name="keywords" content="Android developer view widget custom keyboard KeyboardView Keyboard Row Key">
+<link rel="preload" href="./Android development_ Custom keyboard_files/f(12).txt" as="script"><script src="./Android development_ Custom keyboard_files/f(10).txt"></script><script type="text/javascript" async="" src="https://apis.google.com/js/plusone.js"></script><script src="./Android development_ Custom keyboard_files/osd.js.download"></script><script src="./Android development_ Custom keyboard_files/f(11).txt" id="google_shimpl"></script><script type="text/javascript" src="./Android development_ Custom keyboard_files/f(12).txt"></script><link rel="preload" href="./Android development_ Custom keyboard_files/f(11).txt" as="script"></head>
+<body data-gr-c-s-loaded="true" youdao="bind">
+
+  <div class="main-area">
+
+    <div class="block">
+      <div class="smallprint"> Maarten Pennings' </div>
+      <div class="bigprint"> Android development: Custom keyboard </div>
+      <div class="smallprint">
+        <a title="FamPennings&#39; home" href="http://www.fampennings.nl/index.htm">fampennings</a> /
+        <a title="Maartens home" href="http://www.fampennings.nl/maarten/index.htm">maarten</a> /
+        <a title="Android home" href="http://www.fampennings.nl/maarten/android/index.htm">android</a> /
+        09keyboard
+      </div>
+    </div>
+
+
+
+
+    <h1>Custom keyboard</h1>
+    <p>
+      Download the <a href="http://www.fampennings.nl/maarten/android/09keyboard/09Keyboard.zip">source</a> of this article.
+    </p>
+
+
+
+    <a name="section1"></a><h2>1. Introduction</h2>
+    <p>
+      When using an application, we have to fill out alpha numeric fields.
+      Since most phone or tablets don't have a full keyboard, Android offers us so called soft keyboards.
+      In the figure below (left), we see the full keyboard on tablet.
+      It should be noted that Android's soft keyboards are context sensitive: when the field is a phone number
+      a different keyboard pops up (see the right figure below).
+    </p>
+    <p class="img">
+      <img width="400px" src="./Android development_ Custom keyboard_files/fullandroid.jpg"> &nbsp; <img width="400px" src="./Android development_ Custom keyboard_files/phoneandroid.jpg"><br>
+      Entering a contact's name (left) and his phonenumber (right) with the standard Android Keyboard.
+    </p>
+    <p>
+      This question addressed in this article is: how can a developer offer a custom keyboard.
+      More specifically we have a field that requires a <em>hexadecimal</em> number to be entered, so we are looking for a keyboard with the keys
+      0 to 9 and a to f.
+    </p>
+
+
+
+    <a name="section2"></a><h2>2. Analysis</h2>
+    <p>
+      What kind of keyboards exist, next to the standard Android keyboards?
+    </p>
+
+    <a name="section2.1"></a><h3>2.1. Manufacturer keyboard</h3>
+    <p>
+      One of the first things we notice on an Asus tablet is that we have the choice of using the standard Android keyboard,
+      or using an Asus keyboard. The figure below shows the full text (left) and phone number only (right) keybaords of Asus.
+    </p>
+    <p class="img">
+      <img width="400px" src="./Android development_ Custom keyboard_files/fullasus.jpg"> &nbsp; <img width="400px" src="./Android development_ Custom keyboard_files/phoneasus.jpg"><br>
+      Entering a contact's name (left) and his phonenumber (right) using the Asus keyboard.
+    </p>
+    <p>
+      We see big differences. The Asus phone keyboard has fewer keys (it doesn't have the obscure -/+/,/. keys), whereas
+      the Asus full keyboard has more keys (it does have keys for all digits).
+    </p>
+
+
+    <a name="section2.2"></a><h3>2.2. User installed keyboard</h3>
+    <p>
+      We saw above that manufacturers have the ability to add keyboards, where they are completely free in chosing a layout.
+      Can we do that as an end-user?
+    </p>
+    <p>
+      Yes!
+    </p>
+    <p>
+      For example, we can install the <a href="https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard">Hacker's keyboard</a>.
+      Please note that installing a keyboard is not without risk: all keys pass this application, and this includes your passwords!
+    </p>
+    <p class="img">
+      <img width="400px" src="./Android development_ Custom keyboard_files/fullhackers.jpg"> &nbsp; <img width="400px" src="./Android development_ Custom keyboard_files/phonehackers.jpg"><br>
+      Entering a contact's name (left) and his phonenumber (right) using the Hacker's keyboard.
+    </p>
+    <p>
+      We see again big differences. Most notably, we see cursor keys and extra 'shift' keys (control and alt). And they work (including ctrl-v to paste)!
+    </p>
+
+
+    <a name="section2.3"></a><h3>2.3. Input type</h3>
+    <p>
+      Besides the fact that a <em>user</em> can select which keyboard "service" (yes, each of these keyboards - Android, Asus, Hackers - runs a task) is active,
+      we notice there is another mechanism to select which keyboard "layout" (full, phone) is chosen. Who choses that?
+    </p>
+    <p>
+      It's the application programmer that makes that choice.
+      For example, an <span class="code">EditText</span> has a field <span class="code">inputType</span>
+      that decides which layout to use. For example <span class="code">android:inputType="text"</span> selects the full keyboard
+      and <span class="code">android:inputType="phone"</span> select the phone number one. See the
+      <a href="http://developer.android.com/reference/android/text/InputType.html">developer site</a> for the other types.
+    </p>
+    <p>
+      An no, there is no input type for hexadecimal numbers.
+    </p>
+
+    <a name="section2.4"></a><h3>2.4. Dialog</h3>
+    <p>
+      Besides the keyboard services with multiple layouts, we see another approach. For examle, when we have to enter a date,
+      we do not get a date specific keyboard, rather we get a date specific dialog. See the fgure below.
+    </p>
+    <p class="img">
+      <img width="400px" src="./Android development_ Custom keyboard_files/dialog.jpg"><br>
+      A dialog geared towards a specifc type of field (date in this case).
+    </p>
+
+    <a name="section2.5"></a><h3>2.5. Conclusion</h3>
+    <p>
+      We could write our own keyboard service. But that looks like a hell of a lot of work (multiple layouts, accents, spell check support, locale specific fonts).
+      Furthermore, it means that our customers (the end users of our app) not only have to install our app, but also the keyboard service (second apk?).
+      They are not likely to do that, because wise users see the security issues with that. Finally, it probably will not help anyway.
+      The reason is that there is no <span class="code">inputType</span> for hexadecimal, so our app can not even request a hex layout to the keyboard service.
+      So, writing a keyboard service is definitly a <em>no go</em>.
+    </p>
+    <p>
+      So, it looks like we are stuck with writing a dialog (just like the date picker) that has buttons for 0..9, a..f, ...
+    </p>
+    <p>
+      But wait, there is this badly known <span class="code">KeyboardView</span>. What's that?
+    </p>
+
+
+
+
+    <p class="ad">
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-6712094523051121";
+      /* Android-leaderboard-unit */
+      google_ad_slot = "8437554647";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+      </script>
+      <script type="text/javascript" src="./Android development_ Custom keyboard_files/f(13).txt">
+      </script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;" data-ad-slot="8437554647"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:728px;height:90px;" src="./Android development_ Custom keyboard_files/saved_resource(3).html"></iframe></ins></ins>
+    </p>
+
+
+
+
+    <a name="section3"></a><h2>3. KeyboardView</h2>
+    <p>
+      Let's have a look at the <span class="code">KeyboardView</span> class.
+    </p>
+
+
+
+    <a name="section3.1"></a><h3>3.1. High level overview of the KeyboardView</h3>
+    <p>
+      Since API level 3, Android has a <a href="http://developer.android.com/reference/android/inputmethodservice/KeyboardView.html"><span class="code">KeyboardView</span></a>.
+      As the name suggests, this is a <span class="code">View</span>, so it is part of the layout of an activity. This is good news an bad news. It is bad news, because it means
+      we have to obscure all layout files of our applications with a view for a keyboard. It is good news, because it means we are in full control in our app.
+    </p>
+    <p>
+      But wait, what will the <span class="code">KeyboardView</span> show? The answer to this is that we have to associate a
+      <span class="code">Keyboard</span> with the <span class="code">KeyboardView</span>. A keyboard consists of <span class="code">Row</span>s, and rows consist
+      of <span class="code">Key</span>s, and keys are associated with a <i>label</i> (what is shown on the key button) and a <i>code</i> (what is sent to the app when the key is pressed).
+    </p>
+    <p>
+      So, that's four classes to study:
+    </p>
+    <ul>
+      <li><a href="http://developer.android.com/reference/android/inputmethodservice/KeyboardView.html"><span class="code">KeyboardView</span></a></li>
+      <li><a href="http://developer.android.com/reference/android/inputmethodservice/Keyboard.html"><span class="code">Keyboard</span></a></li>
+      <li><a href="http://developer.android.com/reference/android/inputmethodservice/Keyboard.Row.html"><span class="code">Keyboard.Row</span></a></li>
+      <li><a href="http://developer.android.com/reference/android/inputmethodservice/Keyboard.Key.html"><span class="code">Keyboard.Key</span></a></li>
+    </ul>
+    <p>
+      But it is not that bad: a <span class="code">Keyboard</span> can be setup with a single (ok, rather large) xml file. It lists all rows, their keys,
+      and per key the label and the code. So, what we see in practice is a <span class="code">KeyboardView</span> in our activity (activities),
+      one or more xml files with a keyboard layout (in our case one file describing a hexadecimal keyboard layout), and a single line of code to
+      assign the <span class="code">Keyboard</span> to the <span class="code">KeyboardView</span>.
+      And then there are some issues in when to show the keyboard.
+    </p>
+    <p>
+      Let's look at the details.
+    </p>
+
+
+
+    <a name="section3.2"></a><h3>3.2. Creating a KeyboardView</h3>
+    <p>
+      The <span class="code">KeyboardView</span> is a <span class="code">View</span> like any other, so we include it in the layout file of our activity.
+      Nevertheless, there are a couple of noteworthy remarks; they are marked <font color="red">red</font> in the code fragment below.
+    </p>
+    <pre class="code">&lt;<font color="red">RelativeLayout</font> xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" &gt;
+
+    &lt;EditText
+        android:id="@+id/edittext0"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:drawableRight="@drawable/hex"
+        android:inputType="text" /&gt;
+
+    &lt;EditText
+        android:id="@+id/edittext1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext0"
+        android:layout_centerHorizontal="true"
+        android:drawableRight="@drawable/txt"
+        android:inputType="text" /&gt;
+
+    ...
+
+    &lt;<font color="red">android.inputmethodservice.</font>KeyboardView
+        android:id="@+id/keyboardview"
+        <font color="red">android:layout_width="fill_parent"</font>
+        android:layout_height="wrap_content"
+        <font color="red">android:layout_alignParentBottom="true"</font>
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        <font color="red">android:visibility="gone"</font> /&gt;
+
+&lt;/RelativeLayout&gt;</pre>
+    <p>
+      First of all, the <span class="code">KeyboardView</span> will be used to show a keyboard.
+      Typically, keyboards are at the bottom of the screen (<span class="code">android:layout_alignParentBottom="true"</span>),
+      filling the complete width (<span class="code">android:layout_width="fill_parent"</span>);
+      this is easily achieved in <span class="code">RelativeLayout</span> (maybe throw in a vertical scroll bar).
+      Secondly, the keyboard is hidden by default (<span class="code">android:visibility="gone"</span>);
+      we use the <span class="code">gone</span> value instead of <span class="code">invisible</span>
+      to completely hide it. Thirdly, the <span class="code">KeyboardView</span>, for reasons unknown to me, is not part of a package that
+      is automagically found. So, we need to add the full path (<span class="code">android.inputmethodservice.KeyboardView</span>).
+    </p>
+    <p>
+      Unfortunately, the graphical layout editor in Eclipse cannot find that package either. So it gives an
+      exception (<span class="code">java.lang.NoClassDefFoundError: Could not initialize class android.inputmethodservice.KeyboardView</span>)
+      and the keyboard is not shown. I have no idea how to fix that
+      (I would expect that I could add a search path to the graphical layout editor in Eclipse).
+      The feedback I got from Jan, is that Android Studio gives the same complaint.
+    </p>
+
+
+
+    <a name="section3.3"></a><h3>3.3. Creating a Keyboard</h3>
+    <p>
+      The prevous section showed how to create a <span class="code">KeyboardView</span>. This is a view, so this was most easily done in xml:
+      the actvity has a layout file <span class="code">activity_main</span>, which contains a view of type <span class="code">KeyboardView</span>
+      with id  <span class="code">keyboardview</span>.
+    </p>
+    <p>
+      The second step is to create a <span class="code">Keyboard</span>. A <span class="code">Keyboard</span> is a data structure describing
+      rows of keys, each with their label and key code. A large part is also done in xml (file <span class="code">hexkbd</span>),
+      and a small part is done programatically; see the code fragment below.
+    </p>
+    <pre class="code"><b>@Override</b> <b>protected</b> <b>void</b> onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(<font color="red">R.layout.activity_main</font>);
+    ...
+    <font color="green"><em>// Create the Keyboard</em></font>
+    Keyboard mKeyboard= <b>new</b> Keyboard(MainActivity,<font color="red">R.xml.hexkbd</font>);
+
+    <font color="green"><em>// Lookup the KeyboardView</em></font>
+    KeyboardView mKeyboardView= (KeyboardView)findViewById(<font color="red">R.id.keyboardview</font>);
+    <font color="green"><em>// Attach the keyboard to the view</em></font>
+    mKeyboardView.setKeyboard( mKeyboard );
+    <font color="green"><em>// Do not show the preview balloons</em></font>
+    mKeyboardView.setPreviewEnabled(false);
+    ...
+}</pre>
+    <p>
+      The image below shows where the two xml files (activity layout and keyboard layout) are located.
+    </p>
+    <p class="img">
+      <img src="./Android development_ Custom keyboard_files/xmlfiles.png"><br>
+      The location of the xml files.
+    </p>
+
+
+
+    <a name="section3.4"></a><h3>3.4. The Keyboard xml layout file</h3>
+    <p>
+      The xml file <span class="code">hexkbd</span> describes the complete keyboard.
+      Recall that we want to make a hexadecimal keyboard, so we have relatively few keys.
+      In order to illustrate some points, we have added a number of keys:
+      backspace/clear all, cursor left/right, cursor begin/end, prev/next field and keyboard hide button.
+    </p>
+    <p class="img">
+      <img width="640" src="./Android development_ Custom keyboard_files/hexland.jpg"><br>
+      The design of our hexadecimal keyboard.
+    </p>
+    <p>
+      Observe that we have a 'keyboard hide' button (centre of the lowest row). Many <span class="code">KeyboardView</span> keyboards have this
+      because the normal 'hide keyboard' feature in the system bar doesn't work anymore.
+      We can see this in the figure: the bar at the bottom still shows the 'Back' soft key instead of the 'Hide keyboard' softkey.
+    </p>
+    <a name="section3.4.1"></a><h3>3.4.1. Key sizes</h3>
+    <p>
+      One of the great features (I miss that in activity layouts...) is the fact that (key) sizes can be expressed in
+      percentages relative to the parent container (by using <span class="code">%p</span> as unit).
+      This also means that we have no (ok little) worries on landscape versus portrait.
+    </p>
+    <p>
+      When we define a keyboard, we have three levels where we can set properties: at keyboard level, at row level, and at key level.
+      Since most keys on a keyboard have the same size, it makes sense to set the keysize at the keyboard level, and have some overrides
+      at key level. As we can see in the figure above, each row in our hexkbd has 3 keys, a gap of half a key, 2 keys, again a gap of half a key,
+      and finally 2 keys. This sums up to 8 keys, so the key <em>width</em> is 1/8 of 100% or 12.50%. We set the key <em>height</em> to 10%,
+      which means that the full keyboard (4 rows) takes 40% of the complete screen.
+      We have two width overrides: the '0' key has double width (25%) and the 'keyboard hide' key has double width (25%).
+      These size settings are shown in <font color="blue">blue</font> in the code fragment below.
+    </p>
+    <pre class="code">&lt;?<b>xml</b> version="1.0" encoding="utf-8"?&gt;
+&lt;<b>Keyboard</b> xmlns:android="http://schemas.android.com/apk/res/android"
+    <font color="blue">android:keyWidth="12.50%p"</font>
+    <font color="blue">android:keyHeight="10%p"</font> &gt;
+
+    &lt;<b>Row</b>&gt;
+        &lt;Key android:codes="55"    android:keyLabel="7" android:keyEdgeFlags="left" /&gt;
+        &lt;Key android:codes="56"    android:keyLabel="8" /&gt;
+        &lt;Key android:codes="57"    android:keyLabel="9" /&gt;
+        &lt;Key android:codes="65"    android:keyLabel="A" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="66"    android:keyLabel="B" /&gt;
+        &lt;Key android:codes="-5"    android:keyIcon="@drawable/sym_keyboard_delete" android:isRepeatable="true" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="55006" android:keyLabel="CLR" android:keyEdgeFlags="right"/&gt;
+    &lt;/<b>Row</b>&gt;
+    &lt;<b>Row</b>&gt;
+        &lt;Key android:codes="52"    android:keyLabel="4" android:keyEdgeFlags="left"  /&gt;
+        &lt;Key android:codes="53"    android:keyLabel="5" /&gt;
+        &lt;Key android:codes="54"    android:keyLabel="6" /&gt;
+        &lt;Key android:codes="67"    android:keyLabel="C" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="68"    android:keyLabel="D" /&gt;
+        &lt;Key android:codes="55002" android:keyIcon="@drawable/sym_keyboard_left" android:isRepeatable="true" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="55003" android:keyIcon="@drawable/sym_keyboard_right" android:isRepeatable="true" android:keyEdgeFlags="right" /&gt;
+    &lt;/<b>Row</b>&gt;
+    &lt;<b>Row</b>&gt;
+        &lt;Key android:codes="49"    android:keyLabel="1"  android:keyEdgeFlags="left" /&gt;
+        &lt;Key android:codes="50"    android:keyLabel="2" /&gt;
+        &lt;Key android:codes="51"    android:keyLabel="3" /&gt;
+        &lt;Key android:codes="69"    android:keyLabel="E" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="70"    android:keyLabel="F" /&gt;
+        &lt;Key android:codes="55001" android:keyIcon="@drawable/sym_keyboard_allleft" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="55004" android:keyIcon="@drawable/sym_keyboard_allright" android:keyEdgeFlags="right" /&gt;
+    &lt;/<b>Row</b>&gt;
+    &lt;<b>Row</b>&gt;
+        &lt;Key android:codes="48"    android:keyLabel="0" <font color="blue">android:keyWidth="25%p"</font> <font color="red">android:horizontalGap="6.25%p"</font> android:keyEdgeFlags="left" /&gt;
+        &lt;Key android:codes="-3"    android:keyIcon="@drawable/sym_keyboard_done" <font color="blue">android:keyWidth="25%p"</font> <font color="red">android:horizontalGap="12.50%p"</font> /&gt;
+        &lt;Key android:codes="55000" android:keyLabel="PREV" <font color="red">android:horizontalGap="6.25%p"</font> /&gt;
+        &lt;Key android:codes="55005" android:keyLabel="NEXT" android:keyEdgeFlags="right" /&gt;
+    &lt;/<b>Row</b>&gt;
+&lt;/<b>Keyboard</b>&gt;</pre>
+    <p>
+      We can also make tall keys. For example, we could add <span class="code">android:keyHeight="20%p"</span> to the 'F' key,
+      so that it becomes twice as tall. It would then overlap with the 'keyboard hide' key. To prevent that
+      we would typically make the 'keyboard hide' key half the width (12.5%) and add a larger gap (18.75%) before 'PREV' (see below).
+    </p>
+    <p>
+      To make everything work across different screen sizes, you may want to put things
+      like the keyboard's <span class="code">keyHeight</span> value in device-dependent resource directories.
+      If you use percentages for that (using "%p"), you need to create "fraction" resources
+      (referenced by <span class="code">@fraction/</span>). Thanks for the tip Jan!
+    </p>
+
+    <a name="section3.4.2"></a><h3>3.4.2. Key gaps</h3>
+    <p>
+      Another feature is that we can offset (indent) a row of keys (as we did with the last row),
+      or even (as we also did) add gaps to create islands of keys.
+      Use the attribute <span class="code">android:horizontalGap</span> for that, and my advise is to use percentages here too.
+      The gap settings are shown in <font color="red">red</font> in the code fragment above.
+    </p>
+    <p>
+      It is possible to add <span class="code">android:horizontalGap</span> and/or <span class="code">android:verticalGap</span> on keyboard level.
+      This is most useful when we want to add a tiny amount of space between all keys.
+      It is tempting to do that in pixels, but this interferes with the key size (width/height) in percentages; they no longer add up to 100%.
+    </p>
+    <p>
+      I cannot find the spec of <span class="code">horizontalGap</span>, but as this example demonstrates,
+      the gap is <em>before</em> the key that carries the <span class="code">horizontalGap</span> attribute. However, when
+      we add a <span class="code">horizontalGap</span> (on Keyboard level) that is greater
+      than 0, the <span class="code">horizontalGap</span> (on Key level) no longer creates a gap <em>before</em> but now
+      <em>after</em> the key that carries the <span class="code">horizontalGap</span> attribute.
+      To me, this looks like a bug...
+    </p>
+    <p>
+      Jan had a nasty surprise on his Nexus 4 with KitKat: the landscape rendering is wrong: <span class="code">horizontalGap</span>
+      is after the key, while in portrait it is before! When I tested it on a Nexus 5 with KitKat, I had a similar nasty surprise: for me the
+      the portrait mode is wrong (gaps after key instead of before), and landscape is ok.
+      Jan ended up adding <span class="code">horizontalGap</span>
+      attribute of 1px to <span class="code">Keyboard</span>. But if the first item of the keyboard row has a
+      drawable (as he had it in the last row; that's where he put the hide keyboard key),
+      the behaviour reverses for that key, making it impossible to add a gap after that key...
+    </p>
+    <p>
+      The <span class="code">keyEdgeFlags</span> are a bit magic. In all the examples I found, the attribute
+      <span class="code">android:keyEdgeFlags="left"</span> is at the left most key in a row and the
+      <span class="code">android:keyEdgeFlags="right"</span> is at the right most key.
+      But when absent, the keyboard still layout's nicely. Because every body seems to do it, I included these flags too.
+      The <a href="http://developer.android.com/reference/android/inputmethodservice/Keyboard.Key.html">documentation</a>
+      suggest it has to do with handling touch events: "Flags that specify the anchoring to edges of the keyboard for detecting touch events that are just out of the boundary of the key."
+    </p>
+
+    <a name="section3.4.3"></a><h3>3.4.3. Key labels</h3>
+    <p>
+      The next issue to settle is the labels on the buttons. There are two options: strings and drawables.
+    </p>
+    <p>
+      String are associated with the attribute <span class="code">keyLabel</span>.
+      As an example, consider the single character labels <span class="code">android:keyLabel="0"</span> or <span class="code">android:keyLabel="A"</span>,
+      or the multi character labels <span class="code">android:keyLabel="CLR"</span> or <span class="code">android:keyLabel="NEXT"</span>.
+      Jan points out that multi character labels have a smaller font than single character labels
+      because they use <span class="code">labelTextSize</span> instead of <span class="code">keyTextSize</span>,
+      see <a href="http://developer.android.com/reference/android/inputmethodservice/KeyboardView.html">documentation</a>.
+    </p>
+    <p>
+      Drawables are associated with the attribute <span class="code">keyIcon</span>.
+      As an example consider <span class="code">android:keyIcon="@drawable/sym_keyboard_allleft"</span> shown below.
+    </p>
+    <p class="img">
+      <img src="./Android development_ Custom keyboard_files/sym_keyboard_allleft.png"><br>
+      The drawable "sym_keyboard_allleft.png"
+    </p>
+    <p>
+      Please be aware that smaller screens still need some precaution. The figure below shows the same keyboard on a phone.
+      Notice that the icons are too big (this can probably be fixed by including the icons in several resolutions in the
+       <span class="code">res/drawable_xxx</span> directories) and that even plain text labels might become too big ('prev' and 'next' are on the border).
+
+    </p>
+    <p class="img">
+      <img src="./Android development_ Custom keyboard_files/phone.png"><br>
+      Problems on smaller screens
+    </p>
+    <p>
+      I have no idea how to change the background color of some keys as is done with the shift/tab/backspace key in the standard keyboard.
+      Will Verduzco wrote a followup <a href="http://www.xda-developers.com/android/create-a-custom-soft-keyboard-layout-for-your-app/">article</a>,
+      that touches on the subject of styling.
+    </p>
+
+    <a name="section3.4.4"></a><h3>3.4.4. Key codes</h3>
+    <p>
+      When a key is pressed,the <span class="code">KeyboardView</span> calls the <span class="code">onKey()</span> of
+      its <span class="code">OnKeyboardActionListener</span>. It passes the key code of the key. The key codes are declared
+      in the xml file. For example, for the 'A' key we use the key code 65.
+    </p>
+    <p>
+      The keyboard is completely app specific: the application has to provide the key handling in the <span class="code">onKey()</span>.
+      This means that the key codes can be chosen freely. Nevertheless, the key handler becomes simpler if we use some standard (e.g. Unicode)
+      for plain keys. And that's what we did in the example.
+    </p>
+    <p>
+      For the non plain keys (cursor movement, delete), we pick some arbitrary number; the example uses 55000 and higher.
+    </p>
+    <p>
+      When there is no keyCode, the KeyboardView derives a code from the label.
+      When key  <span class="code">android:keyLabel="A"</span> does not have a key code, its gets 65!
+      When key  <span class="code">android:keyLabel="PREV"</span> does not have a key code, its gets 80 (the Unicode of 'P' is 80).
+      When a key does not have a code, nor a label, an exception is raised.
+    </p>
+    <p>
+      A nice feature is the attribute <span class="code">android:isRepeatable="true"</span>. It makes the
+      key auto repeat as long as it is pressed. We have used this for the cursor movement and delete.
+    </p>
+    <p>
+      If we look at the details, there is some unexpected flexibility.
+      Each key may declare a <em>list</em> of key codes (with a maximum of twelve?), such as <span class="code">android:codes="65,66,67"</span>.
+      When the key is pressed, the <span class="code">onKey(int primaryCode, int[] keyCodes)</span> is called.
+      The array <span class="code">keyCodes</span> contains this list; it is always (?) twelve integers long
+      where the start of the list has the declared key codes and the list is padded with -1's.
+      The first element of the list is always passed as the <span class="code">primaryCode</span> parameter.
+      The documentation explains the use: "The alternatives will include other characters that may be on
+      the same key or adjacent keys. These codes are useful to correct for accidental presses of a key adjacent to the intended key".
+    </p>
+
+    <a name="section3.4.5"></a><h3>3.4.5. Key popups</h3>
+    <p>
+      An advanced feature is that a key can have a popup. It appears when the key is long pressed.
+      This feature is known from the standard Android keyboard as well: the popup shows alternative keys.
+      For example, a long press on 'e' typically shows 'é', 'è', 'ë' etc.
+    </p>
+    <p class="img">
+      <img width="640px" src="./Android development_ Custom keyboard_files/popup.jpg"><br>
+      A popup for the 'A' key (on long press), the generic way
+    </p>
+    <p>
+      There are two ways to make a popup keyboard: generic and dedicated.
+    </p>
+    <p>
+      The dedicated way is to add an element to a key specifying a <em>keyboard layout</em> for the popup keyboard.
+      For example, we could add <span class="code">android:popupKeyboard="@xml/newkeyboard"</span> to some key.
+      This requires an xml file <span class="code">newkeyboard</span> which has all the features of the main keyboard.
+    </p>
+    <p>
+      The generic way is to add an element to a key specifying the <em>labels</em> (with implict codes) of the popup keys.
+      For example, we could add <span class="code">android:popupCharacters="aA" </span> to the 'A' key.
+      This does require require an xml file, but only with keyboard level attributes.
+    </p>
+    <p>
+      The key is decorated as follows.
+    </p>
+    <pre class="code">&lt;<b>Key</b> android:codes="65" android:keyLabel="A" android:popupKeyboard="@xml/popup" android:popupCharacters="aA" &gt;</pre>
+    <p>
+      The <span class="code">popup.xml</span> has the following content.
+    </p>
+    <pre class="code">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;<b>Keyboard</b> xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="10%p"
+    android:keyHeight="10%p"&gt;
+&lt;/<b>Keyboard</b>&gt;</pre>
+
+    <a name="section3.5"></a><h3>3.5. The key handler</h3>
+    <p>
+      We have to write the key handler ourselves.
+      For this, we add the <font color="red">red</font> code to the creation of the keyboard.
+    </p>
+    <pre class="code"><font color="green"><em>// Create the Keyboard</em></font>
+Keyboard mKeyboard= <b>new</b> Keyboard(MainActivity,R.xml.hexkbd);
+
+<font color="green"><em>// Lookup the KeyboardView</em></font>
+KeyboardView mKeyboardView= (KeyboardView)findViewById(R.id.keyboardview);
+<font color="green"><em>// Attach the keyboard to the view</em></font>
+mKeyboardView.setKeyboard( mKeyboard );
+
+<font color="green"><em>// Install the key handler</em></font>
+<font color="red">mKeyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);</font>
+...
+}</pre>
+    <p>
+      As mentioned above, the <span class="code">OnKeyboardActionListener</span> has an <span class="code">onKey()</span>,
+      but it has many more methods.
+    </p>
+<pre class="code"><b>private</b> OnKeyboardActionListener mOnKeyboardActionListener = <b>new</b> OnKeyboardActionListener() {
+    <b>@Override </b><b>public</b> <b>void</b> onKey(int primaryCode, int[] keyCodes) {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> onPress(int arg0) {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> onRelease(int primaryCode) {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> onText(CharSequence text) {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> swipeDown() {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> swipeLeft() {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> swipeRight() {
+    }
+
+    <b>@Override </b><b>public</b> <b>void</b> swipeUp() {
+    }
+};</pre>
+    <p>
+      We only override the <span class="code">onKey()</span>.
+      It searches for the view in focus (if it is not an <span class="code">EditText</span>, we abort).
+      Then it executes an action based on the actual key code (for a list of key codes, see below).
+    </p>
+<pre class="code"><b>@Override</b> <b>public</b> <b>void</b> onKey(int primaryCode, int[] keyCodes) {
+    <font color="green"><em>// Get the EditText and its Editable</em></font>
+    View focusCurrent = MainActivity.this.getWindow().getCurrentFocus();
+    if( focusCurrent==null || focusCurrent.getClass()!=EditText.class ) <b>return</b>;
+    EditText edittext = (EditText) focusCurrent;
+    Editable editable = edittext.getText();
+    int start = edittext.getSelectionStart();
+    <font color="green"><em>// Handle key</em></font>
+    <b>if</b>( primaryCode==CodeCancel ) {
+        hideCustomKeyboard();
+    } <b>else</b> <b>if</b>( primaryCode==CodeDelete ) {
+        if( editable!=null &amp;&amp; start&gt;0 ) editable.delete(start - 1, start);
+    } <b>else</b> <b>if</b>( primaryCode==CodeClear ) {
+        if( editable!=null ) editable.clear();
+    } <b>else</b> <b>if</b>( primaryCode==CodeLeft ) {
+        if( start&gt;0 ) edittext.setSelection(start - 1);
+    } <b>else</b> <b>if</b>( primaryCode==CodeRight ) {
+        if (start &lt; edittext.length()) edittext.setSelection(start + 1);
+    } <b>else</b> <b>if</b>( primaryCode==CodeAllLeft ) {
+        edittext.setSelection(0);
+    } <b>else</b> <b>if</b>( primaryCode==CodeAllRight ) {
+        edittext.setSelection(edittext.length());
+    } <b>else</b> <b>if</b>( primaryCode==CodePrev ) {
+        View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
+        if( focusNew!=null ) focusNew.requestFocus();
+    } <b>else</b> <b>if</b>( primaryCode==CodeNext ) {
+        View focusNew= edittext.focusSearch(View.FOCUS_FORWARD);
+        if( focusNew!=null ) focusNew.requestFocus();
+    } <b>else</b> {<font color="green"><em>// Insert character</em></font>
+        editable.insert(start, Character.toString((char) primaryCode));
+    }
+}
+</pre>
+    <p>
+      The key codes are the codes used in the xml file; they have constants in the java class.
+    </p>
+<pre class="code"><b>public</b> <b>final</b> <b>static</b> int CodeDelete   = -5; <font color="green"><em>// Keyboard.KEYCODE_DELETE</em></font>
+<b>public</b> <b>final</b> <b>static</b> int CodeCancel   = -3; <font color="green"><em>// Keyboard.KEYCODE_CANCEL</em></font>
+<b>public</b> <b>final</b> <b>static</b> int CodePrev     = 55000;
+<b>public</b> <b>final</b> <b>static</b> int CodeAllLeft  = 55001;
+<b>public</b> <b>final</b> <b>static</b> int CodeLeft     = 55002;
+<b>public</b> <b>final</b> <b>static</b> int CodeRight    = 55003;
+<b>public</b> <b>final</b> <b>static</b> int CodeAllRight = 55004;
+<b>public</b> <b>final</b> <b>static</b> int CodeNext     = 55005;
+<b>public</b> <b>final</b> <b>static</b> int CodeClear    = 55006;
+</pre>
+
+
+
+
+
+    <a name="section3.6"></a><h3>3.6. When to show or hide the custom keyboard</h3>
+    <p>
+      One of the hardest issues with the <span class="code">KeyboardView</span> is making it visible at the right time.
+      There is only one thing harder: making the standard keyboard invisible at the same time!
+    </p>
+    <p>
+      Let's start by writing the methods that show respectively hide the custom keyboard.
+      After that, we focus on <em>when</em> to call them.
+    </p>
+    <pre class="code"><b>public</b> <b>void</b> hideCustomKeyboard() {
+    mKeyboardView.setVisibility(View.GONE);
+    mKeyboardView.setEnabled(false);
+}
+
+<b>public</b> <b>void</b> showCustomKeyboard( View v ) {
+    mKeyboardView.setVisibility(View.VISIBLE);
+    mKeyboardView.setEnabled(true);
+    <b>if</b>( v!=null ) ((InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+}
+
+<b>public</b> <b>boolean</b> isCustomKeyboardVisible() {
+    <b>return</b> mKeyboardView.getVisibility() == View.VISIBLE;
+}</pre>
+    <p>
+      The <span class="code">showCustomKeyboard()</span> will be called when and <span class="code">EditText</span> is getting focus.
+      We not only show the custom keyboard, but also actively switch off the standard keyboard.
+    </p>
+    <p>
+      Now to <em>when</em> to show or hide the custom keyboard.
+      The model that we use is that our custom keyboard is "coupled" to one (or more) <span class="code">EditText</span>s.
+      When a "coupled" <span class="code">EditText</span> has focus the custom keyboard should be visible.
+      By setting the <span class="code">OnFocusChangeListener</span> of the <span class="code">EditText</span>,
+      we can show the custom keyboard when the edit box gets focus, but also hide it when the edit box loses focus.
+    </p>
+    <pre class="code"><font color="green"><em>// Find the EditText</em></font>
+EditText edittext= (EditText)findViewById(...);
+
+<font color="green"><em>// Make the custom keyboard appear</em></font>
+edittext.setOnFocusChangeListener(new OnFocusChangeListener() {
+    <b>@Override</b> <b>public</b> <b>void</b> onFocusChange(View v, boolean hasFocus) {
+        <b>if</b>( hasFocus ) showCustomKeyboard(v); <b>else</b> hideCustomKeyboard();
+    }
+});</pre>
+    <p>
+      However, this listener only gets called at the transition of  <em>getting</em> (or <em>losing</em>) focus.
+      If the <span class="code">EditText</span> has focus, but the keyboard is hidden
+      (e.g. after pressing the hide keyboard button) how can the user make it visible again?
+      The standard keyboard allows a re-tap of the <span class="code">EditText</span> in focus.
+      Let's mimick that.
+    </p>
+    <pre class="code">edittext.setOnClickListener(new OnClickListener() {
+    <b>@Override</b> <b>public</b> <b>void</b> onClick(View v) {
+        showCustomKeyboard(v);
+    }
+});</pre>
+    <p>
+      We are nearly there.
+      When our activity starts, with a coupled <span class="code">EditText</span> in focus, the standard
+      keyboard is displayed. If have no idea why, I would expect the last statement in
+      <span class="code">showCustomKeyboard()</span> would have hidden it, but it hasn't.
+      We add one more line (the <font color="red">red</font> one) to the creation of the keyboard.
+    </p>
+    <pre class="code"><font color="green"><em>// Create the Keyboard</em></font>
+Keyboard mKeyboard= <b>new</b> Keyboard(MainActivity,R.xml.hexkbd);
+
+<font color="green"><em>// Lookup the KeyboardView</em></font>
+KeyboardView mKeyboardView= (KeyboardView)findViewById(R.id.keyboardview);
+<font color="green"><em>// Attach the keyboard to the view</em></font>
+mKeyboardView.setKeyboard( mKeyboard );
+
+<font color="green"><em>// Install the key handler</em></font>
+mKeyboardView.setOnKeyboardActionListener(mOnKeyboardActionListener);
+
+<font color="green"><em>// Hide the standard keyboard initially</em></font>
+<font color="red">getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);</font>
+...
+}</pre>
+    <p>
+      As a final step, we would like the back button of the activity to close the custom keyboard (if it is open).
+      Therefore, we add the following code to our activity.
+    </p>
+    <pre class="code"><b>@Override</b> <b>public</b> void onBackPressed() {
+    <b>if</b>( isCustomKeyboardVisible() ) hideCustomKeyboard(); <b>else</b> this.finish();
+}</pre>
+
+
+    <p>
+      Still, Android is persistent in poping up the standard keybaord.
+      There is one certain way to stop Android doing this: add <span class="code">edittext.setInputType(InputType.TYPE_NULL)</span>
+      to tell Android that we won't be doing any editing on the <span class="code">EditText</span>.
+    However, this has one small issue, Android won't be showing a cursor. And no,
+      <span class="code">edittext.setCursorVisible(true)</span> doesn't help (I consider this a bug).
+    </p>
+    <p class="img">
+      <img src="./Android development_ Custom keyboard_files/cursor.jpg"><br>
+      A cursor in an <span class="code">EditText</span>.
+    </p>
+    <p>
+      If you don't need a cursor, you're done.
+      But we want a cursor: we have added cursor keys in our custom keyboard.
+      So, we can not set the input type to null, we set it to text.
+      As a result, we have to standard keyboard poping up.
+    </p>
+    <p>
+      I found the following work around on the web (forgot where...).
+      The trick is to have the input type set to text (so that the cursor is always visible),
+      but just before a key press, we set input type to none and call the base class handler.
+      This way, the base class handler only sees input type none and does not pop up the standard keyboard.
+    </p>
+    <pre class="code">edittext.setOnTouchListener(<b>new</b> OnTouchListener() {
+    <b>@Override</b> <b>public</b> boolean onTouch(View v, MotionEvent event) {
+        EditText edittext = (EditText) v;
+        int inType = edittext.getInputType();       <font color="green"><em>// Backup the input type</em></font>
+        edittext.setInputType(InputType.TYPE_NULL); <font color="green"><em>// Disable standard keyboard</em></font>
+        edittext.onTouchEvent(event);               <font color="green"><em>// Call native handler</em></font>
+        edittext.setInputType(inType);              <font color="green"><em>// Restore input type</em></font>
+        <b>return</b> true; <font color="green"><em>// Consume touch event</em></font>
+    }
+});</pre>
+
+
+
+    <a name="section3.7"></a><h3>3.7. But I have multiple <span class="code">EditText</span>s</h3>
+    <p>
+      It is not uncommon that multiple <span class="code">EditText</span>s need the same custom keyboard.
+      We can solve that be writing all <span class="code">EditText</span> related code in a <span class="code">registerEditText</span>
+      method, and call it for all the <span class="code">EditText</span>s that need the keyboard.
+    </p>
+    <pre class="code"><b>public</b> <b>void</b> registerEditText(int resid) {
+    <font color="green"><em>// Find the EditText 'resid'</em></font>
+    EditText edittext= (EditText)findViewById(resid);
+    <font color="green"><em>// Make the custom keyboard appear</em></font>
+    edittext.setOnFocusChangeListener(<b>new</b> OnFocusChangeListener() {
+        <b>@Override</b> <b>public</b> void onFocusChange(View v, boolean hasFocus) {
+            <b>if</b>( hasFocus ) showCustomKeyboard(v); <b>else</b> hideCustomKeyboard();
+        }
+    });
+    edittext.setOnClickListener(<b>new</b> OnClickListener() {
+        <b>@Override</b> <b>public</b> void onClick(View v) {
+            showCustomKeyboard(v);
+        }
+    });
+    <font color="green"><em>// Disable standard keyboard hard way</em></font>
+    edittext.setOnTouchListener(<b>new</b> OnTouchListener() {
+        <b>@Override</b> <b>public</b> boolean onTouch(View v, MotionEvent event) {
+            EditText edittext = (EditText) v;
+            int inType = edittext.getInputType();       <font color="green"><em>// Backup the input type</em></font>
+            edittext.setInputType(InputType.TYPE_NULL); <font color="green"><em>// Disable standard keyboard</em></font>
+            edittext.onTouchEvent(event);               <font color="green"><em>// Call native handler</em></font>
+            edittext.setInputType(inType);              <font color="green"><em>// Restore input type</em></font>
+            return true; <font color="green"><em>// Consume touch event</em></font>
+        }
+    });
+    <font color="green"><em>// Disable spell check (hex strings look like words to Android)</em></font>
+    edittext.setInputType( edittext.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS );
+}</pre>
+
+
+
+
+
+    <p class="ad">
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-6712094523051121";
+      /* Android-leaderboard-unit */
+      google_ad_slot = "8437554647";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+      </script>
+      <script type="text/javascript" src="./Android development_ Custom keyboard_files/f(13).txt">
+      </script><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;" data-ad-slot="8437554647"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent;"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:728px;height:90px;" src="./Android development_ Custom keyboard_files/saved_resource(4).html"></iframe></ins></ins>
+    </p>
+
+
+
+
+
+
+
+    <a name="section4"></a><h2>4. Convert to a class</h2>
+    <p>
+      To make it easier to use a custom keyboard; we can move all keyboard code to a seperate class.
+    </p>
+    <pre class="code"><b>package</b> nl.fampennings.keyboard;
+...
+
+<b>class</b> CustomKeyboard {
+
+    <b>private</b> KeyboardView mKeyboardView;
+    <b>private</b> Activity     mHostActivity;
+
+    <b>private</b> OnKeyboardActionListener mOnKeyboardActionListener = <b>new</b> OnKeyboardActionListener() {
+        <b>@Override</b> <b>public</b> void onKey(int primaryCode, int[] keyCodes) {
+            ...
+        }
+        ...
+    };
+
+    <b>public</b> CustomKeyboard(Activity host, int viewid, int layoutid) {
+        ...
+    }
+
+    <b>public</b> boolean isCustomKeyboardVisible() {
+        ...
+    }
+
+    <b>public</b> void showCustomKeyboard( View v ) {
+        ...
+    }
+
+    <b>public</b> void hideCustomKeyboard() {
+        ...
+    }
+
+    <b>public</b> void registerEditText(int resid) {
+        ...
+    }
+
+}</pre>
+    <p>
+      The activity then just registers the <span class="code">EditText</span>s.
+    </p>
+    <pre class="code"><b>package</b> nl.fampennings.keyboard;
+
+<b>import</b> android.app.Activity;
+<b>import</b> android.os.Bundle;
+
+<b>public</b> <b>class</b> MainActivity <b>extends</b> Activity {
+
+    CustomKeyboard mCustomKeyboard;
+
+    <b>@Override</b> <b>protected</b> void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mCustomKeyboard= <b>new</b> CustomKeyboard(this, R.id.keyboardview, R.xml.hexkbd );
+
+        mCustomKeyboard.registerEditText(R.id.edittext0);
+        <font color="green"><em>// mCustomKeyboard.registerEditText(R.id.edittext1);</em></font>
+        <font color="green"><em>// mCustomKeyboard.registerEditText(R.id.edittext2);</em></font>
+        mCustomKeyboard.registerEditText(R.id.edittext3);
+        mCustomKeyboard.registerEditText(R.id.edittext4);
+    }
+
+    <b>@Override</b> <b>public</b> void onBackPressed() {
+        <b>if</b>( mCustomKeyboard.isCustomKeyboardVisible() ) mCustomKeyboard.hideCustomKeyboard(); <b>else</b> this.finish();
+    }
+
+}</pre>
+
+
+
+
+    <hr width="70%" noshade="">
+    <p align="center">
+      Download the <a href="http://www.fampennings.nl/maarten/android/09keyboard/09Keyboard.zip">source</a> of this article.
+    </p>
+
+  </div><iframe id="google_osd_static_frame_1915575674820" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./Android development_ Custom keyboard_files/saved_resource(5).html"></iframe>
+
+  <div class="bar-area">
+
+    <!-- Back-icon, logo, name -->
+    <center>
+      <a href="http://www.fampennings.nl/maarten/index.htm"><img vspace="12" alt="home" title="FamPennings&#39; home" border="0" src="./Android development_ Custom keyboard_files/fampen.gif"></a><br>
+      <img alt="keyboard" title="keyboard" src="./Android development_ Custom keyboard_files/keyboard.jpg"><br>
+      <div class="bigprint">Custom Keyboard</div>
+    </center>
+
+    <!-- G+1 button -->
+    <br><br><br><br>
+    <!-- Place this tag where you want the +1 button to render. -->
+    <div class="g-plusone"></div>
+    <!-- Place this tag after the last +1 button tag. -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+
+    <!-- Downloads -->
+    <br><br><br><br>
+    <p class="smallprint">
+      <em>Downloads:</em><br>
+        <span style="margin-left: 2ex;" title="Download the source"><a href="http://www.fampennings.nl/maarten/android/09keyboard/09Keyboard.zip">Source</a></span><br>
+        <span style="margin-left: 2ex;" title="Download the APK"><a href="http://www.fampennings.nl/maarten/android/09keyboard/09Keyboard.apk">APK</a></span><br>
+    </p>
+
+    <!-- Name/date -->
+    <br><br><br><br>
+    <p class="smallprint">
+      <em>Editor:</em><br>
+        <span style="margin-left: 2ex;" title="Stuur een mailtje naar de editor"><a href="mailto:maartenpennings@hotmail.com">Maarten Pennings</a></span><br>
+      <em>Laatste wijziging:</em><br>
+        <span style="margin-left: 2ex;" title="Datum laatste wijziging volgens editor">1 feb 2014</span><br>
+      <em>File:</em><br>
+        <span style="margin-left: 2ex;" title="Datum van deze file (volgens webserver)"><span id="span_filemodified">13 sep 2014</span>
+        <script language="Javascript">
+          var d = new Date(Date.parse(document.lastModified));
+          var e = document.getElementById("span_filemodified");
+          e.innerHTML= d.getDate()+" "+"jan,feb,mar,apr,mei,jun,jul,aug,sep,okt,nov,dec".split(",")[d.getMonth()]+" "+d.getFullYear();
+        </script>
+        </span>
+    </p>
+
+    <!-- Ad -->
+    <br><br><br><br>
+    <center>
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-6712094523051121";
+      /* Android-skyscraper-unit */
+      google_ad_slot = "7804402658";
+      google_ad_width = 120;
+      google_ad_height = 600;
+      //-->
+      </script>
+      <script type="text/javascript" src="./Android development_ Custom keyboard_files/f(13).txt">
+      </script><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:120px;background-color:transparent;" data-ad-slot="7804402658"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:120px;background-color:transparent;"><iframe width="120" height="600" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:120px;height:600px;" src="./Android development_ Custom keyboard_files/saved_resource(6).html"></iframe></ins></ins>
+    </center>
+
+  </div>
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./Android development_ Custom keyboard_files/saved_resource(7).html"></iframe></ins></ins></ins><div id="ydNoteExtensionClipper" style="position: fixed; right: 10px; top: 10px; padding-bottom: 10px; font: 12px/100% arial, sans-serif; color: rgb(51, 51, 51); z-index: 2147483647 !important; height: 427px; width: 289px; display: block;"><div id="ydNoteExtensionClipper-New" class="ydnwc-dialog" style="border-radius: 5px; box-shadow: rgba(208, 208, 208, 0.2) 0px 6px 12px; width: 281px;"><div id="ydNoteExtensionClipper_view" style="background: rgb(255, 255, 255); border-radius: 5px; border: 1px solid rgb(208, 208, 208); height: 427px; width: 279px;"><iframe width="100%" height="100%" border="0" frameborder="0" src="javascript:document.write(&#39;&#39;);" style="width:100%;height:100%;border:0px;display: block!important;" id="_YNoteContentFrame" name="2ContentFrame&amp;ChromeStore" scrolling="no"></iframe></div><div id="ydNoteExtensionClipper_loadview" style="position: absolute; height: 258px; background: rgb(255, 255, 255); top: 0px; left: 50%; display: none;"><img src="http://note.youdao.com/yws/images/webclipper/loading.gif" style="position: absolute;top: 20%;margin-left: -20px;"></div></div><div style="display: none;"><form id="_YNoteContentForm" name="_YNoteContentForm" action="http://note.youdao.com/yws/mapi/wcp?method=putfile&amp;keyfrom=wcp&amp;from=chrome&amp;vendor=ChromeStore&amp;vn=2" target="2ContentFrame&amp;ChromeStore" enctype="multipart/form-data" method="POST"><input type="text" name="tl" id="_YNoteContentFormtitle" value=""><input type="text" name="p" id="_YNoteContentFormpath" value=""><textarea name="bs" id="_YNoteContentFormcontent"></textarea><input type="text" name="src" id="_YNoteContentFormsource" value=""><input type="text" name="type" id="_YNoteContentFormtype" value=""><input type="text" name="userid" id="_YNoteContentFormuserid" value=""><input type="text" name="len" id="_YNoteContentFormlen" value=""><input type="text" name="cs" id="_YNoteContentFormcharset" value=""><input type="text" name="e" id="_YNoteContentFormsign" value=""></form></div></div></body><iframe id="google_esf" name="google_esf" src="./Android development_ Custom keyboard_files/zrt_lookup.html" data-ad-client="ca-pub-6712094523051121" style="display: none;"></iframe></html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)https://teddysun.com/486.html -->
+<html class="gr__teddysun_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>Shadowsocks 一键安装脚本（四合一）  |  秋水逸冰</title>
+<script async="" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/analytics.js.download"></script><script src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/osd.js.download"></script><script src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/ca-pub-6679514888902709.js.download"></script><script>
+window._deel = {
+    name: '秋水逸冰',
+    url: 'https://teddysun.com/wp-content/themes/d8',
+    rss: '',
+    ajaxpager: '',
+    maillist: '',
+    maillistCode: '',
+    commenton: 1,
+    roll: [0,0],
+    tougaoContentmin: 200,
+    tougaoContentmax: 5000,
+    appkey: {
+    	tqq: '801494063',
+    	tsina: '1106777879',
+    	t163: '',
+    	tsohu: ''
+    }
+}
+</script>
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":false,"svgExt":".svg","source":{"concatemoji":"https:\/\/teddysun.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="style-css" href="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/jquery-ui.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://teddysun.com/wp-json/">
+<link rel="prev" title="FTP 上传一键脚本ftp_upload.sh" href="https://teddysun.com/484.html">
+<link rel="next" title="一键安装最新内核并开启 BBR 脚本" href="https://teddysun.com/489.html">
+<link rel="canonical" href="https://teddysun.com/486.html">
+<link rel="shortlink" href="https://teddysun.com/?p=486">
+<link rel="alternate" type="application/json+oembed" href="https://teddysun.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fteddysun.com%2F486.html">
+<link rel="alternate" type="text/xml+oembed" href="https://teddysun.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fteddysun.com%2F486.html&amp;format=xml">
+<meta name="keywords" content="CentOS, Debian, shadowsocks, Shell, 技术">
+<meta name="description" content="本脚本适用环境   系统支持：CentOS 6+，Debian 7+，Ubuntu 12+ 内存要求：≥128M 日期  ：2019 年 01 月 11 日   	关于本脚本   1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端； 2、各版本的启动脚本及配置文件名不再重合； 3、每次运行可安装一种版本； 4、支持以多次">
+<script async="" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/f.txt"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6679514888902709",
+          enable_page_level_ads: true
+     });
+</script><style>.article-content{font-size: 14px;}@media (max-width:640px){.article-content{font-size:16px}}</style><!--[if lt IE 9]><script src="https://teddysun.com/wp-content/themes/d8/js/html5.js"></script><![endif]-->
+<link rel="preload" href="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/f(1).txt" as="script"><script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/f(1).txt"></script><link rel="preload" href="https://pagead2.googlesyndication.com/pagead/js/r20190204/r20190131/show_ads_impl.js" as="script"></head>
+<body class="post-template-default single single-post postid-486 single-format-standard" data-gr-c-s-loaded="true">
+<div class="navbar-wrap">
+<div class="navbar">
+		<div class="logo"><a href="https://teddysun.com/" title="秋水逸冰">秋水逸冰</a></div>
+		<ul class="nav">
+			<li id="menu-item-132" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-132"><a href="https://teddysun.com/">首页</a></li>
+<li id="menu-item-95" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-95"><a href="https://teddysun.com/wen">文学</a></li>
+<li id="menu-item-109" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-109"><a href="https://teddysun.com/pic">相册</a></li>
+<li id="menu-item-94" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><a href="https://teddysun.com/about">关于</a></li>
+		</ul>
+		<div class="menu pull-right">
+			<form method="get" class="dropdown search-form" action="https://teddysun.com/">
+				<input class="search-input" name="s" type="text" placeholder="输入关键字搜索" x-webkit-speech=""><input class="btn btn-success search-submit" type="submit" value="搜索">
+				<ul class="dropdown-menu search-suggest"></ul>
+			</form>
+			<div class="btn-group pull-left">
+							</div>
+		</div>
+</div>
+</div>
+<header class="header">
+	<div class="speedbar">
+			</div>
+</header>
+<section class="container">
+	<div class="content-wrap">
+	<div class="content">
+		<div class="breadcrumbs">你的位置：<a href="https://teddysun.com/">秋水逸冰</a> <small>&gt;</small> <a href="https://teddysun.com/category/tech">技术</a> <small>&gt;</small> <span class="muted">Shadowsocks 一键安装脚本（四合一）</span></div>
+				<header class="article-header">
+			<h1 class="article-title"><a href="https://teddysun.com/486.html">Shadowsocks 一键安装脚本（四合一）</a></h1>
+			<div class="meta">
+				<span class="muted"><a href="https://teddysun.com/category/tech"><i class="icon-list-alt icon12"></i> 技术</a></span>				<span class="muted"><i class="icon-user icon12"></i> <a href="https://plus.google.com/103396485017390034127" rel="author">秋水逸冰</a></span>
+				<time class="muted"><i class="ico icon-time icon12"></i> 发布于: 2016-12-04</time>
+				<time class="muted"><i class="ico icon-time icon12"></i> 更新于: 2019-01-11</time>
+				<span class="muted"><i class="ico icon-eye-open icon12"></i> 1592898 次围观</span>
+				<span class="muted"><i class="icon-comment icon12"></i> <a href="https://teddysun.com/486.html#comments">1282 次吐槽</a></span>							</div>
+		</header>
+
+		<div class="banner banner-post"><script async="" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/f.txt"></script>
+<!-- recommed -->
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6679514888902709" data-ad-slot="2147980674" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><iframe width="950" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0px;width:950px;height:90px;" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource.html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>		
+		<article class="article-content">
+			<p><a href="https://teddysun.com/486.html"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/shadowsocks.png" title="Shadowsocks一键安装脚本（四合一版）" class="aligncenter" style="width:auto;height:auto;"></a></p>
+<h2>
+	<span style="color:red;">本脚本适用环境</span><br>
+</h2>
+<p><span style="font-size:14px;">系统支持：CentOS 6+，Debian 7+，Ubuntu 12+</span><br>
+<span style="font-size:14px;">内存要求：≥128M</span><br>
+<span style="font-size:14px;color:red;">日期　　：2019 年 01 月 11 日</span></p>
+<h3>
+	<span style="color:red;">关于本脚本</span><br>
+</h3>
+<p><span style="font-size:14px;">1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；</span><br>
+<span style="font-size:14px;">2、各版本的启动脚本及配置文件名不再重合；</span><br>
+<span style="font-size:14px;">3、每次运行可安装一种版本；</span><br>
+<span style="font-size:14px;">4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；</span><br>
+<span style="font-size:14px;">5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；</span></p>
+<p><span style="font-size:14px;"><span style="color:red;"><strong>友情提示：</strong></span>如果你有问题，请先阅读这篇《<a href="https://teddysun.com/399.html" target="_blank">Shadowsocks Troubleshooting</a>》之后再询问。</span></p>
+<p>
+	<span id="more-486"></span>
+</p>
+<p></p>
+<h3>
+	<span style="color:red;">默认配置</span><br>
+</h3>
+<p><span style="font-size:14px;">服务器端口：自己设定（如不设定，默认从 9000-19999 之间随机生成）</span><br>
+<span style="font-size:14px;">密码：自己设定（如不设定，默认为 teddysun.com）</span><br>
+<span style="font-size:14px;">加密方式：自己设定（如不设定，Python 和 libev 版默认为 aes-256-gcm，R 和 Go 版默认为 aes-256-cfb）</span><br>
+<span style="font-size:14px;">协议（protocol）：自己设定（如不设定，默认为 origin）（仅限 ShadowsocksR 版）</span><br>
+<span style="font-size:14px;">混淆（obfs）：自己设定（如不设定，默认为 plain）（仅限 ShadowsocksR 版）</span><br>
+<span style="font-size:14px;"><strong>备注：</strong>脚本默认创建单用户配置文件，如需配置多用户，请手动修改相应的配置文件后重启即可。</span></p>
+<h3>
+	<span style="color:red;">客户端下载</span><br>
+</h3>
+<p><span style="font-size:14px;">常规版 Windows 客户端</span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocks/shadowsocks-windows/releases">https://github.com/shadowsocks/shadowsocks-windows/releases</a></span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版 Windows 客户端</span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocksrr/shadowsocksr-csharp/releases">https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</a></span></p>
+<h3>
+	<span style="color:red;">使用方法</span><br>
+</h3>
+<p><span style="font-size:14px;">使用root用户登录，运行以下命令：</span></p>
+<pre class="prettyprint lang-bsh">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+chmod +x shadowsocks-all.sh
+./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</pre>
+<p></p>
+<h3>
+	<span style="color:red;">安装完成后，脚本提示如下</span><br>
+</h3>
+<pre class="prettyprint lang-bsh">Congratulations, your_shadowsocks_version install completed!
+Your Server IP        :your_server_ip
+Your Server Port      :your_server_port
+Your Password         :your_password
+Your Encryption Method:your_encryption_method
+
+Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)
+ ss://your_encryption_method:your_password@your_server_ip:your_server_port
+Your QR Code has been saved as a PNG file path:
+ your_path.png
+
+Welcome to visit:https://teddysun.com/486.html
+Enjoy it!</pre>
+<p></p>
+<h3>
+	<span style="color:red;">卸载方法</span><br>
+</h3>
+<p><span style="font-size:14px;">若已安装多个版本，则卸载时也需多次运行（每次卸载一种）</span></p>
+<p><span style="font-size:14px;">使用root用户登录，运行以下命令：</span></p>
+<pre class="prettyprint lang-bsh">./shadowsocks-all.sh uninstall</pre>
+<p></p>
+<h3>
+	<span style="color:red;">启动脚本</span><br>
+</h3>
+<p><span style="font-size:14px;">启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Python 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-python start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-r start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Go 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-go start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">Shadowsocks-libev 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-libev start | stop | restart | status</span></p>
+<h3>
+	<span style="color:red;">各版本默认配置文件</span><br>
+</h3>
+<p><span style="font-size:14px;">Shadowsocks-Python 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-python/config.json</span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-r/config.json</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Go 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-go/config.json</span></p>
+<p><span style="font-size:14px;">Shadowsocks-libev 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-libev/config.json</span></p>
+<h3>
+	<span style="color:red;">更新日志</span><br>
+</h3>
+<p><span style="font-size:14px;color:red;">2019 年 01 月 11 日：</span><br>
+<span style="font-size:14px;">1、升级：libsodium 到最新版本 1.0.17；</span><br>
+<span style="font-size:14px;">2、升级：mbedtls 到最新版本 2.16.0；</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 11 月 05 日：</span><br>
+<span style="font-size:14px;">1、升级：使用 Github 上最新代码编译出 Go 版二进制可执行文件，版本号 1.2.2。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 06 月 01 日：</span><br>
+<span style="font-size:14px;">1、修正：在启用了插件 simple-obfs 的情况下，libev 版启动失败的问题；</span><br>
+<span style="font-size:14px;">2、修正：在使用 /etc/init.d/shadowsocks-libev restart 命令重启 libev 版服务端时，偶尔出现的 “bind: Address already in use” 问题；</span><br>
+<span style="font-size:14px;">3、修正：移除 libev 版配置文件中的 local_address 字段；</span><br>
+<span style="font-size:14px;">4、修改：不再默认使用 root 用户启动，改为使用 nobody 用户启动 libev 版服务端 ss-server；</span><br>
+<span style="font-size:14px;">5、升级：mbedtls 到版本 2.9.0；</span><br>
+<span style="font-size:14px;">6、修改：libev 版启动脚本中的 -u 参数（即同时启用 TCP 和 UDP 模式），改到配置文件里配置为 “mode”: “tcp_and_udp”；</span><br>
+<span style="font-size:14px;">7、修改：libev 版配置文件的内置 NameServers 为 8.8.8.8，默认是从 /etc/resolv.conf 中取得。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 02 月 07 日：</span><br>
+<span style="font-size:14px;">1、修改：将默认端口从 8989 改为从 9000-19999 之间随机生成。</span></p>
+<p><span style="font-size:14px;color:red;">2018 年 02 月 06 日：</span><br>
+<span style="font-size:14px;">1、修改：ShadowsocksR 版为 <a href="https://github.com/shadowsocksrr/shadowsocksr" target="_blank">ShadowsocksRR</a> 最新版；</span><br>
+<span style="font-size:14px;">2、新增：ShadowsocksR 版的协议（protocol）增加了 4 个，分别为：</span></p>
+<pre class="prettyprint lang-bsh">auth_chain_c
+auth_chain_d
+auth_chain_e
+auth_chain_f</pre>
+<p>
+<span style="font-size:14px;color:red;">2017 年 12 月 29 日：</span><br>
+<span style="font-size:14px;">1、升级：libsodium 到 1.0.16。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 11 月 25 日：</span><br>
+<span style="font-size:14px;">1、如果 Linux 内核版本大于 3.7.0，则配置文件默认支持 TCP fast open；</span><br>
+<span style="font-size:14px;">2、新增：libev 版启动时支持 verbose mode，也就是默认写 log 到 /var/log/messages 方便查看。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 11 月 12 日：</span><br>
+<span style="font-size:14px;">1、新增生成 ss:// 或 ssr:// 链接，以及其二维码图片。</span><br>
+<span style="font-size:14px;">※ 脚本会根据当前安装的版本以及输入的各项配置，自动生成 ss:// 或 ssr:// 的链接并在安装成功后显示，直接复制即可被客户端识别。同时生成其二维码图片，并保存在当前目录下，下载后用看图软件打开，也能被客户端识别。</span></p>
+<p><span style="font-size:14px;color:blue;">复制二维码链接后 Shadowsocks 客户端识别示例：</span><br>
+<img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/ss_client.png" title="Shadowsocks 客户端示例" class="left" style="width:auto;height:auto;"></p>
+<p><span style="font-size:14px;color:blue;">复制二维码链接后 ShadowsocksR 客户端识别示例：</span><br>
+<img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/ssr_client.png" title="ShadowsocksR 客户端示例" class="left" style="width:auto;height:auto;"></p>
+<p><span style="font-size:14px;">二维码（QR Code）参考链接：</span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocks/shadowsocks/wiki/Generate-QR-Code-for-Android-or-iOS-Clients">https://github.com/shadowsocks/shadowsocks/wiki/Generate-QR-Code-for-Android-or-iOS-Clients</a></span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocksr-backup/shadowsocks-rss/wiki/SSR-QRcode-scheme">https://github.com/shadowsocksr-backup/shadowsocks-rss/wiki/SSR-QRcode-scheme</a></span></p>
+<p><span style="font-size:14px;color:red;">2017 年 10 月 22 日：</span><br>
+<span style="font-size:14px;">1、升级：libsodium 到 1.0.15。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 10 月 14 日：</span><br>
+<span style="font-size:14px;">1、新增：在安装 Shadowsocks-libev 版时<strong>可选安装</strong> simple-obfs 服务端。</span><br>
+<span style="font-size:14px;">※ 脚本通过判断 autoconf 版本是否大于或等于 2.67 来一键安装 simple-obfs 服务端。并且，支持在安装过程中选择 obfs 为 http 或 tls。</span><br>
+<span style="font-size:14px;">※ 使用方法参考：<a href="https://teddysun.com/511.html" target="_blank">https://teddysun.com/511.html</a></span></p>
+<p><span style="font-size:14px;color:red;">2017 年 09 月 16 日：</span><br>
+<span style="font-size:14px;">1、修正：Shadowsocks-libev 版 v3.1.0 使用 libc-ares 替换 libudns 依赖包，解决了依赖问题；</span><br>
+<span style="font-size:14px;">2、升级：mbedtls 到版本 2.6.0。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 07 月 27 日：</span><br>
+<span style="font-size:14px;">1、新增：ShadowsocksR 版可选协议（protocol）auth_chain_b 。使用该协议需更新到最新（4.7.0） <a href="http://dl.teddysun.com/files/ShadowsocksR-4.7.0-win.7z" target="_blank">ShadowsocksR 版客户端</a>；</span><br>
+<span style="font-size:14px;">2、修改：更新 ShadowsocksR 源码下载地址。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 07 月 23 日：</span><br>
+<span style="font-size:14px;">1、修正：卸载时可自行选择某个版本卸载，若该版本不存在则报错退出。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 07 月 22 日：</span><br>
+<span style="font-size:14px;">1、修正：默认加密方式从 aes-256-cfb 改为 aes-256-gcm（Python 和 libev 版）；</span><br>
+<span style="font-size:14px;">2、新增：安装时可选 16 种加密方式的其中之一（Python 和 libev 版）。如下所示：</span></p>
+<pre class="prettyprint lang-bsh">aes-256-gcm
+aes-192-gcm
+aes-128-gcm
+aes-256-ctr
+aes-192-ctr
+aes-128-ctr
+aes-256-cfb
+aes-192-cfb
+aes-128-cfb
+camellia-128-cfb
+camellia-192-cfb
+camellia-256-cfb
+chacha20-ietf-poly1305
+chacha20-ietf
+chacha20
+rc4-md5</pre>
+<p><span style="font-size:14px;">3、新增：安装时可选 9 种加密方式的其中之一（Go 版）。如下所示：</span></p>
+<pre class="prettyprint lang-bsh">aes-256-cfb
+aes-192-cfb
+aes-128-cfb
+aes-256-ctr
+aes-192-ctr
+aes-128-ctr
+chacha20-ietf
+chacha20
+rc4-md5</pre>
+<p><span style="font-size:14px;">4、新增：安装时可选 15 种加密方式的其中之一（none 是不加密，ShadowsocksR 版）。如下所示：</span></p>
+<pre class="prettyprint lang-bsh">none
+aes-256-cfb
+aes-192-cfb
+aes-128-cfb
+aes-256-cfb8
+aes-192-cfb8
+aes-128-cfb8
+aes-256-ctr
+aes-192-ctr
+aes-128-ctr
+chacha20-ietf
+chacha20
+salsa20
+xchacha20
+xsalsa20
+rc4-md5</pre>
+<p><span style="font-size:14px;">5、新增：安装时可选 7 种协议（protocol）的其中之一（仅限 ShadowsocksR 版）。如下所示：</span></p>
+<pre class="prettyprint lang-bsh">origin
+verify_deflate
+auth_sha1_v4
+auth_sha1_v4_compatible
+auth_aes128_md5
+auth_aes128_sha1
+auth_chain_a
+auth_chain_b</pre>
+<p><span style="font-size:14px;">6、新增：安装时可选 9 种混淆（obfs）的其中之一（仅限 ShadowsocksR 版）。如下所示：</span></p>
+<pre class="prettyprint lang-bsh">plain
+http_simple
+http_simple_compatible
+http_post
+http_post_compatible
+tls1.2_ticket_auth
+tls1.2_ticket_auth_compatible
+tls1.2_ticket_fastauth
+tls1.2_ticket_fastauth_compatible</pre>
+<p><span style="font-size:14px;color:red;">2017 年 02 月 24 日：</span><br>
+<span style="font-size:14px;">1、恢复： 通过 Github API 自动获取 Shadowsocks-libev 的最新 release 版本的功能（v3.0.3）。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 02 月 13 日：</span><br>
+<span style="font-size:14px;">1、升级： Shadowsocks-libev 版到版本 3.0.2；</span><br>
+<span style="font-size:14px;">2、升级： Shadowsocks-go 版到版本 1.2.1（基于 <a href="https://github.com/shadowsocks/shadowsocks-go" target="_blank">Github 最新代码</a>，用 go 1.8 编译完成的 x86 和 x86_64 二进制文件）；</span><br>
+<span style="font-size:14px;">3、修复：在 Debian 7 下默认没有 libudns-dev 依赖包的问题。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 02 月 12 日：</span><br>
+<span style="font-size:14px;">1、升级： Shadowsocks-libev 版到版本 3.0.1。</span></p>
+<p><span style="font-size:14px;color:red;">2017 年 01 月 27 日：</span><br>
+<span style="font-size:14px;">1、升级： Shadowsocks-go 版到版本 1.2.1 （仅适用于 x86_64 系统）</span></p>
+<h3>
+	<span style="color:red;">更多单版本 Shadowsocks 服务端一键安装脚本</span><br>
+</h3>
+<p><span style="font-size:14px;"><a href="https://teddysun.com/342.html" target="_blank">Shadowsocks Python 版一键安装脚本（CentOS，Debian，Ubuntu）</a></span><br>
+<span style="font-size:14px;"><a href="https://shadowsocks.be/9.html" target="_blank">ShadowsocksR 版一键安装脚本（CentOS，Debian，Ubuntu）</a></span><br>
+<span style="font-size:14px;"><a href="https://teddysun.com/357.html" target="_blank">CentOS 下 Shadowsocks-libev 一键安装脚本</a></span><br>
+<span style="font-size:14px;"><a href="https://teddysun.com/358.html" target="_blank">Debian 下 Shadowsocks-libev 一键安装脚本</a></span><br>
+<span style="font-size:14px;"><a href="https://teddysun.com/392.html" target="_blank">Shadowsocks-go 一键安装脚本（CentOS，Debian，Ubuntu）</a></span></p>
+<p><span style="font-size:14px;color:red;"><strong>注意：</strong>以上单版本不可与该四合一版本混用。</span></p>
+<p>转载请注明：<a href="https://teddysun.com/">秋水逸冰</a> » <a href="https://teddysun.com/486.html">Shadowsocks 一键安装脚本（四合一）</a></p>		</article>
+
+		
+		<footer class="article-footer">
+			<div class="article-tags">继续浏览有关 <a href="https://teddysun.com/tag/centos" rel="tag">CentOS</a><a href="https://teddysun.com/tag/debian" rel="tag">Debian</a><a href="https://teddysun.com/tag/shadowsocks" rel="tag">shadowsocks</a><a href="https://teddysun.com/tag/shell" rel="tag">Shell</a> 的文章</div>		</footer>
+
+		<nav class="article-nav">
+			<span class="article-nav-prev">上一篇 <a href="https://teddysun.com/484.html" rel="prev">FTP 上传一键脚本ftp_upload.sh</a></span>
+			<span class="article-nav-next"><a href="https://teddysun.com/489.html" rel="next">一键安装最新内核并开启 BBR 脚本</a> 下一篇</span>
+		</nav>
+
+		<div class="relates">
+			<h3>与本文相关的文章</h3>
+			<ul>
+<li><a href="https://teddysun.com/536.html">介绍几款 Docker 镜像</a></li><li><a href="https://teddysun.com/532.html">如何启用 Shadowsocks 的多端口</a></li><li><a href="https://teddysun.com/525.html">使用定时任务cron监视Shadowsocks进程</a></li><li><a href="https://teddysun.com/511.html">如何安装和配置simple-obfs服务端</a></li><li><a href="https://teddysun.com/473.html">CentOS 6.10安装Python2.7.15</a></li><li><a href="https://teddysun.com/451.html">一键脚本那些事儿</a></li><li><a href="https://teddysun.com/444.html">一键测试脚本bench.sh</a></li><li><a href="https://teddysun.com/440.html">解决pip安装M2Crypto失败的问题</a></li><li><a href="https://teddysun.com/432.html">在CentOS下编译安装GCC</a></li><li><a href="https://teddysun.com/410.html">LAMP一键安装脚本使用说明</a></li><li><a href="https://teddysun.com/403.html">如何在Debian下安装Webmin</a></li><li><a href="https://teddysun.com/399.html">Shadowsocks Troubleshooting</a></li></ul>		</div>
+	
+
+		<div class="banner banner-related"><script async="" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/f.txt"></script>
+<!-- recommed -->
+<ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-6679514888902709" data-ad-slot="2147980674" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:950px;background-color:transparent;"><iframe width="950" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0px;width:950px;height:90px;" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource(1).html"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		<div id="respond" class="no_webshot">
+		<form action="https://teddysun.com/wp-comments-post.php" method="post" id="commentform">
+		
+		<div class="comt-title">
+			<div class="comt-avatar pull-left">
+				<img alt="" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource" srcset="https://secure.gravatar.com/avatar/?s=56&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-28 photo avatar-default" height="28" width="28">			</div>
+			<div class="comt-author pull-left">
+			发表评论			</div>
+			<a id="cancel-comment-reply-link" class="pull-right" href="javascript:;">取消评论</a>
+		</div>
+		
+											<div class="comt-comterinfo" id="comment-author-info">
+						<ul>
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="help-inline">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="help-inline">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="help-inline">网址</span></li>
+						</ul>
+					</div>
+									
+		<div class="comt">
+			<div class="comt-box">
+				<div class="QapTcha"><div class="bgSlider"><div class="Slider ui-draggable" style="position: relative;"></div></div><div class="Icons"></div><div class=" TxtStatus dropError">发表评论前，请滑动滚动条解锁</div><div class="clr"></div><input name="M9dZQeD2SsH-S6nyPd-FUzC4D4cC24rD" value="9A7Vyr9" type="hidden"></div><textarea placeholder="写点什么..." class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey&amp;&amp;event.keyCode==13){document.getElementById(&#39;submit&#39;).click();return false};"></textarea>
+				<div class="comt-ctrl">
+					<button class="btn btn-primary pull-right" type="submit" name="submit" id="submit" tabindex="5"><i class="icon-ok-circle icon-white icon12"></i> 提交评论</button>
+					<div class="comt-tips pull-right"><input type="hidden" name="comment_post_ID" value="486" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</div>
+					<span data-type="comment-insert-smilie" class="muted comt-smilie"><i class="icon-thumbs-up icon12"></i>表情</span>
+					<span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
+				</div>
+			</div>
+		</div>
+
+		
+	</form>
+	</div>
+<div id="postcomments">
+	<h3 id="comments">
+		已有评论<b> (1282)</b>
+	</h3>
+	<ol class="commentlist">
+		<li class="comment even thread-even depth-1" id="comment-15469"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/fffd3a38c6a7af90973ce3300e574674?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/fffd3a38c6a7af90973ce3300e574674?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15469">checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking how to run the C preprocessor... /lib/cpp
+configure: error: in `/root/shadowsocks-libev-3.2.3':
+configure: error: C preprocessor "/lib/cpp" fails sanity check
+See `config.log' for more details
+
+[Error] Shadowsocks-libev install failed.
+Please visit: https://teddysun.com/486.html and contact.
+不知道怎么回事。。<div class="c-meta"><span class="c-author">loukky</span>4天前<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/486.html?replytocom=15469#respond" onclick="return addComment.moveForm( &quot;div-comment-15469&quot;, &quot;15469&quot;, &quot;respond&quot;, &quot;486&quot; )" aria-label="回复给loukky">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15463"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/ae7caaed857e9d33491819998732a9fe?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/ae7caaed857e9d33491819998732a9fe?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15463">请求支援V2ray-Plugin，Simple-Obfs已经无效<div class="c-meta"><span class="c-author">hmac</span>1周前 (2019-02-02)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/486.html?replytocom=15463#respond" onclick="return addComment.moveForm( &quot;div-comment-15463&quot;, &quot;15463&quot;, &quot;respond&quot;, &quot;486&quot; )" aria-label="回复给hmac">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-15459"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/b22a4d9467a430781327102bb767c71c?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/b22a4d9467a430781327102bb767c71c?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15459">python 支持一下吧~~~ 不会php<div class="c-meta"><span class="c-author">NyneoJ</span>2周前 (2019-01-30)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/486.html?replytocom=15459#respond" onclick="return addComment.moveForm( &quot;div-comment-15459&quot;, &quot;15459&quot;, &quot;respond&quot;, &quot;486&quot; )" aria-label="回复给NyneoJ">回复</a></div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-15457"><div class="c-avatar"><img alt="" data-original="https://secure.gravatar.com/avatar/909e410367d2547786d543675f7006d5?s=36&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g" srcset="https://secure.gravatar.com/avatar/909e410367d2547786d543675f7006d5?s=72&amp;d=https%3A%2F%2Fteddysun.com%2Fwp-content%2Fthemes%2Fd8%2Fimg%2Fdefault.png&amp;r=g 2x" class="avatar avatar-36 photo" height="36" width="36"></div><div class="c-main" id="div-comment-15457">不知为何 新版脚本安装shadowsocks-libev之后 链接经常出现connect closed by peer。python版本正常，为什么会出现这个错误呢？不过一般出现这个问题之后过十几秒到一分钟他会自己解决。<div class="c-meta"><span class="c-author">zhicheng2914</span>2周前 (2019-01-28)<a rel="nofollow" class="comment-reply-link" href="https://teddysun.com/486.html?replytocom=15457#respond" onclick="return addComment.moveForm( &quot;div-comment-15457&quot;, &quot;15457&quot;, &quot;respond&quot;, &quot;486&quot; )" aria-label="回复给zhicheng2914">回复</a></div></div></li><!-- #comment-## -->
+	</ol>
+	<div class="pagenav">
+		<a class="page-numbers" href="https://teddysun.com/486.html/comment-page-1#comments">1</a>
+<span class="page-numbers dots">…</span>
+<a class="page-numbers" href="https://teddysun.com/486.html/comment-page-56#comments">56</a>
+<a class="page-numbers" href="https://teddysun.com/486.html/comment-page-57#comments">57</a>
+<span aria-current="page" class="page-numbers current">58</span>	</div>
+</div>
+
+		
+	</div>
+</div>
+<aside class="sidebar">	
+<div class="widget_text widget widget_custom_html"><h3 class="widget_tit">推荐资源</h3><div class="textwidget custom-html-widget"><ul class="resource">
+	    <li><a href="https://www.csr.sh/" target="_blank"><span class="text">CSR 在线生成工具</span></a></li>
+    <li><a href="https://teddysun.com/448.html" target="_blank"><span class="text">L2TP 一键安装脚本</span></a></li>
+    <li><a href="https://lamp.sh/" target="_blank"><span class="text">LAMP 一键安装脚本</span></a></li>
+    <li><a href="https://teddysun.com/444.html" target="_blank"><span class="text">Bench 一键测试脚本</span></a></li>
+    <li><a href="https://qiu.sh/freess" target="_blank"><span class="text">Shadowsocks 免费帐号</span></a></li>
+    <li><a href="https://teddysun.com/392.html" target="_blank"><span class="text">Shadowsocks-Go 一键脚本</span></a></li>
+    <li><a href="https://shadowsocks.be/9.html" target="_blank"><span class="text">ShadowsocksR 一键安装脚本</span></a></li>
+    <li><a href="https://teddysun.com/342.html" target="_blank"><span class="text">Shadowsocks-Python 一键脚本</span></a></li>
+    <li><a href="https://teddysun.com/486.html" target="_blank"><span class="text">Shadowsocks 一键脚本（四合一）</span></a></li>
+    <li><a href="https://teddysun.com/358.html" target="_blank"><span class="text">Shadowsocks-libev for Debian 一键脚本</span></a></li>
+    <li><a href="https://teddysun.com/357.html" target="_blank"><span class="text">Shadowsocks-libev for CentOS 一键脚本</span></a></li>
+</ul></div></div><div class="widget_text widget widget_custom_html"><h3 class="widget_tit">Shadowcosks推荐</h3><div class="textwidget custom-html-widget"><table border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td><a href="https://qiu.sh/getss" target="_blank"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/getss.jpg" width="220" height="220" alt="getss" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/getss" target="_blank">稳定可靠的 Shadowsocks 服务，其服务器分布于：<br>美国，俄罗斯，日本，韩国，新加坡，香港，台湾。<br>同时兼容 SS 和 SSR 客户端连接。<br>
+最低只需 1 元 1GB 3 天，先体验再付费。</a>
+        </td>
+    </tr>
+</tbody></table></div></div><div class="widget_text widget widget_custom_html"><h3 class="widget_tit">经典VPS</h3><div class="textwidget custom-html-widget"><table border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody><tr>
+        <td><a href="https://qiu.sh/bwh" target="_blank"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/bandwagon.png" width="300" height="150" alt="bandwagonhost" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/bwh" target="_blank">使用优惠码 BWH26FXH3HIQ 后仅需$18.79/年起</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/vultr" target="_blank"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/vultr.png" width="300" height="250" alt="vultr" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/vultr" target="_blank">15个数据中心，低至$2.5/月，新用户注册就送$10</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/do" target="_blank"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/do.png" width="300" height="250" alt="digitalocean" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/do" target="_blank">1GB内存，25G SSD，$5/月，新用户注册就送$10</a>
+        </td>
+    </tr>
+    <tr>
+        <td><a href="https://qiu.sh/linode" target="_blank"><img src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/linode.png" width="300" height="117" alt="ramnode" border="0"></a>
+        <br>
+        <a href="https://qiu.sh/linode" target="_blank">经典Linode，新用户优惠码podcastinit2018，充$5送$20</a>
+        </td>
+    </tr>
+</tbody></table></div></div><div class="widget d_tag"><h3 class="widget_tit">标签云</h3><div class="d_tags"><a href="https://teddysun.com/tag/vps">VPS (22)</a><a href="https://teddysun.com/tag/centos">CentOS (21)</a><a href="https://teddysun.com/tag/linux">Linux (16)</a><a href="https://teddysun.com/tag/shadowsocks">shadowsocks (13)</a><a href="https://teddysun.com/tag/apache">apache (11)</a><a href="https://teddysun.com/tag/php">PHP (10)</a><a href="https://teddysun.com/tag/wordpress">wordpress (9)</a><a href="https://teddysun.com/tag/lamp">LAMP (9)</a><a href="https://teddysun.com/tag/web">web (9)</a><a href="https://teddysun.com/tag/google">Google (8)</a><a href="https://teddysun.com/tag/shell">Shell (6)</a><a href="https://teddysun.com/tag/google-drive">Google Drive (5)</a><a href="https://teddysun.com/tag/%e7%bd%91%e7%bb%9c%e5%ae%89%e5%85%a8">网络安全 (5)</a><a href="https://teddysun.com/tag/windows">Windows (5)</a><a href="https://teddysun.com/tag/vpn">VPN (4)</a><a href="https://teddysun.com/tag/digitalocean">DigitalOcean (4)</a><a href="https://teddysun.com/tag/webmin">webmin (4)</a><a href="https://teddysun.com/tag/%e7%bd%91%e7%9b%98">网盘 (4)</a><a href="https://teddysun.com/tag/debian">Debian (4)</a><a href="https://teddysun.com/tag/ssl">ssl (4)</a><a href="https://teddysun.com/tag/domain">domain (4)</a><a href="https://teddysun.com/tag/python">Python (3)</a><a href="https://teddysun.com/tag/iptables">iptables (3)</a><a href="https://teddysun.com/tag/%e7%94%b5%e5%bd%b1">电影 (3)</a><a href="https://teddysun.com/tag/owncloud">ownCloud (3)</a><a href="https://teddysun.com/tag/eclipse">eclipse (3)</a><a href="https://teddysun.com/tag/phpmyadmin">phpMyAdmin (3)</a><a href="https://teddysun.com/tag/pip">pip (3)</a><a href="https://teddysun.com/tag/pptp">PPTP (2)</a><a href="https://teddysun.com/tag/l2tp">L2TP (2)</a><a href="https://teddysun.com/tag/%e7%94%9f%e6%b4%bb">生活 (2)</a><a href="https://teddysun.com/tag/jdk7">JDK7 (2)</a></div></div>		<div class="widget widget_recent_entries">		<h3 class="widget_tit">最新文章</h3>		<ul>
+											<li>
+					<a href="https://teddysun.com/545.html">介绍几款 Windows DD 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/544.html">如何制作 Windows Server 2019 的 DD 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/536.html">介绍几款 Docker 镜像</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/532.html">如何启用 Shadowsocks 的多端口</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/530.html">一键安装KMS服务脚本</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/527.html">关于免费SSL证书的那些事儿</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/525.html">使用定时任务cron监视Shadowsocks进程</a>
+									</li>
+											<li>
+					<a href="https://teddysun.com/517.html">LAMP新增Letsencrypt支持</a>
+									</li>
+					</ul>
+		</div></aside></section><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0px;width:0px;height:0px;" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource(2).html"></iframe></ins></ins></ins><iframe id="google_osd_static_frame_276522940404" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource(3).html"></iframe>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="copyright">
+            © 2013-2019 <a href="https://teddysun.com/" style="color:#06c; rel=" home"="">秋水逸冰</a> Powered by <a href="http://cn.wordpress.org/" target="_blank" style="color:#06c;" rel="generator">WordPress</a> &amp; <a href="https://qiu.sh/linode" target="_blank" style="color:#06c;">Linode</a> Theme <a href="http://www.daqianduan.com/" target="_blank" style="color:#06c;">D8</a>
+        </div>
+        <div class="trackcode pull-right">
+            <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-38776518-1', 'auto');
+ga('send', 'pageview');
+</script>        </div>
+    </div>
+</footer>
+<link rel="stylesheet" href="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/myQaptcha.jquery.css" type="text/css">
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/jquery.ui.touch.js.download"></script>
+<script type="text/javascript">var myQaptchaJqueryPage="https://teddysun.com/wp-content/plugins/myqaptcha/jquery/myQaptcha.jquery.php";</script>
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/myqaptcha.jquery.js.download"></script>
+<script type="text/javascript">jQuery(document).ready(function(){if(jQuery("p:has('textarea')").length>0) jQuery("p:has('textarea')").before('<div class="QapTcha"></div>'); else jQuery("#comment").before('<div class="QapTcha"></div>');jQuery('.QapTcha').QapTcha({disabledSubmit:true,autoRevert:true});});</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"https:\/\/teddysun.com\/wp-admin\/admin-ajax.php","post_id":"486"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/postviews-cache.js.download"></script>
+<script type="text/javascript" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/wp-embed.min.js.download"></script>
+
+</body><iframe id="google_shimpl" style="display: none;" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/saved_resource(4).html"></iframe><iframe id="google_esf" name="google_esf" src="./Shadowsocks 一键安装脚本（四合一） _ 秋水逸冰_files/zrt_lookup.html" data-ad-client="ca-pub-6679514888902709" style="display: none;"></iframe></html>

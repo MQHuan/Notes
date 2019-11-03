@@ -1,0 +1,201 @@
+/*************************************************\
+** Top-level settings                            **
+\*************************************************/
+
+
+body {
+  font-size: small; /* in firefox: 12pt */
+  font-family: Verdana, Tahoma, Arial, Helvetica, MS Sans Serif;
+  line-height:140%;
+  color: black;
+  background-image: url(new-bg.jpg);
+}
+
+* html body {  /* rule is only seen by IE */
+  font-size: x-small; /* in IE: 12pt */
+}
+
+h1 {
+  font-size: 130%;
+  margin-top: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  font-size: 115%;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+
+h3 {
+  font-size:  100%;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+
+table {
+  font-size:  100%;
+}
+
+tr, td { /* set tables tight */
+  padding: 0 1ex 0 0;
+}
+
+p {
+  margin-bottom: 0.5ex;
+  margin-top: 0.75ex;
+}
+
+/*************************************************\
+** Rendering of hyperlinks                       **
+\*************************************************/
+
+
+div.main-area a {
+  color: black;
+  text-decoration: underline;
+}
+
+div.bar-area a {
+  color: black;
+  text-decoration: none;
+}
+
+div.bar-area a:hover {
+/*  font-style: italic;  */
+  text-decoration: underline;
+}
+
+
+/*************************************************\
+** Styles to position the area's in the template **
+\*************************************************/
+
+div.bar-area {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  /* right: 5px; */
+  background-color:#F4F4F4; /*#E0E0E0;*/
+  border:1px solid gray;
+  padding:5px;
+  width: 140px; /* This width is used by standards browsers, like firefox */
+}
+
+/* This rule is the "Modified simplified box model hack" to make IE work */
+* html div.bar-area { /* rule is only seen by IE */
+  /* This width should equal 'border+padding+width+padding+border' from above */
+  width: 152px;
+}
+
+div.main-area {
+  margin-top: 15px; /* smaller has no effect in IE ?? */
+  margin-left: 155px;
+  /* margin-right: 155px; */
+  background-color:#F4F4F4;
+  border: 1px solid gray;
+  padding: 1em;
+}
+
+/*************************************************\
+** General styles                                **
+\*************************************************/
+
+.smallprint {
+  font-size: 80%;
+  line-height: 120%;
+}
+
+.bigprint {
+  font-size: 210%;
+  line-height: 120%;
+}
+
+.block {
+  background-color:#E0E0E0;
+  border:1px solid gray;
+  padding:5px;
+  margin: 0px;
+  text-align: center;
+}
+
+table.blocked {
+  border-spacing: 3px;
+}
+
+table.blocked td, table.blocked th {
+  padding: 3px;
+  background-color:#E0E0E0;
+  text-align:center;
+}
+
+p.img {
+  text-align: center;
+  font-size:80%;
+  margin-left:3%;
+  margin-right:3%;
+  background-color:#FFFFD0;
+  padding:2ex;
+}
+
+p.ad {
+  text-align: center;
+  margin-left:3%;
+  margin-right:3%;
+  background-color:#E0E0E0;
+  padding:2ex;
+}
+
+p.display {
+  margin-left:3%;
+  margin-right:3%;
+  background-color:#FFFFD0;
+  padding:2ex;
+}
+
+pre.code {
+  font-family: Courier;
+/*font-size:70%;*/
+  margin-left:3%;
+  margin-right:3%;
+  background-color:#FFFFD0;
+  padding:2ex;
+  line-height: 140%;
+}
+
+span.code {
+  font-family: courier;
+}
+
+span.code b, pre.code b {
+/*font-size:110%;*/
+  font-weight:900; /* 400=norm, 700=bold*/
+  text-decoration: underline;
+}
+
+tt {
+  font-size: 120%;
+  color: gray;
+}
+
+div.main-area a.toc {
+  display:block;
+  color:black;
+  text-decoration:none;
+  padding-left:2ex;
+}
+
+div.main-area a.toc:hover {
+  border:solid blue 1px;
+  background-color: lightblue;
+}
+
+span.new {
+  border: solid red 1px; 
+  background:yellow; 
+  color:red; 
+  font-weight:700; 
+  font-size:90%;
+  padding-left:0.5ex;
+  padding-right:0.5ex;
+}

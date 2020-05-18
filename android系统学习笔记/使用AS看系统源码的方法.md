@@ -3,8 +3,6 @@
 
 stackoverflow上的提问：https://stackoverflow.com/questions/16727607/can-we-use-android-studio-for-aosp-development
 
-
-
 readme内容如下：
 IDEGen automatically generates Android IDE configurations for IntelliJ IDEA
 and Eclipse. Your IDE should be able to compile everything in a reasonable

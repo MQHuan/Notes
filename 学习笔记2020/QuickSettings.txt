@@ -1,0 +1,8 @@
+在通知栏的设置里面添加一个自定义的快捷入口
+android 7.0开放
+
+知乎介绍：https://www.zhihu.com/question/49108301/answer/126490244
+
+官网文档：https://developer.android.com/reference/android/service/quicksettings/package-summary
+
+github样例：https://github.com/nstrelow/YouTubeSubscriberTile

@@ -1,0 +1,2 @@
+System.currentTimeMillis()在刚开机的时候，会返回系统开机时间，后面才会变成当前时间，
+如果在刚开机的时候用时间戳做一些处理，可以用SystemClock.elapsedRealtime()代替，这个永远返回系统开机时间

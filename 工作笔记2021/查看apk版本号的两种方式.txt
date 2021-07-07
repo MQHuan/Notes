@@ -1,0 +1,31 @@
+方法1：
+
+使用adb命令：
+
+（1）首先需要获取到该应用（如微信）的package包名：
+
+adb shell dumpsys window w | findstr \/ | findstr name=
+
+可以查看到包名package为：com.tencent.mm
+
+（2）adb shell dumpsys package com.tencent.mm | findstr versionCode  查看微信的versionCode信息
+
+（3）adb shell dumpsys package com.tencent.mm | findstr versionName  查看微信的versionName信息
+
+
+
+方法2：
+
+使用软件工具：如 aapt
+
+1、首先找到aapt工具所在目录并cd到该目录
+
+目录，如：D:\Program Files\Genuitec\android-sdk-windows\platform-tools
+
+2、然后使用aapt dump badging XXX.apk就能看到VersionCode等信息
+
+如：aapt dump badging E:\workspace\app-release.apk
+
+
+
+来源：http://www.51testing.com/html/06/15214706-4421118.html#xspace-itemreply

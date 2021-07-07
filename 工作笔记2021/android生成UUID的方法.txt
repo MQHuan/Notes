@@ -1,0 +1,101 @@
+
+来自stackOverflow的：https://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
+
+UPDATE: As of recent versions of Android, many of the issues with ANDROID_ID have been resolved, and I believe this approach is no longer necessary. Please take a look at Anthony's answer.
+
+Full disclosure: my app used the below approach originally but no longer uses this approach, and we now use the approach outlined in the Android Developer Blog entry that emmby's answer links to (namely, generating and saving a UUID#randomUUID()).
+
+There are many answers to this question, most of which will only work "some" of the time, and unfortunately, that's not good enough.
+
+Based on my tests of devices (all phones, at least one of which is not activated):
+
+    All devices tested returned a value for TelephonyManager.getDeviceId()
+    All GSM devices (all tested with a SIM) returned a value for TelephonyManager.getSimSerialNumber()
+    All CDMA devices returned null for getSimSerialNumber() (as expected)
+    All devices with a Google account added returned a value for ANDROID_ID
+    All CDMA devices returned the same value (or derivation of the same value) for both ANDROID_ID and TelephonyManager.getDeviceId() -- as long as a Google account has been added during setup.
+    I did not yet have a chance to test GSM devices with no SIM, a GSM device with no Google account added, or any of the devices in airplane mode.
+
+So if you want something unique to the device itself, TM.getDeviceId() should be sufficient. Obviously, some users are more paranoid than others, so it might be useful to hash 1 or more of these identifiers, so that the string is still virtually unique to the device, but does not explicitly identify the user's actual device. For example, using String.hashCode(), combined with a UUID:
+```
+final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+
+final String tmDevice, tmSerial, androidId;
+tmDevice = "" + tm.getDeviceId();
+tmSerial = "" + tm.getSimSerialNumber();
+androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+
+UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+String deviceId = deviceUuid.toString();
+```
+might result in something like: 00000000-54b3-e7c7-0000-000046bffd97
+
+It works well enough for me.
+
+As Richard mentions below, don't forget that you need permission to read the TelephonyManager properties, so add this to your manifest:
+```
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+```
+import libraries
+```
+import android.content.Context;
+import android.telephony.TelephonyManager;
+import android.view.View;
+```
+
+另外的方法：https://www.cnblogs.com/xd502djj/p/8137204.html
+
+一种比较折衷的办法，在获取MAC地址之前先判断当前WiFi状态，若开启了Wifi，则直接获取MAC地址，若没开启Wifi，则用代码开启Wifi，然后马上关闭，再获取MAC地址。
+
+目前此方法测试成功，无论在哪种状态下都能正确取得设备的MAC地址（包括开机后未启动过Wifi的状态下），且在未开启Wifi的状态下，用代码开启Wifi并马上关闭，过程极短，不会影响到用户操作。
+
+代码如下：
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+	
+public String getMacAddress() {
+ 
+     String macAddress = null ;
+     WifiManager wifiManager =
+         (WifiManager)MyApplication.getContext().getSystemService(Context.WIFI_SERVICE);
+     WifiInfo info = ( null == wifiManager ? null : wifiManager.getConnectionInfo());
+         
+     if (!wifiManager.isWifiEnabled())
+     {
+        //必须先打开，才能获取到MAC地址
+         wifiManager.setWifiEnabled( true );
+         wifiManager.setWifiEnabled( false );
+     }
+     if ( null != info) {
+         macAddress = info.getMacAddress();
+     }
+     return macAddress;
+}
+
+需要加入如下权限
+1
+2
+3
+	
+< uses-permission android:name = "android.permission.ACCESS_WIFI_STATE" > </ uses-permission >
+< uses-permission android:name = "android.permission.CHANGE_WIFI_STATE" > </ uses-permission >
+< uses-permission android:name = "android.permission.WAKE_LOCK" > </ uses-permission >
+
+
+

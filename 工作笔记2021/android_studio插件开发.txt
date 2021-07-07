@@ -1,0 +1,7 @@
+https://proandroiddev.com/write-an-android-studio-plugin-part-1-creating-a-basic-plugin-af956c4f8b50
+
+https://plugins.jetbrains.com/docs/intellij/android-studio.html#configuring-the-plugin-pluginxml-file
+
+可参考的项目：
+https://github.com/Airsaid/AndroidLocalizePlugin
+https://github.com/westlinkin/AndroidLocalizationer

@@ -1,0 +1,11 @@
+adb pull /storage/emulated/0/text.xls D:\
+时会报：No such file or directory
+后面添加 . 即可
+adb pull /storage/emulated/0/text.xls D:\.
+
+也可以加具体路径
+adb pull /storage/emulated/0/text.xls D:\.\demo
+等同于adb pull /storage/emulated/0/text.xls D:\demo
+
+如果文件就在根目录，可以写做：
+adb pull /storage/emulated/0/text.xls D:\.\text_result.xls

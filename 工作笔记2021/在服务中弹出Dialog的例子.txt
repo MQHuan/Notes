@@ -1,0 +1,56 @@
+在服务中弹出dialog需要权限和Theme
+
+1. 权限：
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            alertDialog3.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+        } else {
+            alertDialog3.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+        }
+
+2. Theme 服务里面的context缺少弹窗需要的theme，需要自己传进去
+ AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog);
+R.style.Theme_AppCompat_Dialog
+
+
+3. 实例如下：
+```
+
+    // 多选提示框
+    private AlertDialog alertDialog3;
+    public void showMutilAlertDialog(Context context){
+        final String[] items = {"Struts2","Spring","Hibernate","Mybatis","Spring MVC"};
+        // 创建一个AlertDialog建造者
+        AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog);
+        // 设置标题
+        alertDialogBuilder.setTitle("java EE 常用框架");
+        alertDialogBuilder.setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+            }
+        });
+        alertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                alertDialog3.dismiss();
+            }
+        });
+        alertDialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                alertDialog3.dismiss();
+            }
+        });
+        alertDialog3 = alertDialogBuilder.create();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            alertDialog3.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+        } else {
+            alertDialog3.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+        }
+        alertDialog3.show();
+    }
+
+```
